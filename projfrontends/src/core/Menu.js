@@ -10,6 +10,7 @@ const currentTab = (history, path) => {
   }
 };
 
+
 const Menu = ({ history }) => (
   <div>
     <ul className="nav nav-tabs bg-dark">
@@ -101,14 +102,15 @@ const Menu = ({ history }) => (
         <li className="nav-item">
           <Link
             className="nav-link text-white"
-            to="user/:userId"
+            to={"/user/update/" + isAutheticated().user._id}
           >
-            Signout
+            PROFILE
           </Link>
         </li>
       )}
     </ul>
   </div>
 );
+console.log(isAutheticated());
 
 export default withRouter(Menu);

@@ -93,11 +93,7 @@ const UpdateProducts = ({match}) => {
           createdProduct: data.name,
           getaRedirect:true
         });
-      if (!getaRedirect) {
-        setTimeout(() => {
-          return <Redirect to="/admin/dashboard" />
-        }, 2000);
-      }
+
        
       }
     });

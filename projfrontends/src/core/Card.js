@@ -9,8 +9,9 @@ const Card = ({product , addToCart = true , removeFromCart = false , setReload =
   const [redirect , setRedirect ] = useState(false)
   const [count , setCount ] = useState(1)
  
-product.count = count;
- 
+    product.count = count;
+    product.price = product.price  ;
+    
 
     const cartTitle = product ? product.name : "Default Title"
     const cartDescription = product ? product.description : "Default Description"

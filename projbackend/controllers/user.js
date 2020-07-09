@@ -21,11 +21,12 @@ exports.getUser = (req, res) => {
 
 exports.updateUser = (req, res) => {
   User.findByIdAndUpdate(
+  
     { _id: req.profile._id },
     { $set: req.body },
     { new: true, useFindAndModify: false },
     (err, user) => {
-      if (err) {
+      if (err && !user) {
         return res.status(400).json({
           error: "You are not authorized to update this user"
         });

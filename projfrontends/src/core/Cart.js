@@ -7,6 +7,7 @@ import { loadCart } from "./helper/cartHelper";
 import StripeCheckout from "./StripeCheckout"
 import Paypal from "./Paypal";
 import Razorpay from "./Razorpay";
+import total from "./total";
 
 
 const  Cart = ()  => {
@@ -48,9 +49,18 @@ console.log(products);
   return (
     <Base title="Cart Items" description="Get Reddu For Checkout">
       <div className="row text-center">
-        <div className="col-6">{products.length > 0 ? loadProducts(products): (<h3>NO products in your cart</h3>)}</div>
+        <div className="col-6">{  products && products.length > 0 ? loadProducts(products): (<h3>NO products in your cart</h3>)}</div>
         <div className="col-6">
       
+   
+      <Razorpay 
+
+      products={products}
+      setReload={setReload}
+
+      />
+
+
 {/* 
         <StripeCheckout
         products={products}
@@ -60,12 +70,6 @@ console.log(products);
         {/* <Paypal products={products} setReload={setReload} /> */}
 
 
-      <Razorpay 
-
-      products={products}
-      setReload={setReload}
-
-      />
 
          </div>
       </div>

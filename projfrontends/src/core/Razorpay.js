@@ -14,29 +14,31 @@ const Razorpay = ({products , setReload = f => f , reload = undefined}) => {
         error:"",
         address:"",
         phone:"",
-        redirect:true
+        redirect:true,
+        price:0
 
        
     })
-    const [amount , setAmount] = useState(0)
 
-    const {name , loading , error , address , phone , redirect } = data
+    const {name , loading , error , address , phone , redirect , price} = data
 
     const token = isAutheticated() && isAutheticated().token;
     const userId = isAutheticated() && isAutheticated()._id;
     const user = isAutheticated() && isAutheticated();
 
-console.log(amount);
-            
+
+ 
         const showTotalAmount = () =>{
             let amount = 0
             products.forEach(product => {
-                amount += product.price * product.count
+                amount += product.price  * product.count
             });
-            // setAmount(amount)
+           
             return amount
         }
-   
+
+
+
         const loadScript = (src) => {
         return new Promise(resolve => {
             const script = document.createElement('script')
@@ -48,7 +50,7 @@ console.log(amount);
                 resolve(false)
             }
             document.body.appendChild(script)
-
+        
         })
     }
 
@@ -83,8 +85,10 @@ console.log(amount);
 
 
   const detail =   data({
+     
         amount:showTotalAmount(),
     })
+   
 
 
 
@@ -126,7 +130,7 @@ console.log(amount);
                  if (redirect) {
                   return   <Redirect to="/user/dashboard" />
                  }
-
+         
 
             },
             prefill: {
@@ -228,7 +232,6 @@ console.log(amount);
             required
           />
         </div>
-
 
       
      
