@@ -1,0 +1,165 @@
+*{
+  margin: 0;
+  padding: 0;
+  }
+  *,
+  *::before,
+  *::after{
+  box-sizing: border-box;
+  }
+  html {
+  font-size: 62.5%; //10px
+  box-sizing: border-box;
+
+  }
+  
+
+  .header{
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .logo{
+      height: 3.5rem;
+      margin-left: 3rem;
+    }
+    .search{
+      flex:0 0 40%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &-input{
+      background-color: #eeeeee;
+      border: none;
+      padding: .7rem 2rem;
+      border-radius: .5rem;
+      width: 90%;
+      transition: all .2s;
+      margin-right: -3.25rem;
+
+      &:focus {
+        outline: none;
+        width: 100%;
+      }
+    
+      &::-webkit-input-placeholder{
+      font-size: 1.2rem;
+      
+      }
+     
+      }
+      &-input:focus + &-button {
+  
+      }
+
+      &-button{
+      border: none;
+      background-color: #eeeeee;
+      
+      &:focus{
+        outline: none;
+   
+      }
+      &:active{
+        transform: translateY(2px);
+      }
+      }
+      &-icon{
+      height: 2rem;
+      width: 2rem;
+      fill: #393e46;
+      }
+
+    }
+    .user-nav{
+display: flex;
+align-items: center;
+align-self: stretch;
+
+& > * {
+  padding: 1rem 2rem;
+  cursor: pointer;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+& > *:hover{
+  background-color: #ebf0f6;
+}
+
+      &-icon-box{
+        position: relative;
+      }
+      &-icon{
+      height: 2.5rem;
+      width: 2.5rem;
+      fill:#393e46;
+      }
+      &-notification{
+      height: 1.75rem;
+      width: 1.75rem;
+      background-color: orangered;
+      border-radius: 50%;
+      padding: .8rem;
+      color: white;
+      position: absolute;
+      top: 1rem;
+      right: .8rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      }
+
+      &-user{
+
+        &-profile{
+          height: 3.75rem;
+          margin-right: 1.5rem;
+        }
+        &-name{
+        font-size: 1.5rem;
+        font-weight: 400;
+        }
+      }
+
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.btn,
+.jumbotron,
+.nav :hover {
+  border-radius: 0px;
+}
+
+body {
+  background: #343a40;
+  position: relative;
+}

@@ -1,5 +1,4 @@
 import React , {useState , useEffect} from "react";
-import "../styles.css";
 import { API } from "../backend";
 import Base from "./Base";
 import Card from "./Card";
@@ -14,6 +13,11 @@ const  Cart = ()  => {
 
   const [products , setProducts] = useState([])
   const [reload , setReload] = useState(false)
+  const [total , setTotal] = useState(0)
+
+
+
+
 
   useEffect(()=>{
   setProducts(loadCart())
@@ -23,9 +27,11 @@ console.log(products);
   const productTitle = products ? <h2>your products</h2> : <h2>No product found</h2>
 
   const loadProducts = (products) => {
+  
       return (
           <div>
           {productTitle}
+         
           {products && (
             products.map((product , index) => (
               <Card
@@ -77,4 +83,4 @@ console.log(products);
   );
 }
 
-export default Cart ;
+export default Cart 

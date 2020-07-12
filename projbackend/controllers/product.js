@@ -153,6 +153,21 @@ exports.getAllProducts = (req, res) => {
     });
 };
 
+exports.getAllProductsByCategory = (req, res) => {
+
+  Product.find({"category":req.body._id})
+  .select("-photo")
+   
+    .exec((err, products) => {
+      if (err) {
+        return res.status(400).json({
+          error: "NO product FOUND"
+        });
+      }
+      res.json(products);
+    });
+};
+
 exports.getAllUniqueCategories = (req, res) => {
   Product.distinct("category", {}, (err, category) => {
     if (err) {

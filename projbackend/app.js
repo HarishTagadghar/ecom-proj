@@ -18,14 +18,16 @@ const RazorpayRoutes = require("./routes/razorpay");
 
 //DB Connection
 mongoose
-  .connect(process.env.DATABASEURL, {
+  .connect("mongodb://localhost:27017/ecom", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true
   })
   .then(() => {
     console.log("DB CONNECTED");
-  });
+  }).catch(err => {
+    console.log(err);
+  })
 
 //Middlewares
 app.use(bodyParser.json());

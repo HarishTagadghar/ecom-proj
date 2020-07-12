@@ -98,6 +98,7 @@ const Menu = ({ history }) => (
           </span>
         </li>
       )}
+      
       {isAutheticated() && (
         <li className="nav-item">
           <Link
@@ -111,6 +112,5 @@ const Menu = ({ history }) => (
     </ul>
   </div>
 );
-console.log(isAutheticated());
 
 export default withRouter(Menu);

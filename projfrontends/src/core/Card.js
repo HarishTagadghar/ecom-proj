@@ -33,7 +33,6 @@ const Card = ({product , addToCart = true , removeFromCart = false , setReload =
       setCount(event.target.value)
     }
 
-console.log(count);
 
 
    const showAddToCart = () => {

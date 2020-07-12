@@ -33,7 +33,6 @@ const Razorpay = ({products , setReload = f => f , reload = undefined}) => {
             products.forEach(product => {
                 amount += product.price  * product.count
             });
-           
             return amount
         }
 
@@ -193,7 +192,6 @@ const Razorpay = ({products , setReload = f => f , reload = undefined}) => {
   
 
 
-  
     return (
        
         <div>
@@ -234,9 +232,10 @@ const Razorpay = ({products , setReload = f => f , reload = undefined}) => {
         </div>
 
       
+      
      
         
-        <h3  className="text-white"> checkouts ₹{showTotalAmount()} </h3>
+        <h3  className="text-white"> checkouts ₹{showTotalAmount() } </h3>
         {showButton()}
     </div>
 
