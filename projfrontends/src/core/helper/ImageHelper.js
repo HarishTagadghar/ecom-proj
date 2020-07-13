@@ -9,8 +9,8 @@ const ImageHelper = ({product}) =>{
      ;
 
 
-    return(
-            <img
+    return  (
+   <img
                 src={imageUrl}
               alt="photo"
               style={{ maxHeight: "100%", maxWidth: "100%" }}
@@ -20,3 +20,5 @@ const ImageHelper = ({product}) =>{
 }
 
 export default ImageHelper;
+
+    

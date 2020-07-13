@@ -1,0 +1,39 @@
+*{
+    margin: 0;
+    padding: 0;
+    }
+    $bp-largest: 75em ;//1200px
+  $bp-large: 68.75em; //1100px
+  $bp-medium: 62.5em; //900px
+  $bp-small: 37.5em ;//600px
+  $bp-smaller:31.25em; //500px
+
+  $primary-color: #ff3c20;
+  $gray-color:#f7f7f7 ;
+  $gray-dark-color:#232f3e;
+  $blue-color:#0187de;
+
+
+    *,
+    *::before,
+    *::after{
+    box-sizing: border-box;
+    }
+    html {
+    font-size: 62.5%; //10px
+    box-sizing: border-box;
+  
+    }
+    
+  .btn,
+  .jumbotron,
+  .nav :hover {
+    border-radius: 0px;
+  }
+  
+  body {
+    // background: #343a40;
+
+background: white; 
+   position: relative;
+  }

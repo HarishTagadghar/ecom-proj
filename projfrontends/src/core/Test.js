@@ -1,118 +1,99 @@
-// import React from 'react';
-// import "../styles.scss"
-// import { Link } from 'react-router-dom';
-// import { signout } from '../auth/helper';
-// const Test =() => {
-//     return (
-//        <header className="header">
-//            <img src="flipkart.png" className="logo" alt=""/>
-//            <form action="#" className="search">
-//                <input type="text" placeholder="Search Items" className="search-input"/>
-//                <button className="search-button">
-//                   <svg className="search-icon">
-//                       <use xlinkHref="sprite.svg#icon-search"></use> 
-//                   </svg>
-//                </button>
-//            </form>
-//            <nav className="user-nav">
-// {/* home */}
-        
-//                   <Link   to="/">
-//                   <div className="user-nav-icon-box">
-//                         <svg className="user-nav-icon">
-//                       <use xlinkHref="sprite.svg#icon-home2"></use> 
-//                   </svg>
-//                   </div>
-//                   </Link>
-              
-// {/* user dashbord */}
-// {isAutheticated() && isAutheticated().user.role === 0 && (
-//           <Link  to="/user/dashboard"
-//           >
-//             <div className="user-nav-icon-box">
-//                <svg className="user-nav-icon">
-//                       <use xlinkHref="sprite.svg#icon-dashboard"></use> 
-//                   </svg>
-//                   <span className="user-nav-notification">7</span>
-//                </div>
-//           </Link>
-//       )}
+import React , { useState , useEffect ,Fragment} from 'react';
+import "../scss/styles.scss"
+import { Link } from 'react-router-dom';
+import { isAutheticated, signout } from '../auth/helper';
+import Carousel from './carousel'
+import Dots from './indicator-dots'
+import Buttons from './buttons'
+import Testcart from './Testcart';
+import { getProducts, getCategories } from '../admin/helper/adminapicall';
 
-// {/* admin dashbord */}
-// {isAutheticated() && isAutheticated().user.role === 1 && (
-//         <Fragment>
-//           <Link
-           
-//             to="/user/dashboard"
-//           >
-//              <div className="user-nav-icon-box">
-//                <svg className="user-nav-icon">
-//                       <use xlinkHref="sprite.svg#icon-dashboard"></use> 
-//                   </svg>
-//                   <span className="user-nav-notification">7</span>
-//                </div>
+export default function Test() {
 
-//           </Link>
-//           <Link
-           
-//             to="/admin/dashboard"
-//           >
-//             <div className="user-nav-icon-box">
-//                <svg className="user-nav-icon">
-//                       <use xlinkHref="sprite.svg#icon-dashboard"></use> 
-//                   </svg>
-//                   <span className="user-nav-notification">7</span>
-//                </div>
-//           </Link>
-//         </Fragment>
-        
-//       )}  
-               
-// {/* cart */}
-// <Link to="/cart" >
-              
+  const [products , setProducts] = useState([])
+  const [errors , seterrors] = useState(false)
+  const [categories , setCategory] = useState([])
+  const preload = () => {
+    getProducts().then(data => {
+      if (data.error) {
+        seterrors(data.error)
+      }else{
+    setProducts(data)
+      }
+    })
+  }
 
-//                <div className="user-nav-icon-box">
-//                <svg className="user-nav-icon">
-//                       <use xlinkHref="sprite.svg#icon-cart"></use> 
-//                   </svg>
-//                   <span className="user-nav-notification">17</span>
-//                </div>
+  useEffect(()=>{
+   preload()
+  }, [])
 
-//                </Link> 
+  const preloadCategory = () => {
+    getCategories().then(data => {
+      if (data.error) {
+        seterrors({error: data.error });
+      } else {
+        setCategory(data);
+      }
+    });
+  };
 
-// {/* profile */}
-// {!isAutheticated() && (
-//         <Fragment>
+  useEffect(() => {
+    preloadCategory();
+  }, []);
+
+  
+
+// carousel item
+  
+    
+        return (
+            <div className="hcontainer">
+                <div className="sidebar">
+                    sidebar
+                </div>
+             <div className="carousel">
          
-//             <Link to="/signup"
-//             >
-//               Signup
-//             </Link>
-//             <Link to="/signin"
-//             >
-//               Sign In
-//             </Link>
-//         </Fragment>
-//       )}
-//       {isAutheticated() && (
-//         <div onClick={() => {
-//             signout(() => {
-//                 console.log("user sign out")
-//             }) }} className="user-nav-user">
-//                    <img src="user.png" className="user-nav-user-profile" alt=""/>
-//                    <span className="user-nav-user-name">Name</span>
-//                </div>
-//       )}
-
-
-
-
+             <div style={{height: '100%'}}>
               
+              <Carousel loop auto  widgets={[Dots, Buttons]} className="custom-class">
+                <p className="css" style={{backgroundColor: 'royalblue', height: '100%'}}>FRAME 1</p>
+                <p className="css" style={{backgroundColor: 'orange', height: '100%'}}>FRAME 2</p>
+                <p className="css" style={{backgroundColor: 'orchid', height: '100%'}}>FRAME 3</p>
+              </Carousel>
+            </div>
+            
+             </div>
+             <div className="carousel-sidebar">
+                 carousel-sidebar
+             </div>
+                <div className="banner">
+                    banner
+                </div>
+                <div className="products">
+                {products.map((product , index) => {
+                  return (
+                    <div key={product._id} className="col-4 mb-4">
+                     <Testcart product={product} />
+                    </div>
+                  )
+                })}
+               
+                </div>
+                <div className="products-2"
+                >products-2
+                </div>
+                <div className="footer">
+                    footer
+                </div>
+            </div>
+                 )
+      
+  
 
-//            </nav>
-//        </header>
-//     )
-// }
+}
 
-// export default Test
+
+/* 
+row 60vh 6-min-content
+column 1fr 24rem 25(8) 1fr
+*/

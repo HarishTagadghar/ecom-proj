@@ -1,24 +1,13 @@
-*{
-  margin: 0;
-  padding: 0;
-  }
-  *,
-  *::before,
-  *::after{
-  box-sizing: border-box;
-  }
-  html {
-  font-size: 62.5%; //10px
-  box-sizing: border-box;
 
-  }
-  
-
-  .header{
+//// navbar
+.header{
     background-color: #fff;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    @media(max-width:$bp-medium){
+      display: none;
+    }
     .logo{
       height: 3.5rem;
       margin-left: 3rem;
@@ -31,7 +20,7 @@
 
       &-input{
       background-color: #eeeeee;
-      border: none;
+      border: 1px solid #9d8f8f;
       padding: .7rem 2rem;
       border-radius: .5rem;
       width: 90%;
@@ -49,13 +38,13 @@
       }
      
       }
-      &-input:focus + &-button {
-  
-      }
+ 
 
       &-button{
       border: none;
-      background-color: #eeeeee;
+      height: 100%;
+      border-radius: 3px;
+     
       
       &:focus{
         outline: none;
@@ -68,7 +57,6 @@
       &-icon{
       height: 2rem;
       width: 2rem;
-      fill: #393e46;
       }
 
     }
@@ -104,11 +92,12 @@ align-self: stretch;
       padding: .8rem;
       color: white;
       position: absolute;
-      top: 1rem;
-      right: .8rem;
+      top: 0;
+      right: 0;
       display: flex;
       justify-content: center;
       align-items: center;
+      transform: translateX(1.2rem);
       }
 
       &-user{
@@ -120,46 +109,9 @@ align-self: stretch;
         &-name{
         font-size: 1.5rem;
         font-weight: 400;
+        color: black;
         }
       }
 
     }
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.btn,
-.jumbotron,
-.nav :hover {
-  border-radius: 0px;
-}
-
-body {
-  background: #343a40;
-  position: relative;
-}

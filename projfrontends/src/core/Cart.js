@@ -22,6 +22,7 @@ const  Cart = ()  => {
   useEffect(()=>{
   setProducts(loadCart())
   }, [reload])
+  
 console.log(products);
 
   const productTitle = products ? <h2>your products</h2> : <h2>No product found</h2>

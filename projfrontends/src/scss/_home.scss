@@ -1,0 +1,275 @@
+html, body, #root { margin: 0; padding: 0; height: 100%; font-family: 'PT Sans', monospace }
+      .css { margin: 0; display: flex; justify-content: center; align-items: center; cursor: default }
+      .css { color: white; text-transform: uppercase; -webkit-user-select: none; user-select: none }
+      .axis { margin: 0 1em; color: #FFF; opacity: 0.8; cursor: pointer; text-transform: uppercase }
+      .axis.current { opacity: 1; position: relative }
+      .axis.current:before { content: '•'; position: absolute; left: -11px }
+      .github-corner { position: absolute; top: 0; right: 0; z-index: 100; opacity: 0.8 }
+      .github-corner:hover { opacity: 1 }
+
+
+
+
+
+
+
+.hcontainer{
+    display: grid;
+    grid-template-rows: 60vh repeat(6,min-content);
+    grid-template-columns: [full-start fr1-start] minmax(6rem , 1fr)
+     [fr1-end sidebar-start] 25rem 
+     [sidebar-end center-start] repeat(8, [col-start] minmax(min-content , 25rem)
+      [col-end] ) [center-end fr2-start] minmax(6rem , 1fr) [fr2-end] ;
+
+    & > * {
+        color: white;
+        padding: 4rem;
+        font-size: 3rem;
+    }
+
+    .sidebar{
+        background-color: $primary-color;
+        grid-column: sidebar-start / sidebar-end;
+        grid-row: 1 / span 3;
+    }
+.carousel{
+    grid-column: sidebar-end / col-start 7;
+}
+.carousel-sidebar{
+    grid-column: col-start 7 / fr2-start;
+    background-color: $primary-color;
+
+}
+    .banner{
+        background-color: $blue-color;
+        grid-column: sidebar-end / fr2-start;
+    }
+    .products{
+        grid-column: sidebar-end / fr2-start;
+        background-color: #f1f3f6;
+        display: grid;
+        grid-template-columns: repeat(4 , 1fr);
+        grid-column-gap: 1rem;
+        grid-row-gap: 4rem;
+    }
+    .products-2{      
+          background-color: $blue-color;
+        grid-column: sidebar-start / fr2-start;
+       
+    }
+    .footer {
+        background-color: $gray-dark-color;
+        grid-column: fr1-start / fr2-end;
+    }
+}
+
+
+///test card
+
+.test{
+    height: 350px;
+    width: 300px;
+    position: relative;
+}
+.price-box{
+    position: absolute;
+    bottom: -1px;
+    transition: all .4s;
+    width: 100%;
+    overflow: hidden;
+    background-color: white;
+
+}
+.price{
+    color: black;
+    text-align: center;
+    padding: 5px 0;
+}
+.ccard:hover > .price-box {
+   bottom: 140px;
+}
+.ccard {
+    position: absolute;
+    border-radius: 8px;
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    z-index: 500;
+    box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.6); 
+    transition: all .2s;
+
+}
+.ccard:hover{
+    transform: translateY(-0.5rem);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2); 
+    // box-shadow: 0 0 80px -10px black;
+}
+
+.ccard-blur {
+    position: absolute;
+    height: 100%;
+    width: calc(100% + 1px);
+    background-color: black;
+    opacity: 0;
+    transition: opacity 0.15s ease-in;
+}
+
+.ccard:hover .ccard-blur {
+    opacity: 0.6;
+}
+
+.cfooter {
+    z-index: 1;
+    position: absolute;
+    height: 80px;
+    width: 100%;
+    bottom: 0;
+}
+
+
+
+.connections {
+    height: 80px;
+    width: 400px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 50px;
+}
+
+.connection {
+    height: 25px;
+    width: 25px;
+    border-radius: 5px;
+    background-color: white;
+    display: inline-block;
+    margin-right: 25px;
+    transform: translateY(200px);
+    transition: transform 1s cubic-bezier(.46, 1.48, .18, .81);
+    margin-left: 1.2rem;
+    position: relative;
+  
+}
+
+.ccard:hover .connection {
+    transform: translateY(0px);
+}
+
+.connection.ccart {
+    margin-left: 20px;
+    padding: 15px;
+    background-color: $gray-dark-color;
+}
+
+.connection.cbuy {
+    transition-delay: 0.02s;
+    padding: 15px;
+    background-color: $gray-dark-color;
+}
+
+.connection.cview {
+    transition-delay: 0.04s;
+    padding: 15px;
+    background-color: $gray-dark-color;
+}
+
+.ccart-icon{
+    position: absolute;
+    width: 1.5rem;
+    height: 1.5rem;
+    top: 7px;
+    left: 7px;
+}
+.ccart:hover {
+    width: 10.5rem;
+    border-radius: 5px;
+    transition: all .3s;
+    cursor: pointer;
+    background-color: $primary-color;
+}
+.ccart:hover::before  {
+content: "Add to cart";
+position: absolute;
+font-size: 1.2rem;
+color: white;
+top: 5px;
+left: 2.8rem;
+
+}
+
+
+.cbuy-icon{
+    position: absolute;
+    width: 2rem;
+    height: 2rem;
+    top: 5px;
+    left: 5px;
+}
+.cbuy:hover {
+    width: 10.5rem;
+    border-radius: 5px;
+    transition: all .3s;
+    cursor: pointer;
+    background-color: $primary-color;
+}
+.cbuy:hover::before  {
+content: "Buy now";
+position: absolute;
+font-size: 1.2rem;
+color: white;
+top: 5px;
+left: 3.2rem;
+}
+
+
+
+.cview-icon{
+    position: absolute;
+    width: 2rem;
+    height: 2rem;
+    top: 5px;
+    left: 5px;
+}
+.cview:hover {
+    width: 10.5rem;
+    border-radius: 5px;
+    transition: all .3s;
+    cursor: pointer;
+    background-color: $primary-color;
+}
+.cview:hover::before  {
+content: "View item";
+position: absolute;
+font-size: 1.2rem;
+color: white;
+top: 5px;
+left: 3.2rem;
+}
+
+.cinfo {
+	font-family: Inconsolata;
+    padding-left: 20px;
+    transform: translateY(250px);
+    transition: transform 1s cubic-bezier(.31,1.21,.64,1.02);
+    background-color: #fff;
+}
+
+.ccard:hover .cinfo {
+    transform: translateY(0px);
+}
+
+.name {
+    font-weight: bolder;
+    padding-top: 5px;
+    color: black;
+    font-size: 2.5rem;
+}
+
+.job {
+    margin-top: 10px;
+    color: black;
+    font-size: 2rem;
+}

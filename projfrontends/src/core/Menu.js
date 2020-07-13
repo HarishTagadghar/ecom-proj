@@ -1,116 +1,315 @@
-import React, { Fragment } from "react";
+import React, { Fragment , useState , useEffect} from "react";
 import { Link, withRouter } from "react-router-dom";
 import { signout, isAutheticated } from "../auth/helper";
+ import "../scss/styles.scss"
+import { loadCart } from "./helper/cartHelper";
+import { getUserOrders } from "../user/helper/userapicalls";
 
-const currentTab = (history, path) => {
-  if (history.location.pathname === path) {
-    return { color: "#2ecc72" };
-  } else {
-    return { color: "#FFFFFF" };
+
+
+
+
+const Menu = ({ history }) => {
+// cart items length
+  const [cart , setCart] = useState([])
+
+  useEffect(() => {
+    setCart(loadCart())
+  },[])
+// orders length
+
+let name
+if (isAutheticated()) {
+  if (isAutheticated().user.name.length > 7) {
+   name =  `${isAutheticated().user.name.slice(0,7)}...`
+  }else {
+    name = isAutheticated().user.name
   }
-};
+}
+const [orders , setOrders] = useState([])
 
+let preload = (userId , token) => {
+  getUserOrders(userId , token).then(order => {
+  
+    if(!order){
+    setOrders(0)
+    }else{
+      setOrders(order)
+    }
+    
+  })
+}
 
-const Menu = ({ history }) => (
-  <div>
-    <ul className="nav nav-tabs bg-dark">
-      <li className="nav-item">
-        <Link style={currentTab(history, "/")} className="nav-link" to="/">
-          Home
-        </Link>
-      </li>
-      <li className="nav-item">
-        <Link
-          style={currentTab(history, "/cart")}
-          className="nav-link"
-          to="/cart"
-        >
-          Cart
-        </Link>
-      </li>
-      {isAutheticated() && isAutheticated().user.role === 0 && (
-        <li className="nav-item">
-          <Link
-            style={currentTab(history, "/user/dashboard")}
-            className="nav-link"
-            to="/user/dashboard"
-          >
-            U. Dashboard
-          </Link>
-        </li>
-      )}
-      {isAutheticated() && isAutheticated().user.role === 1 && (
-        <Fragment>
-        <li className="nav-item">
-          <Link
-            style={currentTab(history, "/user/dashboard")}
-            className="nav-link"
-            to="/user/dashboard"
-          >
-            U. Dashboard
-          </Link>
-        </li>
-        <li className="nav-item">
-          <Link
-            style={currentTab(history, "/admin/dashboard")}
-            className="nav-link"
-            to="/admin/dashboard"
-          >
-            A. Dashboard
-          </Link>
-        </li>
-        </Fragment>
+useEffect(()=> {
+  if (isAutheticated()) {
+    preload(isAutheticated().user._id , isAutheticated().token)
+  }
+  
+}, [])
+
+ 
+return(
+
+<div>
+  <header className="header">
+  <img src={require("../images/flipkart.png")} className="logo" alt=""/>
+  <form action="#" className="search">
+      <input type="text" placeholder="Search Items" className="search-input"/>
+      <button className="search-button">
+      <img src={require("../images/SVG/search.svg")}  className="search-icon" alt=""/>
+
+      </button>
+  </form>
+  <nav className="user-nav">
+{/* home */}
+
+         <Link   to="/">
+         <div className="user-nav-icon-box">
+              <img src={require("../images/SVG/home2.svg")} className="user-nav-icon" alt=""/>
+         </div>
+         </Link>
+     
+{/* user dashbord */}
+{isAutheticated() && isAutheticated().user.role === 0 && (
+ <Link  to="/user/dashboard"
+ >
+   <div className="user-nav-icon-box">
+      <img src={require("../images/SVG/dashboard.svg")} className="user-nav-icon" alt=""/>
+         <span className="user-nav-notification">{orders.length}</span>
+      </div>
+ </Link>
+)}
+
+{/* admin dashbord */}
+{isAutheticated() && isAutheticated().user.role === 1 && (
+<Fragment>
+ <Link
+  
+   to="/user/dashboard"
+ >
+    <div className="user-nav-icon-box">
+    <img src={require("../images/SVG/dashboard.svg")} className="user-nav-icon" alt=""/>
+
+         <span className="user-nav-notification">{orders.length}</span>
+      </div>
+
+ </Link>
+ <Link
+  
+   to="/admin/dashboard"
+ >
+   <div className="user-nav-icon-box">
+   <img src={require("../images/SVG/user-tie.svg")} className="user-nav-icon" alt=""/>
+
         
-      )}
-      {!isAutheticated() && (
-        <Fragment>
-          <li className="nav-item">
-            <Link
-              style={currentTab(history, "/signup")}
-              className="nav-link"
-              to="/signup"
-            >
-              Signup
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link
-              style={currentTab(history, "/signin")}
-              className="nav-link"
-              to="/signin"
-            >
-              Sign In
-            </Link>
-          </li>
-        </Fragment>
-      )}
-      {isAutheticated() && (
-        <li className="nav-item">
-          <span
-            className="nav-link text-warning"
-            onClick={() => {
-              signout(() => {
-                history.push("/");
-              });
-            }}
-          >
-            Signout
-          </span>
-        </li>
-      )}
+      </div>
+ </Link>
+</Fragment>
+
+)}  
       
-      {isAutheticated() && (
-        <li className="nav-item">
-          <Link
-            className="nav-link text-white"
-            to={"/user/update/" + isAutheticated().user._id}
-          >
-            PROFILE
-          </Link>
-        </li>
-      )}
-    </ul>
-  </div>
-);
+{/* cart */}
+<Link to="/cart" >
+     
+
+      <div className="user-nav-icon-box">
+      <img src={require("../images/SVG/cart.svg")} className="user-nav-icon" alt=""/>
+
+         <span className="user-nav-notification">{cart.length}</span>
+      </div>
+
+ </Link> 
+
+{/* profile */}
+{!isAutheticated() && (
+<Fragment>
+
+   <Link to="/signup"
+   >
+     Signup
+   </Link>
+   <Link to="/signin"
+   >
+     Sign In
+   </Link>
+</Fragment>
+)}
+{isAutheticated() && (
+ <Link
+  
+   to={"/user/update/" + isAutheticated().user._id}
+ >
+  <div className="user-nav-user">
+          <img src={require("../images/user.png")} className="user-nav-user-profile" alt=""/>
+          <span className="user-nav-user-name">{isAutheticated().user.name}</span>
+      </div>
+
+ </Link>
+)}
+
+{isAutheticated() && (
+
+ <span
+   className="user-nav-user-name"
+   onClick={() => {
+     signout(() => {
+       history.push("/");
+     });
+   }}
+ >
+   Signout
+ </span>
+
+)}
+
+
+
+     
+  </nav>
+</header>
+
+<div className="zcontainer">
+	<div className="zmenu" tabIndex="1">
+		<div className="zlist">
+
+{/* home  */}
+			<span>
+                        <Link   to="/">
+                    <div className="user-menu-icon-box">
+                        <img src={require("../images/SVG/home2.svg")} className="user-menu-icon" alt=""/>
+                        <div className="user-menu-text">
+                            Home
+                        </div>
+                    </div>
+                    </Link>
+         </span>
+
+{/* user dashbord */}
+{isAutheticated() && isAutheticated().user.role === 0 && (
+    <span>
+ <Link  to="/user/dashboard"
+ >
+   <div className="user-menu-icon-box-1">
+      <img src={require("../images/SVG/dashboard.svg")} className="user-menu-icon" alt=""/>
+         <div className="user-menu-notification-1">{orders.length}</div>
+         <div className="user-menu-text">
+            Orders
+        </div>
+      </div>
+ </Link>
+ </span>
+)}
+
+
+
+{/* admin dashbord */}
+
+{isAutheticated() && isAutheticated().user.role === 1 && (
+    <span>
+ <Link to="/user/dashboard"
+ >
+
+    <div className="user-menu-icon-box-1">
+    <img src={require("../images/SVG/dashboard.svg")} className="user-menu-icon" alt=""/>
+
+         <p className="user-menu-notification-1">{orders.length}</p>
+         <div className="user-menu-text">
+            Orders
+        </div>
+      </div>
+
+ </Link>
+ </span>
+)}  
+{isAutheticated() && isAutheticated().user.role ===1 && (
+    <span>
+    <Link to="/admin/dashboard"
+ >
+
+   <div className="user-menu-icon-box">
+   <img src={require("../images/SVG/user-tie.svg")} className="user-menu-icon" alt=""/>
+   <div className="user-menu-text">
+            Admin
+        </div>
+        
+      </div>
+   
+ </Link>
+ </span>
+
+)}
+
+{/* cart */}
+
+<span>
+<Link to="/cart" >
+     
+
+     <div className="user-menu-icon-box-2">
+     <img src={require("../images/SVG/cart.svg")} className="user-menu-icon" alt=""/>
+
+        <p className="user-menu-notification-2">{cart.length}</p>
+        <div className="user-menu-text">
+            Cart
+        </div>
+     </div>
+      
+</Link> 
+</span>
+
+{/* profile */}
+{!isAutheticated() && (
+    <span>
+        <Link className="user-menu-signup" to="/signup">signup</Link>
+    </span>
+)}
+{!isAutheticated() && (
+    <span>
+        <Link className="user-menu-signup" to="/signin">signin</Link>
+    </span>
+)}
+
+{isAutheticated() && (
+    <span>
+ <Link
+  
+   to={"/user/update/" + isAutheticated().user._id}
+ >
+
+  <div className="user-menu-user">
+          <img src={require("../images/user.png")} className="user-menu-user-profile" alt=""/>
+          <div className="user-menu-text">{name}</div>
+      </div>
+
+ </Link>
+ </span>
+)}
+
+{isAutheticated() && (
+
+<span
+  className="user-menu-user-name"
+  onClick={() => {
+    signout(() => {
+      history.push("/");
+    });
+  }}
+>
+  Signout
+</span>
+
+)}
+
+</div>
+		
+			<div className="zbtn"></div>
+		
+	</div>	
+</div>
+
+</div>
+
+)
+  }
 
 export default withRouter(Menu);
