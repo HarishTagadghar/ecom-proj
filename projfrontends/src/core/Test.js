@@ -7,6 +7,10 @@ import Dots from './indicator-dots'
 import Buttons from './buttons'
 import Testcart from './Testcart';
 import { getProducts, getCategories } from '../admin/helper/adminapicall';
+import { API } from '../backend';
+import ImageHelper from './helper/ImageHelper';
+import SideProduct from './SideProduct';
+
 
 export default function Test() {
 
@@ -43,13 +47,22 @@ export default function Test() {
 
   
 
+
+
 // carousel item
   
     
         return (
             <div className="hcontainer">
                 <div className="sidebar">
-                    sidebar
+                {products.slice(0,5).map((product , index) => {
+                  return (
+                    <div key={product._id} className="">
+                     <SideProduct product={product} />
+                    </div>
+                  )
+                })}
+               
                 </div>
              <div className="carousel">
          
@@ -72,16 +85,14 @@ export default function Test() {
                 <div className="products">
                 {products.map((product , index) => {
                   return (
-                    <div key={product._id} className="col-4 mb-4">
+                    <div key={product._id} className="">
                      <Testcart product={product} />
                     </div>
                   )
                 })}
                
                 </div>
-                <div className="products-2"
-                >products-2
-                </div>
+             
                 <div className="footer">
                     footer
                 </div>

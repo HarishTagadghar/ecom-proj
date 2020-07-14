@@ -1,18 +1,12 @@
 import React , {useState , useEffect} from 'react';
-import image from '../images/chair.jpg'
 import { addItemToCart } from './helper/cartHelper';
 import { Redirect } from 'react-router-dom';
-import ImageHelper from './helper/ImageHelper';
 import { API } from '../backend';
 
-// const image = `https://images.pexels.com/photos/3561339/pexels-photo-3561339.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940`
 const Testcart = ({product ,  setReload = f => f /* (f) => return f  */ , reload = undefined}) => {
 
 
   const [redirect , setRedirect ] = useState(false)
-
-    product.price = product.price  ;
-    
 
     const cartTitle = product ? product.name : "Default Title"
     const cartDescription = product ? product.description : "Default Description"
