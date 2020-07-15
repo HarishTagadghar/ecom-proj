@@ -100,7 +100,10 @@ export default function Test() {
                 <div className="banner">
                    <img className="banner-image" src={require('../images/banner1.jpg')} alt=""/>
                 </div>
+             
                 <div className="products">
+                <h1 style={{width:"15%",paddingLeft:"2rem"}} className="sidebar-title">All products</h1>
+                <div className="product">
                 {products.map((product , index) => {
                   return (
                     <div key={product._id} className="">
@@ -108,6 +111,7 @@ export default function Test() {
                     </div>
                   )
                 })}
+                </div>
                
                 </div>
              

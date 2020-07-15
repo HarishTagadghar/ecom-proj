@@ -15,7 +15,7 @@ html, body, #root { margin: 0; padding: 0; height: 100%;}
 
 .hcontainer{
     display: grid;
-    grid-template-rows: 60vh repeat(0,min-content);
+    grid-template-rows: 450px repeat(0,min-content);
     grid-template-columns: [full-start fr1-start] minmax(6rem , 1fr)
      [fr1-end sidebar-start] 25rem 
      [sidebar-end center-start] repeat(7, [col-start] minmax(min-content , 17rem)
@@ -48,16 +48,19 @@ html, body, #root { margin: 0; padding: 0; height: 100%;}
     .products{
         grid-column: sidebar-end / fr2-start;
         background-color: #f1f3f6;
+       .product{
         display: grid;
         grid-template-columns: repeat(auto-fit , minmax(35rem , 1fr));
         grid-column-gap: 1rem;
         grid-row-gap: 4rem;
-        padding-top: 8rem;
+        padding-top: 4rem;
         justify-items: center;
+       }
         
    
         
     }
+ 
 
 }
 
@@ -325,13 +328,11 @@ border-bottom: 1px solid #bbbbbb;
 
 /// banner 
 .banner{
-    margin: 0 auto;
     &-image{
-        width: 100%;
-        height: 100%;
         background-size: cover;
         background-position: center;
-        vertical-align: middle;
+        height: 100%;
+        width: 100%;
     }
 }
 
