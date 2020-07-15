@@ -55,6 +55,7 @@ export default function Test() {
         return (
             <div className="hcontainer">
                 <div className="sidebar">
+                <h2 className="sidebar-title">Trending products</h2>
                 {products.slice(0,5).map((product , index) => {
                   return (
                     <div key={product._id} className="">
@@ -62,25 +63,42 @@ export default function Test() {
                     </div>
                   )
                 })}
+                
+                <img className="sidebar-image" src={require('../images/sidebar2.jpg')} alt=""/>
+                <h2 className="sidebar-title">Top Rated</h2>
+             
+                {products.slice(6,11).map((product , index) => {
+                  return (
+                    <div key={product._id} className="">
+                     <SideProduct product={product} />
+                    </div>
+                  )
+                })}
+
+                <img className="sidebar-image" src={require('../images/sidebar3.jpg')} alt=""/>
                
                 </div>
              <div className="carousel">
          
-             <div style={{height: '100%'}}>
+             <div style={{height: '98%'}}>
               
               <Carousel loop auto  widgets={[Dots, Buttons]} className="custom-class">
-                <p className="css" style={{backgroundColor: 'royalblue', height: '100%'}}>FRAME 1</p>
-                <p className="css" style={{backgroundColor: 'orange', height: '100%'}}>FRAME 2</p>
-                <p className="css" style={{backgroundColor: 'orchid', height: '100%'}}>FRAME 3</p>
-              </Carousel>
+                <img src={require('../images/slider1.jpg')} alt="" className="css"/>
+                <img src={require('../images/slider2.jpg')} alt="" className="css"/>
+                <img src={require('../images/slider3.jpg')} alt="" className="css"/>
+               
+      </Carousel>
             </div>
             
              </div>
              <div className="carousel-sidebar">
-                 carousel-sidebar
+             <div>
+               <img className="carousel-sidebar-image1" src={require('../images/banner2.jpg')} alt=""/>
+               <img className="carousel-sidebar-image2" src={require('../images/banner3.jpg')} alt=""/>
+             </div>
              </div>
                 <div className="banner">
-                    banner
+                   <img className="banner-image" src={require('../images/banner1.jpg')} alt=""/>
                 </div>
                 <div className="products">
                 {products.map((product , index) => {
@@ -93,9 +111,16 @@ export default function Test() {
                
                 </div>
              
-                <div className="footer">
-                    footer
+                {/* <div className="footer">
+                <div class="fmenu">
+                    <div class="flabel">Follow Me</div>
+                    <div class="spacer"></div>
+                    <div class="fitem"><span>Twitter</span></div>
+                    <div class="fitem"><span>Instagram</span></div>
+                    <div class="fitem"><span>FACEBOOK</span></div>
+                    <div class="fitem"><span>YOUTUBE</span></div>
                 </div>
+                </div> */}
             </div>
                  )
       
