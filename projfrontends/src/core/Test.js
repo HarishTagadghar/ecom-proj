@@ -10,6 +10,7 @@ import { getProducts, getCategories } from '../admin/helper/adminapicall';
 import { API } from '../backend';
 import ImageHelper from './helper/ImageHelper';
 import SideProduct from './SideProduct';
+import { getCategoryById } from './helper/categoryHelper';
 
 
 export default function Test() {
@@ -17,7 +18,13 @@ export default function Test() {
   const [products , setProducts] = useState([])
   const [errors , seterrors] = useState(false)
   const [categories , setCategory] = useState([])
+  const [loading , setLoading] = useState(false)
+  const [currentPage , setCurrentPage] = useState(1)
+  const [productPerPage , setProductPerPage] = useState(6)
+
+
   const preload = () => {
+    setLoading(true)
     getProducts().then(data => {
       if (data.error) {
         seterrors(data.error)
@@ -25,6 +32,8 @@ export default function Test() {
     setProducts(data)
       }
     })
+    setLoading(false)
+
   }
 
   useEffect(()=>{
@@ -45,9 +54,32 @@ export default function Test() {
     preloadCategory();
   }, []);
 
-  
+  const handleChange = event => {
 
+    event.target.value && event.target.value === "all" ? (
+      getProducts().then(data => {
+        if (data.error) {
+          seterrors(data.error)
+        }else{
+      setProducts(data)
+        }
+      })
+    ): (
+      getCategoryById({"_id":event.target.value}).then(data => {
+        if (data.error) {
+          seterrors(data.error)
+        } else {
+          setProducts(data)
+        }
+      })
+    );
+    
+  }
 
+  /// get current product pagination
+  const indexOfLastPage = currentPage * productPerPage;
+  const indexOfFirstPost = indexOfLastPage - productPerPage;
+  const currentProduct = products.slice(indexOfFirstPost , indexOfLastPage)
 
 // carousel item
   
@@ -87,7 +119,7 @@ export default function Test() {
                 <img src={require('../images/slider2.jpg')} alt="" className="css"/>
                 <img src={require('../images/slider3.jpg')} alt="" className="css"/>
                
-      </Carousel>
+              </Carousel>
             </div>
             
              </div>
@@ -103,14 +135,35 @@ export default function Test() {
              
                 <div className="products">
                 <h1 style={{width:"15%",paddingLeft:"2rem"}} className="sidebar-title">All products</h1>
+                     
+                     
+                    <div className="cselect">
+                    <select 
+                  onChange={handleChange}
+                  placeholder="Category"
+                >
+                  <option value="all"> All Category  &#11167; </option>
+                  {categories &&
+                    categories.map((cate, index) => (
+                      <option key={index} value={cate._id}>
+                        {cate.name}
+                      </option>
+                    ))}
+                </select>
+                    </div>
+
+
                 <div className="product">
-                {products.map((product , index) => {
+
+              {products.map((product , index) => {
                   return (
                     <div key={product._id} className="">
-                     <Testcart product={product} />
+                     <Testcart  product={product} />
                     </div>
                   )
-                })}
+                })
+              }
+
                 </div>
                
                 </div>

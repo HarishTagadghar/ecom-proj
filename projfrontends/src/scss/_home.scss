@@ -15,7 +15,7 @@ html, body, #root { margin: 0; padding: 0; height: 100%;}
 
 .hcontainer{
     display: grid;
-    grid-template-rows: 450px repeat(0,min-content);
+    grid-template-rows: minmax(450px , min-content) repeat(0,min-content);
     grid-template-columns: [full-start fr1-start] minmax(6rem , 1fr)
      [fr1-end sidebar-start] 25rem 
      [sidebar-end center-start] repeat(7, [col-start] minmax(min-content , 17rem)
@@ -47,7 +47,9 @@ html, body, #root { margin: 0; padding: 0; height: 100%;}
     }
     .products{
         grid-column: sidebar-end / fr2-start;
-        background-color: #f1f3f6;
+        background-color: #f7f7f7;
+        position: relative;
+        
        .product{
         display: grid;
         grid-template-columns: repeat(auto-fit , minmax(35rem , 1fr));
@@ -344,124 +346,39 @@ border-bottom: 1px solid #bbbbbb;
      
   }
 }
+// categories select
 
-///footer
-.fmenu {
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.8);
-  display: inline-block;
-  cursor: pointer;
-  pointer-events: none;
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
+.cselect {
+  & select {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: $gray-dark-color;
+    color: white;
+    width: 17.5rem;
+    font-size: 2rem;
+    font-weight: 600;
+    padding: 1.3rem .5rem;
+    border-radius: 0 0px 8px 8px;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    outline: 0;
+    box-shadow: none;
+    border: 0 !important;
+    cursor: pointer;
+    padding: 1rem 1.5rem;
+
+   &:hover{
+       border-radius: 0;
+   }
+   
+
+  }
+ 
+
 }
-.fmenu:hover {
-  pointer-events: all;
-}
-.label {
-  display: inline-block;
-  cursor: pointer;
-  pointer-events: all;
-}
-.spacer {
-  display: inline-block;
-  width: 80px;
-  margin-left: 15px;
-  margin-right: 15px;
-  vertical-align: middle;
-  cursor: pointer;
-  position: relative;
-}
-.spacer:before {
-  content: "";
-  position: absolute;
-  border-bottom: 1px solid #ffffff;
-  height: 1px;
-  width: 0%;
-  transition: width 0.25s ease;
-  transition-delay: 0.7s;
-}
-.fitem {
-  position: relative;
-  display: inline-block;
-  margin-right: 30px;
-  top: 10px;
-  opacity: 0;
-  transition: opacity 0.5s ease, top 0.5s ease;
-  transition-delay: 0;
-}
-span {
-  transition: color 0.5s ease;
-}
-.fitem:hover span {
-  color: #ff0000;
-}
-.fmenu:hover .spacer:before {
-  width: 100%;
-  transition-delay: 0s;
-}
-.fmenu:hover .fitem {
-  opacity: 1;
-  top: 0px;
-}
-.fitem:nth-child(1) {
-  transition-delay: 0.45s;
-}
-.fitem:nth-child(2) {
-  transition-delay: 0.4s;
-}
-.fitem:nth-child(3) {
-  transition-delay: 0.35s;
-}
-.fitem:nth-child(4) {
-  transition-delay: 0.3s;
-}
-.fitem:nth-child(5) {
-  transition-delay: 0.25s;
-}
-.fitem:nth-child(6) {
-  transition-delay: 0.2s;
-}
-.fitem:nth-child(7) {
-  transition-delay: 0.15s;
-}
-.fitem:nth-child(8) {
-  transition-delay: 0.1s;
-}
-.fitem:nth-child(9) {
-  transition-delay: 0.05s;
-}
-.fitem:nth-child(10) {
-  transition-delay: 0s;
-}
-.fmenu:hover .fitem:nth-child(1) {
-  transition-delay: 0.25s;
-}
-.fmenu:hover .fitem:nth-child(2) {
-  transition-delay: 0.3s;
-}
-.fmenu:hover .fitem:nth-child(3) {
-  transition-delay: 0.35s;
-}
-.fmenu:hover .fitem:nth-child(4) {
-  transition-delay: 0.4s;
-}
-.fmenu:hover .fitem:nth-child(5) {
-  transition-delay: 0.45s;
-}
-.fmenu:hover .fitem:nth-child(6) {
-  transition-delay: 0.5s;
-}
-.fmenu:hover .fitem:nth-child(7) {
-  transition-delay: 0.55s;
-}
-.fmenu:hover .fitem:nth-child(8) {
-  transition-delay: 0.6s;
-}
-.fmenu:hover .fitem:nth-child(9) {
-  transition-delay: 0.65s;
-}
-.fmenu:hover .fitem:nth-child(10) {
-  transition-delay: 0.7s;
-}
+
+
+/* Transition */
+
