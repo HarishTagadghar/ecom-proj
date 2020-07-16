@@ -6,6 +6,7 @@ import Carousel from './carousel'
 import Dots from './indicator-dots'
 import Buttons from './buttons'
 import Testcart from './Testcart';
+import Pagination from './Pagination';
 import { getProducts, getCategories } from '../admin/helper/adminapicall';
 import { API } from '../backend';
 import ImageHelper from './helper/ImageHelper';
@@ -20,7 +21,7 @@ export default function Test() {
   const [categories , setCategory] = useState([])
   const [loading , setLoading] = useState(false)
   const [currentPage , setCurrentPage] = useState(1)
-  const [productPerPage , setProductPerPage] = useState(6)
+  const [productPerPage , setProductPerPage] = useState(4)
 
 
   const preload = () => {
@@ -57,6 +58,7 @@ export default function Test() {
   const handleChange = event => {
 
     event.target.value && event.target.value === "all" ? (
+    
       getProducts().then(data => {
         if (data.error) {
           seterrors(data.error)
@@ -81,6 +83,15 @@ export default function Test() {
   const indexOfFirstPost = indexOfLastPage - productPerPage;
   const currentProduct = products.slice(indexOfFirstPost , indexOfLastPage)
 
+  const paginate = pageNumber => setCurrentPage(pageNumber)
+
+  const pre = ()  => {
+  setCurrentPage(currentPage - 1)
+  }
+  const next = () => {
+    setCurrentPage(currentPage + 1)
+
+  }
 // carousel item
   
     
@@ -112,7 +123,7 @@ export default function Test() {
                 </div>
              <div className="carousel">
          
-             <div style={{height: '98%'}}>
+             <div style={{height: '100%'}}>
               
               <Carousel loop auto  widgets={[Dots, Buttons]} className="custom-class">
                 <img src={require('../images/slider1.jpg')} alt="" className="css"/>
@@ -155,17 +166,27 @@ export default function Test() {
 
                 <div className="product">
 
-              {products.map((product , index) => {
+              {loading? <h1>loading...</h1> : (
+                currentProduct.map((product , index) => {
                   return (
+                    
                     <div key={product._id} className="">
                      <Testcart  product={product} />
                     </div>
+                  
+                    
                   )
                 })
+              )
               }
+             
 
                 </div>
-               
+                <div className="ppagination">
+                <p className="ppagination-pre" onClick={pre}>&#8606;	</p>
+                <Pagination productPerPage={productPerPage} totalProduct={products.length} paginate={paginate} />
+                <p onClick={next}>	&#8608;</p>
+                </div>
                 </div>
              
                 {/* <div className="footer">

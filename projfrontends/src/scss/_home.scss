@@ -15,7 +15,6 @@ html, body, #root { margin: 0; padding: 0; height: 100%;}
 
 .hcontainer{
     display: grid;
-    grid-template-rows: minmax(450px , min-content) repeat(0,min-content);
     grid-template-columns: [full-start fr1-start] minmax(6rem , 1fr)
      [fr1-end sidebar-start] 25rem 
      [sidebar-end center-start] repeat(7, [col-start] minmax(min-content , 17rem)
@@ -49,12 +48,13 @@ html, body, #root { margin: 0; padding: 0; height: 100%;}
         grid-column: sidebar-end / fr2-start;
         background-color: #f7f7f7;
         position: relative;
+        min-height: 1248px;
         
        .product{
         display: grid;
         grid-template-columns: repeat(auto-fit , minmax(35rem , 1fr));
-        grid-column-gap: 1rem;
-        grid-row-gap: 4rem;
+        grid-column-gap: .5rem;
+        grid-row-gap: 3rem;
         padding-top: 4rem;
         justify-items: center;
        }
@@ -101,13 +101,15 @@ html, body, #root { margin: 0; padding: 0; height: 100%;}
     background-repeat: no-repeat;
     overflow: hidden;
     z-index: 500;
-    box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.6); 
     transition: all .2s;
+    transform: translateY(0.5rem);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2); 
 
 }
 .ccard:hover{
-    transform: translateY(-0.5rem);
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2); 
+   
+    box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.4); 
+
     // box-shadow: 0 0 80px -10px black;
 }
 
@@ -380,5 +382,42 @@ border-bottom: 1px solid #bbbbbb;
 }
 
 
-/* Transition */
+// pagination
 
+.ppagination{
+    cursor: pointer;
+    p{
+        font-size: 2.5rem;
+        color: $primary-color;
+    }
+    &-pre{
+        margin-right: 1.5rem;
+    }
+   display: flex;
+   justify-content: center;
+   align-items: center;
+  
+    &-list{
+        list-style-type: none;
+        display: flex;
+        margin-right: 1rem;
+        transition: all .4s;
+        &-item{
+            margin-right: 1rem;
+            background-color: $primary-color;
+            color: white;
+            padding: 1rem;
+            border-radius: .5rem;
+            font-size: 1.5rem;
+            transition: all .4s;
+
+            &-link{
+               
+            }
+            &:active , &:checked > &-link{
+                transform: scale(1.5);
+            }
+            
+        }
+    }
+}

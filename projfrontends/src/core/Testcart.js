@@ -3,7 +3,7 @@ import { addItemToCart } from './helper/cartHelper';
 import { Redirect } from 'react-router-dom';
 import { API } from '../backend';
 
-const Testcart = ({product ,  setReload = f => f /* (f) => return f  */ , reload = undefined}) => {
+const Testcart = ({product ,   setReload = f => f /* (f) => return f  */ , reload = undefined}) => {
 
 
   const [redirect , setRedirect ] = useState(false)
