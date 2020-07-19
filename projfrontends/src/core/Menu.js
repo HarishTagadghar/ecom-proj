@@ -4,7 +4,7 @@ import { signout, isAutheticated } from "../auth/helper";
  import "../scss/styles.scss"
 import { loadCart } from "./helper/cartHelper";
 import { getUserOrders } from "../user/helper/userapicalls";
-
+import {Dropdown} from 'react-bootstrap'
 
 
 
@@ -12,8 +12,12 @@ import { getUserOrders } from "../user/helper/userapicalls";
 const Menu = ({ history }) => {
 // cart items length
   const [cart , setCart] = useState([])
+  const [reload , setReload] = useState(true)
 
   useEffect(() => {
+    if (!loadCart()) {
+     return setCart(cart.length = [])
+    }
     setCart(loadCart())
   },[])
 // orders length
@@ -52,7 +56,7 @@ return(
 
 <div>
   <header className="header">
-  <img src={require("../images/flipkart.png")} className="logo" alt=""/>
+  <img src={require("../images/logo.png")} className="logo" alt=""/>
   <form action="#" className="search">
       <input type="text" placeholder="Search Items" className="search-input"/>
       <button className="search-button">
@@ -68,6 +72,8 @@ return(
               <img src={require("../images/SVG/home2.svg")} className="user-nav-icon" alt=""/>
          </div>
          </Link>
+
+
      
 {/* user dashbord */}
 {isAutheticated() && isAutheticated().user.role === 0 && (
@@ -125,42 +131,58 @@ return(
 <Fragment>
 
    <Link to="/signup"
-   >
+   className="authenticate"
+    >
      Signup
    </Link>
+   
    <Link to="/signin"
+   className="authenticate"
+
    >
      Sign In
    </Link>
 </Fragment>
 )}
 {isAutheticated() && (
- <Link
+  <Dropdown>
+  <Dropdown.Toggle className="ndropdown"  id="dropdown-basic">
+
+  <img src={require("../images/user.png")} className="user-nav-user-profile" alt=""/>
+  <span className="ndropdown-name">{isAutheticated().user.name}</span>
+
+  </Dropdown.Toggle>
+
+  <Dropdown.Menu>
+    <Dropdown.Item className="ndropdown-item" >
+       <Link
   
    to={"/user/update/" + isAutheticated().user._id}
  >
   <div className="user-nav-user">
-          <img src={require("../images/user.png")} className="user-nav-user-profile" alt=""/>
-          <span className="user-nav-user-name">{isAutheticated().user.name}</span>
+          <span className="ndropdown-item-update">Update Profile</span>
       </div>
 
- </Link>
-)}
+ </Link> 
+    </Dropdown.Item>
 
-{isAutheticated() && (
-
- <span
-   className="user-nav-user-name"
+    <Dropdown.Item className="ndropdown-item">
+    <span
+   className="ndropdown-item-signout"
    onClick={() => {
      signout(() => {
-       history.push("/");
+      history.push("/")
      });
    }}
  >
    Signout
  </span>
-
+    </Dropdown.Item>
+  </Dropdown.Menu>
+</Dropdown>
+ 
 )}
+
 
 
 

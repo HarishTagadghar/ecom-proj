@@ -76,7 +76,8 @@ const AddProduct = () => {
   };
 
   const handleChange = name => event => {
-    const value = name === "photo" ? event.target.files[0] : event.target.value;
+    const value = name === "photo" ?
+     event.target.files : event.target.value;
     formData.set(name, value);
     setValues({ ...values, [name]: value });
   };
@@ -112,6 +113,7 @@ if (error) {
             name="photo"
             accept="image"
             placeholder="choose a file"
+            multiple
           />
         </label>
       </div>

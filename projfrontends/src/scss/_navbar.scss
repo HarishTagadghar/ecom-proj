@@ -1,7 +1,11 @@
 
 //// navbar
+
+
 .header{
-    background-color: #fff;
+    background-color: $gray-dark-color;
+    padding: 1rem 0;
+    margin-bottom: 3rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -10,7 +14,7 @@
     }
     .logo{
       height: 3.5rem;
-      margin-left: 3rem;
+      margin-left: 2rem;
     }
     .search{
       flex:0 0 40%;
@@ -19,7 +23,7 @@
       align-items: center;
 
       &-input{
-      background-color: #eeeeee;
+      background-color: #fff;
       border: 1px solid #9d8f8f;
       padding: .7rem 2rem;
       border-radius: .5rem;
@@ -57,24 +61,25 @@
       &-icon{
       height: 2rem;
       width: 2rem;
+      background-color: #fff;
       }
 
     }
+
+
     .user-nav{
 display: flex;
 align-items: center;
 align-self: stretch;
 
 & > * {
-  padding: 1rem 2rem;
+  padding: 1rem 1.2rem;
   cursor: pointer;
   height: 100%;
   display: flex;
   align-items: center;
 }
-& > *:hover{
-  background-color: #ebf0f6;
-}
+
 
       &-icon-box{
         position: relative;
@@ -82,7 +87,6 @@ align-self: stretch;
       &-icon{
       height: 2.5rem;
       width: 2.5rem;
-      fill:#393e46;
       }
       &-notification{
       height: 1.75rem;
@@ -92,7 +96,7 @@ align-self: stretch;
       padding: .8rem;
       color: white;
       position: absolute;
-      top: 0;
+      top: -.5rem;
       right: 0;
       display: flex;
       justify-content: center;
@@ -104,14 +108,51 @@ align-self: stretch;
 
         &-profile{
           height: 3.75rem;
-          margin-right: 1.5rem;
+          margin-right: 1rem;
         }
         &-name{
         font-size: 1.5rem;
         font-weight: 400;
-        color: black;
+        color: white;
         }
       }
 
+    }
+  }
+  .authenticate {
+    color: white;
+    font-size: 1.5rem;
+    &:hover{
+      color: white;
+    }
+  }
+  .ndropdown{
+    background-color: $gray-dark-color;
+    border: none;
+    &:hover , &:active , &:focus  {
+      background-color: #34404d !important;
+      box-shadow: none !important;
+      border-color: $gray-dark-color !important;
+    }
+ 
+    &-name{
+    font-size: 1.7rem;
+    color: white;
+    justify-content: center;
+    }
+    &-item{
+      width: 13.6rem !important;
+      &:hover{
+        background-color: #cecfd1;
+      }
+      &-update{
+     font-size: 1.5rem;
+     color: black;
+      }
+      &-signout{
+        font-size: 1.5rem;
+        color: black;
+        
+      }
     }
   }

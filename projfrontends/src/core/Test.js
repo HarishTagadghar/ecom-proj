@@ -123,7 +123,7 @@ export default function Test() {
                 </div>
              <div className="carousel">
          
-             <div style={{height: '100%'}}>
+             <div style={{height: '100%' , width: '100%'}}>
               
               <Carousel loop auto  widgets={[Dots, Buttons]} className="custom-class">
                 <img src={require('../images/slider1.jpg')} alt="" className="css"/>
