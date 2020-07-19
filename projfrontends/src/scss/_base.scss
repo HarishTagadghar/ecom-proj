@@ -2,9 +2,12 @@
     margin: 0;
     padding: 0;
     }
-    $bp-largest: 75em ;//1200px
+  $bp-largest1: 93.75em;  // 15000px
+  $bp-largest: 75em ;//1200px
   $bp-large: 68.75em; //1100px
-  $bp-medium: 62.5em; //900px
+  $bp-medium: 62.5em; //1000px
+  $bp-small1:50em; // 800px
+  $bp-small2: 43.75em; //700px
   $bp-small: 37.5em ;//600px
   $bp-smaller:31.25em; //500px
 
@@ -21,6 +24,13 @@
     }
     html {
     font-size: 62.5%; //10px
+    @media(max-width:$bp-largest){
+     font-size: 56.25%; //9px
+     }
+     @media(max-width:$bp-small1){
+      font-size: 50%; //9px
+      }
+      
     box-sizing: border-box;
   
     }

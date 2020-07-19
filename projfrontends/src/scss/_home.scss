@@ -4,7 +4,7 @@ html, body, #root { margin: 0; padding: 0; height: 100%;}
       .axis { margin: 0 1em; color: #FFF; opacity: 0.8; cursor: pointer; text-transform: uppercase }
       .axis.current { opacity: 1; position: relative }
       .axis.current:before { content: '•'; position: absolute; left: -11px }
-      .github-corner { position: absolute; top: 0; right: 0; z-index: 100; opacity: 0.8 }
+      .github-corner { position: absolute; top: 0; right: 0;  opacity: 0.8 }
       .github-corner:hover { opacity: 1 }
 
 
@@ -15,10 +15,24 @@ html, body, #root { margin: 0; padding: 0; height: 100%;}
 
 .hcontainer{
     display: grid;
+    margin-top: 3rem;
     grid-template-columns: [full-start fr1-start] minmax(6rem , 1fr)
      [fr1-end sidebar-start] 25rem 
      [sidebar-end center-start] repeat(7, [col-start] minmax(min-content , 17rem)
       [col-end] ) [center-end fr2-start] minmax(6rem , 1fr) [fr2-end] ;
+
+      @media(max-width:$bp-largest){
+        grid-template-columns: [full-start fr1-start] minmax(6rem , 1fr)
+     [fr1-end sidebar-start] 25rem 
+     [sidebar-end center-start] repeat(7, [col-start] minmax(min-content , 17rem)
+      [col-end] ) [center-end fr2-start] minmax(4rem , 1fr) [fr2-end] ;
+    }
+    @media(max-width:$bp-medium){
+        grid-template-columns: [full-start fr1-start] minmax(6rem , 1fr)
+        [fr1-end sidebar-start] 22rem 
+        [sidebar-end center-start] repeat(7, [col-start] minmax(min-content , 17rem)
+         [col-end] ) [center-end fr2-start] minmax(4rem , 1fr) [fr2-end] ;
+    }
 
  
     .sidebar{
@@ -26,36 +40,66 @@ html, body, #root { margin: 0; padding: 0; height: 100%;}
         margin: 0 15px 15px 15px;
         grid-column: sidebar-start / sidebar-end;
         grid-row: 1 / span 3;
+        @media(max-width: $bp-small2){
+            grid-row: 4 ;
+        grid-column: sidebar-start / fr2-start ;
+        margin: 0 0 0 1rem;
+        }
     }
 .carousel{
     grid-column: sidebar-end / col-start 7;
-    width: 100%;
+    // z-index: -1;
+    @media(max-width:$bp-largest1){
+       grid-column: sidebar-end / fr2-start;
+       height: 40vw;
+      }
+      @media(max-width: $bp-small2){
+        grid-column: sidebar-start / fr2-start;
+        margin-left: 1rem;
+       
+    }
 }
+
 .carousel-sidebar{
     grid-column: col-start 7 / fr2-start;
     margin: 0 0 0rem 2rem;
-    
-
+    @media(max-width:$bp-largest1){
+      display: none;
+       }
+   
 }
     .banner{
         background-color: $blue-color;
         grid-column: sidebar-end / fr2-start;
         width: 100%;
         margin: 2rem 0;
+        @media(max-width: $bp-small2){
+            grid-column: sidebar-start / fr2-start;
+            margin-left: 1rem;
+           
+        }
     }
     .products{
         grid-column: sidebar-end / fr2-start;
         background-color: #f7f7f7;
         position: relative;
         min-height: 1248px;
-        
+        @media(max-width: $bp-small2){
+            grid-column: sidebar-start / fr2-start;
+            margin-left: 1rem;
+           
+        }
        .product{
         display: grid;
-        grid-template-columns: repeat(auto-fit , minmax(35rem , 1fr));
+        grid-template-columns: repeat(auto-fit , minmax(25rem , 1fr));
         grid-column-gap: .5rem;
         grid-row-gap: 3rem;
         padding-top: 4rem;
         justify-items: center;
+        @media(max-width:$bp-medium){
+        grid-template-columns: repeat(auto-fit , minmax(20rem , 1fr));
+           
+            }
        }
         
    
@@ -69,9 +113,19 @@ html, body, #root { margin: 0; padding: 0; height: 100%;}
 ///test card
 
 .test{
-    height: 350px;
-    width: 300px;
+    height: 35rem;
+    width: 30rem;
     position: relative;
+    @media(max-width:$bp-largest1){
+    height: 30rem;
+    width: 25rem;
+    margin-left: 2rem;
+    }
+    @media(max-width:$bp-medium){
+        height: 25rem;
+        width: 20rem;
+        margin-left: 2rem;
+        }
 }
 .price-box{
     position: absolute;
@@ -99,10 +153,10 @@ html, body, #root { margin: 0; padding: 0; height: 100%;}
     background-position: center;
     background-repeat: no-repeat;
     overflow: hidden;
-    z-index: 500;
     transition: all .2s;
     transform: translateY(0.5rem);
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2); 
+    
 
 }
 .ccard:hover{
@@ -286,33 +340,59 @@ left: 3.2rem;
     width: 83%;
     border-radius: 0 0px 8px 8px;
     margin-bottom: 2rem;
-
+    font-size: 1.8rem;
+    @media(max-width: $bp-medium){
+        font-size: 1.5rem;
+    }
+    @media(max-width: $bp-small2){
+       width: 100%;
+    }
+   
 }
-
+.sidebar-title-2{
+    width:15%;
+    padding-left:2rem;
+    @media(max-width: $bp-medium){
+        width: 20%;
+    }
+    @media(max-width: $bp-smaller){
+        width: 30%;
+     }
+}
 .side-product{
     display: flex;
     padding: 1rem;
     cursor: pointer;
     margin-right: 1rem;
-
+    
+    @media(max-width:$bp-small1){
+     padding: .5rem;  
+    }
+    @media(max-width: $bp-smaller){
+        // justify-content: center;
+        margin-right: 0;
+     }
     
     &-image{
-    height: 80px;
-    width: 80px;
+    height: 8rem;
+    width: 8rem;
     margin-right: 1rem;
     border-right: 1px solid #fff;
     border-radius: 5px;
-  
+ 
     }
     &-info{
+      
         &-price{
         color: $primary-color;
-        margin-top: 25px;
+        margin-top: 2.5rem;
+      
         }
         &-title{
         font-size: 1.5rem;
         color: black;
-        padding-top:15px ;
+        padding-top:1.5rem ;
+        
         }
     
     }
@@ -323,12 +403,16 @@ border-top: 1px solid #bbbbbb;
 border-bottom: 1px solid #bbbbbb;
 }
 .sidebar-image{
-    width: 100%;
+    height: 28rem;
     &:not(:last-child){
         margin-bottom: 3rem;
     }
 }
-
+.b{
+    @media(max-width:$bp-small2 ){
+        display: none;
+    }
+}
 /// banner 
 .banner{
     &-image{
@@ -343,10 +427,7 @@ border-bottom: 1px solid #bbbbbb;
   &-image{
       &1{
           margin-bottom: 2rem;
-          background-size: cover;
-          background-position: center;
-          height: 100%;
-          width: 100%;
+  
       }
      
   }
@@ -373,11 +454,14 @@ border-bottom: 1px solid #bbbbbb;
     border: 0 !important;
     cursor: pointer;
     padding: 1rem 1.5rem;
-
+    @media(max-width: $bp-medium){
+        font-size: 1.5rem;
+        width: 13.5rem;
+    }
    &:hover{
        border-radius: 0;
    }
-   
+
 
   }
  

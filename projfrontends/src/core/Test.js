@@ -108,22 +108,25 @@ export default function Test() {
                 })}
                 
                 <img className="sidebar-image" src={require('../images/sidebar2.jpg')} alt=""/>
-                <h2 className="sidebar-title">Top Rated</h2>
-             
-                {products.slice(6,11).map((product , index) => {
-                  return (
-                    <div key={product._id} className="">
-                     <SideProduct product={product} />
-                    </div>
-                  )
-                })}
 
-                <img className="sidebar-image" src={require('../images/sidebar3.jpg')} alt=""/>
+                <div className="b">
+                <h2 className="sidebar-title ">Top Rated</h2>
+             
+             {products.slice(6,11).map((product , index) => {
+               return (
+                 <div key={product._id} className="">
+                  <SideProduct product={product} />
+                 </div>
+               )
+             })}
+
+             <img className="sidebar-image" src={require('../images/sidebar3.jpg')} alt=""/>
+                </div>
                
                 </div>
              <div className="carousel">
          
-             <div style={{height: '100%' , width: '100%'}}>
+             <div style={{height: '100%' , width: '100%' }}>
               
               <Carousel loop auto  widgets={[Dots, Buttons]} className="custom-class">
                 <img src={require('../images/slider1.jpg')} alt="" className="css"/>
@@ -135,7 +138,7 @@ export default function Test() {
             
              </div>
              <div className="carousel-sidebar">
-             <div>
+             <div className="med">
                <img className="carousel-sidebar-image1" src={require('../images/banner2.jpg')} alt=""/>
                <img className="carousel-sidebar-image2" src={require('../images/banner3.jpg')} alt=""/>
              </div>
@@ -145,7 +148,7 @@ export default function Test() {
                 </div>
              
                 <div className="products">
-                <h1 style={{width:"15%",paddingLeft:"2rem"}} className="sidebar-title">All products</h1>
+                <h1  className="sidebar-title sidebar-title-2">All products</h1>
                      
                      
                     <div className="cselect">
@@ -153,7 +156,7 @@ export default function Test() {
                   onChange={handleChange}
                   placeholder="Category"
                 >
-                  <option value="all"> All Category  &#11167; </option>
+                  <option className="options" value="all"> All Category  &#11167; </option>
                   {categories &&
                     categories.map((cate, index) => (
                       <option key={index} value={cate._id}>

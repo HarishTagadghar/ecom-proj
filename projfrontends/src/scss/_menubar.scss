@@ -3,11 +3,9 @@
 
 
 .zcontainer{
-	min-width:100%;
-	min-height:100%;
 	display:block;
   position:relative;
-  z-index: 5;
+  position: fixed;
 	}
 
 .zzmenu{
@@ -66,6 +64,7 @@
 	position:absolute;
   border-radius:50%;
   visibility: hidden;
+  
   @media(max-width:$bp-medium){
     visibility: visible;
   }
