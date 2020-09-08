@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../scss/styles.scss'
 import Menu from '../core/Menu';
-import { loadCart, removeItemFromCart } from "./helper/cartHelper";
+import { loadCart, removeItemFromCart ,increse ,decrese} from "./helper/cartHelper";
 import { API } from '../backend';
 import Razorpay from "./Razorpay";
 
@@ -19,12 +19,8 @@ const TestUpdate = ({ match }) => {
   }, [reload])
 
   const CartProduct = ({ product }) => {
-    const [count, setCount] = useState(1)
-
-    const handlechange = event => {
-      setCount(event.target.value)
-    }
-    product.count = count;
+   
+ 
     const image = `${API}/product/photo/${product._id}`;
     const name = product.name;
     const description = product.description;
@@ -41,11 +37,16 @@ const TestUpdate = ({ match }) => {
             <h3 className="cart-items-1-product-right-description">Quantity</h3>
 
             <span onClick={() => {
-              setCount(count - 1)
+              if(product.count === 1){
+               return alert("Quantity cant be less then one")
+              }
+              decrese(product._id)
+              setReload(!reload)
             }} className="minus">-</span>
-            <input className="quantity" type="text" onChange={handlechange} value={count} />
+            <input className="quantity" type="text" disabled value={product.count} />
             <span onClick={() => {
-              setCount(count + 1)
+              increse(product._id)
+              setReload(!reload)
 
             }} className="plus">+</span>
           </div>
@@ -55,7 +56,7 @@ const TestUpdate = ({ match }) => {
           <h3 className="cart-items-1-product-right-description">Size : M</h3>
           <button onClick={() => {
             removeItemFromCart(product._id);
-            window.location.reload(true)
+           setReload(!reload)
           }} className="cart-items-1-product-right-delete">
             <img className="cart-items-1-product-right-delete-icon" src={require("../images/SVG/trash-o.svg")} alt="" />
             <h5 className="cart-items-1-product-right-delete-text">REMOVE ITEM</h5>

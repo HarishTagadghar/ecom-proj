@@ -16,10 +16,12 @@
     "react": "^16.13.1",
     "react-bootstrap": "^1.2.2",
     "react-dom": "^16.13.1",
+    "react-elastic-carousel": "^0.7.5",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "react-stripe-checkout": "^2.6.3",
-    "react-transition-group": "^4.4.1"
+    "react-transition-group": "^4.4.1",
+    "styled-components": "^5.2.0"
   },
   "scripts": {
     "start": "react-scripts start",

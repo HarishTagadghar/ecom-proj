@@ -26,6 +26,9 @@
     border: none;
     background-color: #313131;
     color: white;
+    @media(max-width:$bp-smaller){
+      margin: 25% 48%;
+    }
     &:focus {
       border: none;
       outline: none;

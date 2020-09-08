@@ -41,7 +41,44 @@ export const removeItemFromCart = (productId) => {
     return cart
 
 }
+export const increse = (productId) => {
+    let cart = []
+    if (typeof window !== undefined) {
+        if (localStorage.getItem("cart")) {
+            cart = JSON.parse(localStorage.getItem("cart"))
+        }
+        cart.map((product, i) => {
+            if (product._id === productId) {
+                product.count = product.count + 1
+            }
+        })
 
+
+        localStorage.setItem("cart", JSON.stringify(cart))
+    }
+
+    return cart
+
+}
+export const decrese = (productId) => {
+    let cart = []
+    if (typeof window !== undefined) {
+        if (localStorage.getItem("cart")) {
+            cart = JSON.parse(localStorage.getItem("cart"))
+        }
+        cart.map((product, i) => {
+            if (product._id === productId) {
+                product.count = product.count  - 1
+            }
+        })
+
+
+        localStorage.setItem("cart", JSON.stringify(cart))
+    }
+
+    return cart
+
+}
 export const cartEmpty = next => {
     if (typeof window !== undefined) {
         localStorage.removeItem("cart")
