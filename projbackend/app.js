@@ -12,6 +12,7 @@ const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/user");
 const categoryRoutes = require("./routes/category");
 const productRoutes = require("./routes/product");
+const bannerRoutes = require("./routes/banner");
 const orderRoutes = require("./routes/order");
 const stripeRoutes = require("./routes/stripepayment");
 const RazorpayRoutes = require("./routes/razorpay");
@@ -39,9 +40,11 @@ app.use("/api", authRoutes);
 app.use("/api", userRoutes);
 app.use("/api", categoryRoutes);
 app.use("/api", productRoutes);
+app.use("/api", bannerRoutes);
 app.use("/api", orderRoutes);
 app.use("/api", stripeRoutes);
-app.use("/api", RazorpayRoutes);
+app.use("/api", RazorpayRoutes); 
+
 
 //PORT
 const port = process.env.PORT || 8000;

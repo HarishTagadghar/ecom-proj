@@ -107,7 +107,7 @@ export default function Index() {
           )
         })}
 
-        <img className="sidebar-image" src={require('../images/sidebar2.jpg')} alt="" />
+        <img className="sidebar-image" src={`${API}/banner/photo/5f5a6a3c274bd10a880e2b5f`} alt="" />
 
         <div className="b">
           <h2 className="sidebar-title ">Top Rated</h2>
@@ -120,7 +120,7 @@ export default function Index() {
             )
           })}
 
-          <img className="sidebar-image" src={require('../images/sidebar3.jpg')} alt="" />
+          <img className="sidebar-image" src={`${API}/banner/photo/5f5a6a45274bd10a880e2b60`} alt="" />
         </div>
 
       </div>
@@ -129,24 +129,24 @@ export default function Index() {
         <div style={{ height: '100%', width: '100%' }}>
 
           <Carousel loop auto widgets={[Dots, Buttons]} className="custom-class">
-            <img src={require('../images/slider1.jpg')} alt="" className="css" />
-            <img src={require('../images/slider2.jpg')} alt="" className="css" />
-            <img src={require('../images/slider3.jpg')} alt="" className="css" />
+            <img src={`${API}/banner/photo/5f5a6452bf6fb924b458ee63`} alt="" className="css" />
+            <img src={`${API}/banner/photo/5f5a69de274bd10a880e2b5a`} alt="" className="css" />
+            <img src={`${API}/banner/photo/5f5a69eb274bd10a880e2b5b`} alt="" className="css" />
 
           </Carousel>
         </div>
 
       </div>
       <div className="carousel-sidebar">
-        <div className="carousel-sidebar-image1" style={{ backgroundImage: `url(${require('../images/banner2.jpg')})` }}></div>
-        <div className="carousel-sidebar-image2" style={{ backgroundImage: `url(${require('../images/banner3.jpg')})` }}></div>
+        <div className="carousel-sidebar-image1" style={{ backgroundImage: `url(${API}/banner/photo/5f5a6a05274bd10a880e2b5c)` }}></div>
+        <div className="carousel-sidebar-image2" style={{ backgroundImage: `url(${API}/banner/photo/5f5a6a0c274bd10a880e2b5d)` }}></div>
 
         {/*  <img className="carousel-sidebar-image1" src={require('../images/banner2.jpg')} alt=""/>
             <img className="carousel-sidebar-image2" src={require('../images/banner3.jpg')} alt=""/> */}
 
       </div>
       <div className="banner">
-        <img className="banner-image" src={require('../images/banner1.jpg')} alt="" />
+        <img className="banner-image" src={`${API}/banner/photo/5f5a6a5f274bd10a880e2b61`} alt="" />
       </div>
 
       <div className="products">

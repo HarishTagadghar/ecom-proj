@@ -3,7 +3,7 @@ import { addItemToCart } from './helper/cartHelper';
 import { Redirect, Link } from 'react-router-dom';
 import { API } from '../backend';
 
-const IndexCard = ({product ,   setReload = f => f /* (f) => return f  */ , reload = undefined}) => {
+const RelatedCard = ({product ,   setReload = f => f /* (f) => return f  */ , reload = undefined}) => {
 
 
   const [redirect , setRedirect ] = useState(false)
@@ -34,7 +34,7 @@ const IndexCard = ({product ,   setReload = f => f /* (f) => return f  */ , relo
         return <Redirect to="/cart" />
       }
     }
-    
+
     let formateNumber = (num) => {
       let numSplit , int , dec;
       num = Math.abs(num);
@@ -47,7 +47,6 @@ const IndexCard = ({product ,   setReload = f => f /* (f) => return f  */ , relo
       dec = numSplit[1]
       return int + '.' + dec
     }
-
 
 
 
@@ -66,7 +65,7 @@ const IndexCard = ({product ,   setReload = f => f /* (f) => return f  */ , relo
               <div  onClick={addtocart2} className="connection cbuy">
               <img   src={require("../images/SVG/credit-card.svg")} className="cbuy-icon" alt=""/>
               </div>
-              <Link to={`/Product/${ProductId}`}>
+              <Link  to={`/related/Product/${ProductId}`}>
               <div  className="connection cview">
               <img    src={require("../images/SVG/eye.svg")} className="cview-icon" alt=""/>
               </div>
@@ -85,4 +84,4 @@ const IndexCard = ({product ,   setReload = f => f /* (f) => return f  */ , relo
     )
 }
 
-export default IndexCard
+export default RelatedCard

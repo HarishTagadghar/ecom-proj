@@ -154,7 +154,43 @@ export const updateProduct = (productId, userId, token, product) => {
     .catch(err => console.log(err));
 };
 
+// update banner 
 
+export const updateBanner = (bannerId, userId, token, banner) => {
+  return fetch(`${API}/banner/update/${bannerId}/${userId}`, {
+    method: "PUT",
+    headers: {
+      Accept: "application/json",
+      Authorization: `Bearer ${token}`
+    },
+    body: banner
+  })
+    .then(response => {
+      return response.json();
+    })
+    .catch(err => console.log(err));
+};
+
+// get banner 
+export const getBanner = bannerId => {
+  return fetch(`${API}/banner/${bannerId}`, {
+    method: "GET"
+  })
+    .then(response => {
+      return response.json();
+    })
+    .catch(err => console.log(err));
+};
+// get banners
+export const getBanners = () => {
+  return fetch(`${API}/banners`, {
+    method: "GET"
+  })
+    .then(response => {
+      return response.json();
+    })
+    .catch(err => console.log(err));
+};
 // orders 
 
 export const getOrders = (userId, token) => {

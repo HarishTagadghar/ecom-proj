@@ -5,11 +5,11 @@ import Menu from './Menu';
 import Footer from './Footer';
 import { getCategoryById } from './helper/categoryHelper';
 import ReactElasticCarousel from 'react-elastic-carousel';
-import RelatedCard from './RelatedCard';
+import IndexCard from './IndexCard';
 import { addItemToCart } from './helper/cartHelper';
 import { Redirect, Link } from 'react-router-dom';
 
-const ProductPage = ({match}) => {
+const RelatedPage = ({match}) => {
   const [products, setProducts] = useState([])
   const [categories, setCategory] = useState("")
   const [redirect , setRedirect ] = useState(false)
@@ -87,7 +87,6 @@ const breakPoints = [
         dec = numSplit[1]
         return int + '.' + dec
       }
-      
       const addtocart = () => {
         addItemToCart(product , () => alert("item added to cart"))
       } 
@@ -96,15 +95,13 @@ const breakPoints = [
           setRedirect(true)
         })
       }
-  
-  
+        
       const getARedirect = (redirect) => {
         if (redirect) {
           return <Redirect to="/cart" />
         }
       }
-      // console.log(formateNumber(58354));
-// console.log(product);
+// console.log(products);
     return (
       <div className="product-main">
         <div className="product-container-menu">
@@ -182,19 +179,12 @@ const breakPoints = [
           {products.map((product,i) => {
            return(
             <div key={i} className="related-products-card">
-                  <RelatedCard product={product} />
+                  <IndexCard product={product} />
                 </div>
            )
           })}
               </ReactElasticCarousel>
         </div>
-        {/* <div className="testing">
-          {products.map((product , i) => {
-            return (
-              <h1 key={i}>{product.name}</h1>
-            )
-          })}
-        </div> */}
         </div>
         
         <div className="product-main-footer">
@@ -203,4 +193,4 @@ const breakPoints = [
         </div>
     )
 }
-export default ProductPage
+export default RelatedPage

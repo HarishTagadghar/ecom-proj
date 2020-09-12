@@ -86,7 +86,10 @@ const TestUpdate = () => {
       <div className="acontainer">
         <div className="acontainer-nav">
           <div className="acontainer-nav-list">
-            <h3 className="acontainer-nav-list-item">Update Banners</h3>
+            <h3 className="acontainer-nav-list-item">
+            <Link to="/admin/banners" className="text-white">
+                Update Banners
+                      </Link></h3>
 
             <h3 className="acontainer-nav-list-item">
               <Link className="text-white" to="/admin/create/category"> Creat Category </Link>
@@ -116,7 +119,7 @@ const TestUpdate = () => {
             </h3>
           </div>
           <div className="acontainer-nav-admin">
-            <img className="acontainer-nav-admin-image" src={require('../images/admin.jpg')} alt="" />
+            <img className="acontainer-nav-admin-image" src={`${API}/banner/photo/5f5a6a2a274bd10a880e2b5e`} alt="" />
             <div className="acontainer-nav-admin-name">
               <h4 className="acontainer-nav-admin-name-names">{isAutheticated().user.name}</h4>
               <img className="acontainer-nav-admin-name-icon" src={require('../images/SVG/checked.svg')} alt="" />

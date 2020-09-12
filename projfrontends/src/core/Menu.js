@@ -5,6 +5,8 @@ import "../scss/styles.scss"
 import { loadCart } from "./helper/cartHelper";
 import { getUserOrders } from "../user/helper/userapicalls";
 import { Dropdown } from 'react-bootstrap'
+import { API } from "../backend";
+import { getProducts  } from '../admin/helper/adminapicall';
 
 
 
@@ -12,7 +14,24 @@ import { Dropdown } from 'react-bootstrap'
 const Menu = ({ history }) => {
   // cart items length
   const [cart, setCart] = useState([])
-  const [reload, setReload] = useState(true)
+  const [reload, setReload] = useState(false)
+  const [products, setProducts] = useState([])
+  const [error , setErrors] = useState("")
+
+  const preload2 = () => {
+    getProducts().then(data => {
+      if (!data) {
+        setErrors(true)
+      } else {
+        setProducts(data)
+      }
+    })
+
+  }
+
+  useEffect(() => {
+    preload2()
+  }, [])
 
   useEffect(() => {
     if (!loadCart()) {
@@ -56,14 +75,27 @@ const Menu = ({ history }) => {
 
     <div>
       <header className="header">
-        <img src={require("../images/logo.png")} className="logo" alt="" />
+        <img src={`${API}/banner/photo/5f5a6a7f274bd10a880e2b62`} className="logo" alt="" />
         <form action="#" className="search">
-          <input type="text" placeholder="Search Items" className="search-input" />
+          <input onClick={() => setReload(!reload)} type="text" placeholder="Search Items" className="search-input" />
+          {reload && (
+          <div className="testing ">
+            {products.map((product , i) => {
+              return (
+                <div className="options" key={i}>
+                  {product.name}
+                </div>
+              )
+            })}
+          </div>
+        )}
           <button className="search-button">
             <img src={require("../images/SVG/search.svg")} className="search-icon" alt="" />
 
           </button>
+     
         </form>
+
         <nav className="user-nav">
           {/* home */}
 

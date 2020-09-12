@@ -25,6 +25,18 @@ const TestUpdate = ({ match }) => {
     const name = product.name;
     const description = product.description;
     const price = product.price * product.count;
+    let formateNumber = (num) => {
+      let numSplit , int , dec;
+      num = Math.abs(num);
+      num = num.toFixed(2);
+      numSplit = num.split('.');
+      int = numSplit[0];
+      if(int.length > 3){
+        int = int.substr(0,int.length - 3) + ',' +int.substr(int.length - 3 , 3);
+      }
+      dec = numSplit[1]
+      return int + '.' + dec
+    }
 
     return (
       <div className="cart-items-1-product">
@@ -62,7 +74,7 @@ const TestUpdate = ({ match }) => {
             <h5 className="cart-items-1-product-right-delete-text">REMOVE ITEM</h5>
 
           </button>
-          <h1 className="cart-items-1-product-right-amount">₹{price}</h1>
+          <h1 className="cart-items-1-product-right-amount">₹{formateNumber(price)}</h1>
         </div>
       </div>
     )
@@ -74,7 +86,19 @@ const TestUpdate = ({ match }) => {
     }))
     return am
   }
-  console.log(totals());
+  let formateNumber = (num) => {
+    let numSplit , int , dec;
+    num = Math.abs(num);
+    num = num.toFixed(2);
+    numSplit = num.split('.');
+    int = numSplit[0];
+    if(int.length > 3){
+      int = int.substr(0,int.length - 3) + ',' +int.substr(int.length - 3 , 3);
+    }
+    dec = numSplit[1]
+    return int + '.' + dec
+  }
+
   let length = products ? products.lenght : 0
   return (
     <div className="cart-container">
@@ -106,16 +130,16 @@ const TestUpdate = ({ match }) => {
               <ol className="cart-details-container-sum-list">
 
 
-                <li className="cart-details-container-sum-list-item">Products Amount <span className="cart-details-container-sum-list-item-amount">₹{totals()}
+                <li className="cart-details-container-sum-list-item">Products Amount <span className="cart-details-container-sum-list-item-amount">₹{formateNumber(totals())}
                 </span></li>
 
-                <li className="cart-details-container-sum-list-item">Shipping Charge <span className="cart-details-container-sum-list-item-amount">₹{products ? 30 : 0}</span></li>
+                <li className="cart-details-container-sum-list-item">Shipping Charge <span className="cart-details-container-sum-list-item-amount">₹{products ? formateNumber(30) : 0}</span></li>
               </ol>
             </div>
 
 
             <div className="cart-details-container-total">
-              <h3 className="cart-details-container-total-hedding">The Total Amount <span className="cart-details-container-total-hedding-amount">₹{products ? totals() + 30 : totals()}</span></h3>
+              <h3 className="cart-details-container-total-hedding">The Total Amount <span className="cart-details-container-total-hedding-amount">₹{products ?  formateNumber(totals() + 30) : formateNumber(totals())}</span></h3>
             </div>
 
             <Razorpay
