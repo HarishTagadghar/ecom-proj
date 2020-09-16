@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState, useEffect , useRef } from "react";
 import { Link, withRouter, Redirect } from "react-router-dom";
 import { signout, isAutheticated } from "../auth/helper";
 import "../scss/styles.scss"
@@ -14,10 +14,11 @@ import { getProducts  } from '../admin/helper/adminapicall';
 const Menu = ({ history }) => {
   // cart items length
   const [cart, setCart] = useState([])
-  const [reload, setReload] = useState(false)
+  const [display, setDisplay] = useState(false)
   const [products, setProducts] = useState([])
   const [error , setErrors] = useState("")
-
+  const [search , setSearch] = useState("")
+  const wrapper = useRef(null)
   const preload2 = () => {
     getProducts().then(data => {
       if (!data) {
@@ -70,25 +71,46 @@ const Menu = ({ history }) => {
 
   }, [])
 
+// const change = (event) => {
+//   if(event.target.value.length > 0) {
+//     setReload(true)
+
+
+//   }
+//   else{
+//     setReload(false)
+//   }
+  
+// }
+
+const setSearchValue = value => {
+setSearch(value)
+setDisplay(false)
+}
+
+useEffect(() => {
+  document.addEventListener("mousedown" , handleClickOutSite); 
+
+  return () => {
+    document.removeEventListener("mousedown" , handleClickOutSite);
+  }
+} , [])
+
+const handleClickOutSite = event => {
+    
+  if(wrapper.current && !wrapper.current.contains(event.target)){
+    setDisplay(false);
+  }
+}
 
   return (
 
-    <div>
+    <div >
       <header className="header">
         <img src={`${API}/banner/photo/5f5a6a7f274bd10a880e2b62`} className="logo" alt="" />
-        <form action="#" className="search">
-          <input onClick={() => setReload(!reload)} type="text" placeholder="Search Items" className="search-input" />
-          {reload && (
-          <div className="testing ">
-            {products.map((product , i) => {
-              return (
-                <div className="options" key={i}>
-                  {product.name}
-                </div>
-              )
-            })}
-          </div>
-        )}
+        <form ref={wrapper} action="#" className="search">
+          <input onChange={(event) => setSearch(event.target.value) }  onClick={() => setDisplay(!display)} type="text" value={search} placeholder="Search Items" className="search-input" />
+ 
           <button className="search-button">
             <img src={require("../images/SVG/search.svg")} className="search-icon" alt="" />
 
@@ -218,9 +240,50 @@ const Menu = ({ history }) => {
 
         </nav>
       </header>
+<div  className="header-2">
+
+  <div className="menu-box-1"></div>
+
+  <div ref={wrapper}>      
+  
+    {display && (
+<div className="testing2 shadow-lg" >
+  {   products.filter(({name}) => name.indexOf(search) > -1).map((product , i) => {
+     return (
+       <Link key={i} className="test-link" to={`/Product/${product._id}`}>
+
+       <div  onClick={ () => setSearchValue(product.name)} key={i} className="testing3"  >
+
+          <h1 tabIndex="0" className="search-name"  key={i} >{product.name}</h1>
+       </div>
+       </Link>
+     )
+   })}
+</div>
+ )}
+ 
+ </div>
+
+  <div className="menu-box-3"></div>
+</div>
+
 
     </div>
   )
 }
 
 export default withRouter(Menu);
+
+
+// {reload && (
+//   <div className="testing2" >
+//     {   products.map((product , i) => {
+//        return (
+//          <div >
+  
+//             <h1 className="testing3"  key={i}>{product.name}</h1>
+//          </div>
+//        )
+//      })}
+//   </div>
+//    )}
