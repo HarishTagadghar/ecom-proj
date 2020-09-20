@@ -123,7 +123,7 @@ const breakPoints = [
         <div className="product-container-right ">
         
             <h1 className="product-container-right-name">{name}</h1>
-            <h3 className="product-container-right-description">Description : {description[0]}</h3>
+            <h3 className="product-container-right-description">Description : {description[1]}</h3>
             <h1 className="product-container-right-price">Price: ₹{formateNumber(price)}</h1>
            
             <div className="product-container-right-color">

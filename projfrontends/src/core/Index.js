@@ -22,8 +22,8 @@ export default function Index() {
   const [loading, setLoading] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
   const [productPerPage, setProductPerPage] = useState(16)
-
-
+  const [sideProducts , setSideProducts] = useState([])
+  const [firstsidebar , setFirstsidebar] = useState(false)
   const preload = () => {
     setLoading(true)
     getProducts().then(data => {
@@ -36,9 +36,21 @@ export default function Index() {
     setLoading(false)
 
   }
+  const preload2 = () => {
+    setLoading(true)
+    getProducts().then(data => {
+      if (!data) {
+        seterrors(true)
+      } else {
+        setSideProducts(data)
+      }
+    })
+    setLoading(false)
 
+  }
   useEffect(() => {
     preload()
+    preload2()
   }, [])
 
   const preloadCategory = () => {
@@ -99,7 +111,7 @@ export default function Index() {
     <div className="hcontainer">
       <div className="sidebar">
         <h2 className="sidebar-title">Trending products</h2>
-        {products.slice(0, 5).map((product, index) => {
+        {sideProducts.slice(0, 5).map((product, index) => {
           return (
             <div key={product._id} className="">
               <SideProduct product={product} />
@@ -107,12 +119,23 @@ export default function Index() {
           )
         })}
 
-        <img className="sidebar-image" src={`${API}/banner/photo/5f5a6a3c274bd10a880e2b5f`} alt="" />
 
+
+   
+       <img onLoad={() => setFirstsidebar(true)} className="sidebar-image" src={`${API}/banner/photo/5f5a6a3c274bd10a880e2b5f`} alt="" />
+       
+         {/* {!firstsidebar &&  <div className="loading-sidebar">
+          <div className="loading-sidebar-inner">
+
+            <img src={require('../images/loader2.png')} alt=""/> <br/>
+            <h3 className="loading-sidebar-name">Loading..</h3>
+          </div>
+          </div>
+} */}
         <div className="b">
           <h2 className="sidebar-title ">Top Rated</h2>
 
-          {products.slice(6, 11).map((product, index) => {
+          {sideProducts.slice(6, 11).map((product, index) => {
             return (
               <div key={product._id} className="">
                 <SideProduct product={product} />

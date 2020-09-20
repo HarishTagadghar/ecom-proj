@@ -23,7 +23,7 @@ const TestUpdate = ({ match }) => {
  
     const image = `${API}/product/photo/${product._id}`;
     const name = product.name;
-    const description = product.description;
+    const description = product.description.split('||');
     const price = product.price * product.count;
     let formateNumber = (num) => {
       let numSplit , int , dec;
@@ -63,7 +63,7 @@ const TestUpdate = ({ match }) => {
             }} className="plus">+</span>
           </div>
           <h3 className="cart-items-1-product-right-name">{name}</h3>
-          <h3 className="cart-items-1-product-right-description descrip">Description : {description}</h3>
+          <h3 className="cart-items-1-product-right-description descrip">Description : {description[0]}</h3>
           <h3 className="cart-items-1-product-right-description">Color : Yellow</h3>
           <h3 className="cart-items-1-product-right-description">Size : M</h3>
           <button onClick={() => {

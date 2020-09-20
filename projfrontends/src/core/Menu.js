@@ -1,13 +1,13 @@
 import React, { Fragment, useState, useEffect , useRef } from "react";
 import { Link, withRouter, Redirect } from "react-router-dom";
-import { signout, isAutheticated } from "../auth/helper";
+import { signout, isAutheticated, authenticate } from "../auth/helper";
 import "../scss/styles.scss"
 import { loadCart } from "./helper/cartHelper";
 import { getUserOrders } from "../user/helper/userapicalls";
 import { Dropdown } from 'react-bootstrap'
 import { API } from "../backend";
 import { getProducts  } from '../admin/helper/adminapicall';
-
+import Width from "./Width";
 
 
 
@@ -18,6 +18,7 @@ const Menu = ({ history }) => {
   const [products, setProducts] = useState([])
   const [error , setErrors] = useState("")
   const [search , setSearch] = useState("")
+  const [width , setWidth] = useState('')
   const wrapper = useRef(null)
   const preload2 = () => {
     getProducts().then(data => {
@@ -32,6 +33,7 @@ const Menu = ({ history }) => {
 
   useEffect(() => {
     preload2()
+    setWidth(Width)
   }, [])
 
   useEffect(() => {
@@ -82,12 +84,75 @@ const Menu = ({ history }) => {
 //   }
   
 // }
+const Admin = () => {
+  const mql = window.matchMedia('(max-width: 1000px)');
+  
+  let smallview = mql.matches;
+  if(smallview){
+    return (
+      <div style={{width:'235px'}} className="menu-box-3">
+    
+      </div>
+    )
+  } else {
+    return (
+      <div style={{width:'304px'}} className="menu-box-3">
+    
+      </div>
+    )
+  }
+
+}
+
+
+const UnAuthorised = () => {
+  const mql = window.matchMedia('(max-width: 1000px)');
+  
+  let smallview = mql.matches;
+  if(smallview){
+    return (
+      <div style={{width:'190px'}} className="menu-box-3">
+    
+      </div>
+    )
+  } else {
+    return (
+      <div style={{width:'190px'}} className="menu-box-3">
+    
+      </div>
+    )
+  }
+
+}
+
+const Authorised = () => {
+  const mql = window.matchMedia('(max-width: 1000px)');
+  
+  let smallview = mql.matches;
+  if(smallview){
+    return (
+      <div style={{width:'205px'}} className="menu-box-3">
+    
+      </div>
+    )
+  } else {
+    return (
+      <div style={{width:'245px'}} className="menu-box-3">
+    
+      </div>
+    )
+  }
+
+
+
+}
+
 
 const setSearchValue = value => {
 setSearch(value)
 setDisplay(false)
 }
-
+console.log(width);
 useEffect(() => {
   document.addEventListener("mousedown" , handleClickOutSite); 
 
@@ -103,11 +168,15 @@ const handleClickOutSite = event => {
   }
 }
 
+
   return (
 
     <div >
       <header className="header">
+      <Link to='/' >
+
         <img src={`${API}/banner/photo/5f5a6a7f274bd10a880e2b62`} className="logo" alt="" />
+      </Link>
         <form ref={wrapper} action="#" className="search">
           <input onChange={(event) => setSearch(event.target.value) }  onClick={() => setDisplay(!display)} type="text" value={search} placeholder="Search Items" className="search-input" />
  
@@ -264,14 +333,22 @@ const handleClickOutSite = event => {
  
  </div>
 
-  <div className="menu-box-3"></div>
+
+{!isAutheticated() && (
+
+ <UnAuthorised />
+
+)}
+{isAutheticated() && isAutheticated().user.role == 1 && (
+<Admin />
+)}
+{isAutheticated() && isAutheticated().user.role == 0 && (
+ <Authorised />
+)}
 </div>
-
-
     </div>
   )
 }
-
 export default withRouter(Menu);
 
 

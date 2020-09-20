@@ -9,7 +9,7 @@ const IndexCard = ({product ,   setReload = f => f /* (f) => return f  */ , relo
   const [redirect , setRedirect ] = useState(false)
 
     const cartTitle = product ? product.name : "Default Title"
-    const cartDescription = product ? product.description : "Default Description"
+    const cartDescription = product ? product.description.split('||') : "Default Description"
     const cartPrice = product ? product.price : "Default Price"
     const ProductId = product._id; 
 
@@ -76,7 +76,7 @@ const IndexCard = ({product ,   setReload = f => f /* (f) => return f  */ , relo
         
             <div className="cinfo">
               <div className="name">{cartTitle}</div>
-              <div className="job">{cartDescription}</div>
+              <div className="job">{cartDescription[0]}</div>
             </div>
           </div>
           {/* <div className="ccard-blur" /> */}
