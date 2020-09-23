@@ -107,6 +107,12 @@ const TestLogin = () => {
           <h3 className="lcontainer-image-date">@ {date} Emarket</h3>
         </div>
         <div className="lcontainer-form">
+        <Link to='/' >
+        <div  className="lcontainer-form-back-container">
+        <img src={require('../images/SVG/arrow-left.svg')} alt=""/>
+        </div>
+          
+        </Link>
           <Link to="/signup">
             <h4 className="lcontainer-form-signup">Don't have an account <a href="">Sign Up</a></h4>
           </Link>

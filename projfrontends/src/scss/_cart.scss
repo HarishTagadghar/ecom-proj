@@ -111,6 +111,12 @@
               padding: 2px;
               margin: 0;
             }
+            @media (max-width: 360px ) {
+              margin: -8px;
+            }
+            @media (max-width: $bp-smallest2 ) {
+              margin: 0;
+            }
 
             &:focus {
               outline: none;
@@ -302,7 +308,7 @@
           font-size: 2rem;
         }
         &-details {
-          font-size: 1rem;
+          font-size: 1.5rem;
           color: gray;
         }
       }

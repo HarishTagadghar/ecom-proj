@@ -51,7 +51,20 @@
     position: relative;
     background-color: #f2f2f2 !important;
     width: 100%;
-
+&-back-container{
+  height: 50px;
+  width: 50px;
+  background-color: #fff;
+  border-radius: 100%;
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 11111;
+  box-shadow: 0rem 1rem 3rem rgba(0, 0, 0, 0.6);
+  & > * {
+    transform: translateY(14px) translateX(14px);
+  }
+}
     @media (max-width: $bp-medium1) {
       position: static;
       height: 100vh;

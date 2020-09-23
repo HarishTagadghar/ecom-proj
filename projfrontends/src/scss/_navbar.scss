@@ -27,9 +27,9 @@
     @media (max-width: $bp-medium) {
       height: 2.5rem;
     }
-    @media (max-width: $bp-small) {
-      grid-column: fr1-start / fr2-end;
-      margin: 0 auto;
+    @media (max-width: $bp-smallest2) {
+    
+      margin: 0 110%;
       margin-bottom: 2rem;
     }
   }
@@ -134,8 +134,8 @@
       height: 2.5rem;
       width: 2.5rem;
       @media (max-width: $bp-medium) {
-        height: 1.5rem;
-        width: 1.5rem;
+        height:2rem;
+        width:2rem;
       }
     }
     &-notification {

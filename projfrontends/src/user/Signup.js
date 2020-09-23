@@ -18,10 +18,11 @@ const TestLogin = () => {
     email: "",
     password: "",
     error: "",
-    success: false
+    success: false,
+    loading:false
   });
 
-  const { name, email, password, error, success } = values;
+  const { name, email, password, error, success , loading} = values;
 
   const handleChange = name => event => {
     setValues({ ...values, error: false, [name]: event.target.value });
@@ -29,11 +30,11 @@ const TestLogin = () => {
 
   const onSubmit = event => {
     event.preventDefault();
-    setValues({ ...values, error: false });
+    setValues({ ...values, error: false ,loading: true });
     signup({ name, email, password })
       .then(data => {
         if (data.error) {
-          setValues({ ...values, error: data.error, success: false });
+          setValues({ ...values, error: data.error, success: false , loading:false });
         } else {
           setValues({
             ...values,
@@ -61,7 +62,15 @@ const TestLogin = () => {
       </div>
     );
   };
-
+  const loadingMessage = () => {
+    return (
+      loading && (
+        <div className="alert alert-info">
+          <h2>Loading...</h2>
+        </div>
+      )
+    );
+  };
   const errorMessage = () => {
     return (
       <div
@@ -97,10 +106,17 @@ const TestLogin = () => {
           <h3 className="lcontainer-image-date">@ {date} Emarket</h3>
         </div>
         <div className="lcontainer-form">
+        <Link to='/' >
+        <div  className="lcontainer-form-back-container">
+        <img src={require('../images/SVG/arrow-left.svg')} alt=""/>
+        </div>
+          
+        </Link>
           <Link to="/signin">
             <h4 className="lcontainer-form-signup">Already have an account? <a href="">Sign In</a></h4>
           </Link>
           <div className="center-form">
+          {loadingMessage()}
             {successMessage()}
             {errorMessage()}
             <h2 className="center-form-hedding">Sign Up form</h2>

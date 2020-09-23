@@ -148,8 +148,8 @@ const TestUpdate = ({ match }) => {
 
             />
             <div className="cart-details-container-shipping">
-              <h1 className="cart-details-container-shipping-hedding">Expected Delivery Date</h1>
-              <h3 className="cart-details-container-shipping-details">July 17th 2020 - July 27th 2020</h3>
+              <h1 className="cart-details-container-shipping-hedding">Expected Delivery </h1>
+              <h3 className="cart-details-container-shipping-details">Within 10-12 days</h3>
             </div>
           </div>
 
