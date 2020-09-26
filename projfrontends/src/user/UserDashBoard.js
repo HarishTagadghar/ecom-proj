@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect ,useRef} from 'react';
 import '../scss/styles.scss'
 import Menu from '../core/Menu';
 import Footer from "../core/Footer"
@@ -15,6 +15,27 @@ const TestUpdate = () => {
   const [orders, setOrders] = useState([])
   const [errors, setErrors] = useState(false)
   const [status, setStatus] = useState("")
+
+  const wrapper = useRef(null)
+
+
+  useEffect(() => {
+    document.addEventListener("mousedown" , handleClickOutSite); 
+  
+    return () => {
+      document.removeEventListener("mousedown" , handleClickOutSite);
+    }
+  } , [])
+  
+  const handleClickOutSite = event => {
+      
+    if(wrapper.current && !wrapper.current.contains(event.target)){
+      window.location.reload()
+    }
+  }
+
+  
+
   let preload = (userId, token) => {
     getUserOrders(userId, token).then(order => {
 
@@ -45,9 +66,9 @@ const TestUpdate = () => {
   const statusMessage = () => {
     return (
       status && (
-        <div className="popup">
+        <div  className="popup">
           <button className="popup-cancle-button" onClick={cancle}>x</button>
-          <div className="popup-container">
+          <div ref={wrapper} className="popup-container">
             <h3 className="popup-container-hedding">Track Order</h3>
             {status == "Order Placed" && (
               <ul className="popup-container-list">

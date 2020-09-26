@@ -99,64 +99,92 @@ const TestUpdate = ({ match }) => {
     return int + '.' + dec
   }
 
-  let length = products ? products.lenght : 0
-  return (
-    <div className="cart-container">
-      <Menu />
-      <div className="cart">
-        <div className="cart-items shadow-lg">
-          <div className="cart-items-1">
-            <h2 className="cart-items-1-hedding">
-              Cart ({length} items)
-                        </h2>
-
-            {products && (products.map((product, i) => {
-
-              return (
-
-                <CartProduct product={product} key={i} />
-              )
-            }))}
-
-
-
+  let Items = () => {
+    if (products.length > 0) {
+      return (
+        <div className="cart-container">
+        <Menu />
+        <div className="cart">
+          <div className="cart-items shadow-lg">
+            <div className="cart-items-1">
+              <h2 className="cart-items-1-hedding">
+                Cart ({products.length} items)
+                          </h2>
+  
+              {products && (products.map((product, i) => {
+  
+                return (
+  
+                  <CartProduct product={product} key={i} />
+                )
+              }))}
+  
+  
+  
+            </div>
+          </div>
+          <div className="cart-details shadow-lg">
+            <div className="cart-details-container">
+  
+              <div className="cart-details-container-sum">
+                <h3 className="cart-details-container-sum-hedding">The Total Amount Of</h3>
+                <ol className="cart-details-container-sum-list">
+  
+  
+                  <li className="cart-details-container-sum-list-item">Products Amount <span className="cart-details-container-sum-list-item-amount">₹{formateNumber(totals())}
+                  </span></li>
+  
+                  <li className="cart-details-container-sum-list-item">Shipping Charge <span className="cart-details-container-sum-list-item-amount">₹{products ? formateNumber(30) : 0}</span></li>
+                </ol>
+              </div>
+  
+  
+              <div className="cart-details-container-total">
+                <h3 className="cart-details-container-total-hedding">The Total Amount <span className="cart-details-container-total-hedding-amount">₹{products ?  formateNumber(totals() + 30) : formateNumber(totals())}</span></h3>
+              </div>
+  
+              <Razorpay
+  
+                products={products}
+  
+              />
+              <div className="cart-details-container-shipping">
+                <h1 className="cart-details-container-shipping-hedding">Expected Delivery </h1>
+                <h3 className="cart-details-container-shipping-details">Within 10-12 days</h3>
+              </div>
+            </div>
+  
           </div>
         </div>
-        <div className="cart-details shadow-lg">
-          <div className="cart-details-container">
+      </div>
+      )
+    } else {
+      return (
+        <div className="cart-container ">
+        <Menu />
+        <div className="cart-main-container">
 
-            <div className="cart-details-container-sum">
-              <h3 className="cart-details-container-sum-hedding">The Total Amount Of</h3>
-              <ol className="cart-details-container-sum-list">
+        <div className="cart-sub-container">
 
-
-                <li className="cart-details-container-sum-list-item">Products Amount <span className="cart-details-container-sum-list-item-amount">₹{formateNumber(totals())}
-                </span></li>
-
-                <li className="cart-details-container-sum-list-item">Shipping Charge <span className="cart-details-container-sum-list-item-amount">₹{products ? formateNumber(30) : 0}</span></li>
-              </ol>
+            <div className="image-container" >
+              <img className="emptyimage" src={require('../images/emptyCart2.png')} alt=""/>
+              <h1 className="emptyimage-text">0 Products found in cart</h1>
             </div>
-
-
-            <div className="cart-details-container-total">
-              <h3 className="cart-details-container-total-hedding">The Total Amount <span className="cart-details-container-total-hedding-amount">₹{products ?  formateNumber(totals() + 30) : formateNumber(totals())}</span></h3>
-            </div>
-
-            <Razorpay
-
-              products={products}
-
-            />
-            <div className="cart-details-container-shipping">
-              <h1 className="cart-details-container-shipping-hedding">Expected Delivery </h1>
-              <h3 className="cart-details-container-shipping-details">Within 10-12 days</h3>
-            </div>
-          </div>
 
         </div>
       </div>
-    </div>
-  )
-}
+        </div>
+          
+      )
+    }
+  }
 
+  return (
+   
+      
+
+    <Items />
+   
+  )
+  }
 export default TestUpdate;

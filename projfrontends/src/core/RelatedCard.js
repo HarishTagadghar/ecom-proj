@@ -75,7 +75,7 @@ const RelatedCard = ({product ,   setReload = f => f /* (f) => return f  */ , re
         
             <div className="cinfo">
               <div className="name">{cartTitle}</div>
-              <div className="job">{cartDescription}</div>
+              <div className="job">{cartDescription.split('||')[0]}</div>
             </div>
           </div>
           {/* <div className="ccard-blur" /> */}

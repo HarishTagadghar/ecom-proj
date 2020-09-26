@@ -197,6 +197,8 @@ body,
   text-align: center;
   padding: 5px 0;
   font-size: 2.5rem;
+  font-family: 'Anton', sans-serif;
+      font-weight: 400;
   @media (max-width: $bp-largest1) {
     font-size: 2.2rem;
   }
@@ -290,6 +292,9 @@ body,
   @media (max-width: $bp-small2) {
     padding: 0rem;
   }
+  @media (max-width: $bp-smallest) {
+    padding: 1.6rem;
+  }
 }
 
 .connection.cbuy {
@@ -315,6 +320,9 @@ body,
   @media (max-width: $bp-small2) {
     padding: 0rem;
   }
+  @media (max-width: $bp-smallest) {
+    padding: 1.6rem;
+  }
 }
 
 .ccart-icon {
@@ -328,8 +336,10 @@ body,
     height: 1.2rem;
   }
   @media (max-width: $bp-smallest) {
-    top: 5px;
-    left: 5px;
+    width: 1.7rem;
+    height: 1.7rem;
+    top: 5.5px;
+    left: 5.5px;
   }
 }
 .ccart:hover {
@@ -418,6 +428,8 @@ body,
     height: 1.5rem;
   }
   @media (max-width: $bp-smallest) {
+    width: 2rem;
+    height: 2rem;
     top: 4px;
     left: 4px;
   }
@@ -469,7 +481,8 @@ body,
 }
 
 .name {
-  font-weight: bolder;
+  font-family: 'Baloo Tammudu 2', cursive;
+  font-weight: 500;
   padding-top: 5px;
   color: black;
   font-size: 2.5rem;
@@ -482,6 +495,8 @@ body,
   margin-top: 1rem;
   color: black;
   font-size: 2rem;
+  font-family: 'Fira Sans', sans-serif;
+  font-weight: 500;
   @media (max-width: $bp-small1) {
     font-size: 1.5rem;
     margin-top: 0.5rem;
@@ -499,17 +514,26 @@ body,
   width: 83%;
   border-radius: 0 0px 8px 8px;
   margin-bottom: 2rem;
-  font-size: 1.8rem;
+  font-size: 1.7rem;
+  font-family: 'Patua One', cursive;
+  font-weight: 400;
+  text-transform: uppercase;
+  
   @media (max-width: $bp-medium) {
     font-size: 1.5rem;
   }
   @media (max-width: $bp-small2) {
     width: 100%;
   }
+  @media (max-width: $bp-smallest) {
+    font-size: 1.4rem;
+    padding: 1rem 0.5rem;
+  }
   @media (max-width: $bp-smallest2) {
     font-size: 1.2rem;
     padding: 1rem 0.5rem;
   }
+
 }
 .sidebar-title-2 {
   width: 15%;
@@ -522,6 +546,7 @@ body,
   }
 }
 .side-product {
+
   display: flex;
   padding: 1rem;
   cursor: pointer;
@@ -543,7 +568,9 @@ body,
     border-radius: 5px;
   }
   &-info {
+
     &-price {
+     
       color: $primary-color;
       margin-top: 2.5rem;
     }
@@ -551,6 +578,7 @@ body,
       font-size: 1.5rem;
       color: black;
       padding-top: 1.5rem;
+  
     }
   }
 }

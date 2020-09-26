@@ -355,3 +355,34 @@
     display: none;
   }
 }
+.cart-sub-container{
+  // height: 70%;
+  width: 80%;
+  z-index: 11111111111111111111111;
+  background-color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50% , -50%);
+  text-align: center;
+}
+.cart-main-container{
+  position: relative;
+  height: 80vh;
+  width: 100vw;
+}
+.image-container{
+  padding: 5rem 0;
+}
+.emptyimage{
+  height: 25vw;
+@media(max-width:$bp-smallest){
+  height: 40vw;
+
+}
+  &-text{
+    font-family: 'Lobster', cursive;
+    font-weight: 400;
+  color: #db4254;
+  }
+}

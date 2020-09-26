@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/static/css/main.7099fe4a.chunk.css",
-    "main.js": "/static/js/main.e7cd846f.chunk.js",
-    "main.js.map": "/static/js/main.e7cd846f.chunk.js.map",
+    "main.css": "/static/css/main.73cebef4.chunk.css",
+    "main.js": "/static/js/main.48665b14.chunk.js",
+    "main.js.map": "/static/js/main.48665b14.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.c7355a21.js",
     "runtime-main.js.map": "/static/js/runtime-main.c7355a21.js.map",
-    "static/js/2.b37a73b2.chunk.js": "/static/js/2.b37a73b2.chunk.js",
-    "static/js/2.b37a73b2.chunk.js.map": "/static/js/2.b37a73b2.chunk.js.map",
+    "static/js/2.b6cd12e4.chunk.js": "/static/js/2.b6cd12e4.chunk.js",
+    "static/js/2.b6cd12e4.chunk.js.map": "/static/js/2.b6cd12e4.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.a035b4bca4206e9a7a1f2ed825caf293.js": "/precache-manifest.a035b4bca4206e9a7a1f2ed825caf293.js",
+    "precache-manifest.850152b4ee98ffcc5919143470f46001.js": "/precache-manifest.850152b4ee98ffcc5919143470f46001.js",
     "service-worker.js": "/service-worker.js",
-    "static/css/main.7099fe4a.chunk.css.map": "/static/css/main.7099fe4a.chunk.css.map",
-    "static/js/2.b37a73b2.chunk.js.LICENSE.txt": "/static/js/2.b37a73b2.chunk.js.LICENSE.txt",
+    "static/css/main.73cebef4.chunk.css.map": "/static/css/main.73cebef4.chunk.css.map",
+    "static/js/2.b6cd12e4.chunk.js.LICENSE.txt": "/static/js/2.b6cd12e4.chunk.js.LICENSE.txt",
     "static/media/Order-Placed-Icon.jpg": "/static/media/Order-Placed-Icon.e2192341.jpg",
     "static/media/Order-Processing.png": "/static/media/Order-Processing.1307f130.png",
     "static/media/Order-delivered-Icon copy.png": "/static/media/Order-delivered-Icon copy.1603ca0b.png",
@@ -25,6 +25,7 @@
     "static/media/checkmark.svg": "/static/media/checkmark.2db65b63.svg",
     "static/media/credit-card.svg": "/static/media/credit-card.62dd139c.svg",
     "static/media/dashboard.svg": "/static/media/dashboard.26cbfb68.svg",
+    "static/media/emptyCart2.png": "/static/media/emptyCart2.91e0adf3.png",
     "static/media/eye.svg": "/static/media/eye.1c9f3cc8.svg",
     "static/media/facebook2.svg": "/static/media/facebook2.071e0fd1.svg",
     "static/media/home2.svg": "/static/media/home2.67f91b74.svg",
@@ -42,8 +43,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.c7355a21.js",
-    "static/js/2.b37a73b2.chunk.js",
-    "static/css/main.7099fe4a.chunk.css",
-    "static/js/main.e7cd846f.chunk.js"
+    "static/js/2.b6cd12e4.chunk.js",
+    "static/css/main.73cebef4.chunk.css",
+    "static/js/main.48665b14.chunk.js"
   ]
 }

@@ -93,8 +93,9 @@
                 width: 100vw !important;
               }
             &-name{
+                font-family: 'Cabin', sans-serif;
                 font-size: 3.5rem;
-                font-weight: 400;
+                font-weight: 500;
                 margin-bottom: 1rem;
                 @media (max-width: $bp-largest2) {
                     font-size: 3rem;
@@ -136,21 +137,22 @@
                         margin-right: 2rem;
                         cursor: pointer;
                     &-blue{
-                        height: 3.5rem;
-                        width: 3.5rem;
+                        height: 3rem;
+                        width: 3rem;
                         border-radius: 100%;
                         background-color: skyblue;
                         
+                        
                     }
                     &-red{
-                        height: 3.5rem;
-                        width: 3.5rem;
+                        height: 3rem;
+                        width: 3rem;
                         border-radius: 100%;
                         background-color: #e11d74;
                     }
                     &-green{
-                        height: 3.5rem;
-                        width: 3.5rem;
+                        height: 3rem;
+                        width: 3rem;
                         border-radius: 100%;
                         background-color: #91d18b;
                     }

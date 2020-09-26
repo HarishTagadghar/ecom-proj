@@ -49,6 +49,7 @@ const ManageProducts = () => {
             <tr>
               <th>#</th>
               <th>Name</th>
+              <th>Stock</th>
               <th>Update</th>
               <th>Delete</th>
             </tr>
@@ -60,6 +61,7 @@ const ManageProducts = () => {
                 <tr key={index}>
                   <td>{index + 1}</td>
                   <td>{product.name}</td>
+                  <td><span className="mr-4"> Stock: {product.stock}</span>  <span className="mr-4">,</span>  sold: {product.sold}</td>
                   <td><Link className="btn btn-success" to={`/admin/product/update/${product._id}`}>Update</Link></td>
                   <td><button
                     onClick={() => {

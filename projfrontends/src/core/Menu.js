@@ -19,23 +19,24 @@ const Menu = ({ history }) => {
   const [error , setErrors] = useState("")
   const [search , setSearch] = useState("")
   const [width , setWidth] = useState('')
+
   const wrapper = useRef(null)
+
   const preload2 = () => {
     getProducts().then(data => {
       if (!data) {
         setErrors(true)
       } else {
-        setProducts(data)
+    setProducts(data)
       }
     })
 
   }
-
   useEffect(() => {
     preload2()
     setWidth(Width)
   }, [])
-
+console.log(products);
   useEffect(() => {
     if (!loadCart()) {
       return setCart(cart.length = [])
@@ -153,6 +154,7 @@ setSearch(value)
 setDisplay(false)
 }
 console.log(width);
+
 useEffect(() => {
   document.addEventListener("mousedown" , handleClickOutSite); 
 

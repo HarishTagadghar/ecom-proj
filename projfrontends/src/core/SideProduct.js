@@ -1,6 +1,6 @@
 import React , {useState , useEffect} from 'react';
 import { addItemToCart } from './helper/cartHelper';
-import { Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { API } from '../backend';
 import ImageHelper from './helper/ImageHelper';
 
@@ -12,7 +12,7 @@ const SideProduct = ({product ,  setReload = f => f /* (f) => return f  */ , rel
     const cartTitle = product ? product.name : "Default Title"
     const cartDescription = product ? product.description : "Default Description"
     const cartPrice = product ? product.price : "Default Price"
-
+    
   
 
 
@@ -33,7 +33,8 @@ const SideProduct = ({product ,  setReload = f => f /* (f) => return f  */ , rel
   
   
     return (
-        <div onClick={addtocart} className="side-product">
+      <Link style={{ textDecoration: 'none' }} to={`/product/${product._id}`} >
+        <div  className="side-product">
             <ImageHelper product={product} />
             {getARedirect(redirect)}
             <div className="side-product-info">
@@ -42,6 +43,7 @@ const SideProduct = ({product ,  setReload = f => f /* (f) => return f  */ , rel
                 <h2 className="side-product-info-price">₹{cartPrice}</h2>
             </div>
         </div>
+        </Link>
     )
 }
 
