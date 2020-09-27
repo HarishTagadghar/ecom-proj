@@ -31,12 +31,13 @@ const ManageOrders = () => {
 
     useEffect(() => {
         preload(userId, token)
-    })
+    },[])
 
 
 
     const handler = (event) => {
         // console.log(event.target.value.split(',')[0]);
+       
         let object = {
             orderId: event.target.value.split(',')[1],
             status: event.target.value.split(',')[0]
@@ -49,11 +50,49 @@ const ManageOrders = () => {
         // console.log(object);
     }
     // console.log(isAutheticated().user._id);
+
+
+
+
+const sorter = (e) => {
+e.target.value && e.target.value ==='All Orders' ? (
+    getOrders(userId, token).then(order => {
+
+        if (!order || order.error) {
+            setErrors(order.error)
+
+        } else {
+        
+            setOrders(order)
+        }
+    })
+) :
+ (
+    getOrders(userId, token).then(order => {
+
+        if (!order || order.error) {
+            setErrors(order.error)
+
+        } else {
+           
+            setOrders(order.filter(filter => filter.status != 'Delivered'))
+        }
+    })
+)
+}
     return (
         <div>
             <Menu />
             <div className="ocontainer">
                 <h1 className="text-center pb-4 pt-4">Total Orders Are {orders.length}</h1>
+
+                <div className="sort">
+                    <h4>Sort By</h4>
+                    <select onClick={sorter} name="Sort BY" id="">
+                    <option value="All Orders">All Orders</option>
+                    <option value="NON delevered">NON delevered</option>
+                </select>
+                </div>
                 <Table className="tab" responsive striped bordered hover >
                     <thead>
                         <tr>
@@ -69,7 +108,7 @@ const ManageOrders = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {orders.map((order, i) => {
+                        {orders.reverse().map((order, i) => {
                             return (
                                 <tr key={i}>
                                     <td>{i + 1}</td>

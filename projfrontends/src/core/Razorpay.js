@@ -81,6 +81,10 @@ const Razorpay = ({ products, setReload = f => f, reload = undefined }) => {
                     body: JSON.stringify(paymentInfo)
                 })
                     .then(response => {
+                        
+           
+                    
+                        console.log(response);
                         return response.json()
                     })
                     .catch(err => {
@@ -103,46 +107,40 @@ const Razorpay = ({ products, setReload = f => f, reload = undefined }) => {
                 currency: "INR",
                 name: products.name,
                 description: products.description,
-                image: "https://cdn.worldvectorlogo.com/logos/react.svg",
+                image: `${API}/banner/photo/5f5a6a7f274bd10a880e2b62`,
                 order_id: detail.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
                 handler: function (response) {
 
-                    alert('order placed successfully')
-                    window.location.reload(true)
-
+               
                     const orderData = {
                         products: products,
                         amount: showTotalAmount(),
                         address: address,
-                        user: user.user._id,
+                        user: isAutheticated().user._id,
                         phone: phone,
                         transaction_id: response.razorpay_payment_id
                     }
-
-                    createOrder(user.user._id, user.token, orderData).then(data => {
+                    
+                    createOrder(isAutheticated().user._id, isAutheticated().token, orderData).then(data => {
                         if (!data || data.error) {
                             console.log("failed to create order", data.error);
-
+                            
                         } else {
                             console.log("order created successfully");
-
+                            
                         }
                     })
+                    alert('order placed successfully')
+
                     cartEmpty(() => {
                         console.log("did we got a crash!");
-
+                        
                     })
-                    // setReload(!reload);
-
-                    if (redirect) {
-                        return <Redirect to="/user/dashboard" />
-                    }
-
-
+                    window.location.reload(true)
                 },
                 prefill: {
-                    name: user.user.name,
-                    email: user.user.email,
+                    name: isAutheticated().user.name,
+                    email: isAutheticated().user.email,
                     contact: `+91${phone}`
                 },
                 theme: {

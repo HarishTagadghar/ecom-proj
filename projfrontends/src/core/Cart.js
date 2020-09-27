@@ -100,7 +100,8 @@ const TestUpdate = ({ match }) => {
   }
 
   let Items = () => {
-    if (products.length > 0) {
+
+    if (products && products.length > 0) {
       return (
         <div className="cart-container">
         <Menu />
@@ -180,11 +181,7 @@ const TestUpdate = ({ match }) => {
   }
 
   return (
-   
-      
-
-    <Items />
-   
+ <Items />
   )
   }
 export default TestUpdate;

@@ -57,7 +57,6 @@ const IndexCard = ({product ,   setReload = f => f /* (f) => return f  */ , relo
        <div className="price-box">
         <h1 className="price">₹{cartPrice}</h1>
         </div>
-        {getARedirect(redirect)}
           <div className="cfooter">
             <div className="connections">
               <div onClick={addtocart} className="connection ccart">
@@ -66,10 +65,11 @@ const IndexCard = ({product ,   setReload = f => f /* (f) => return f  */ , relo
               <div  onClick={addtocart2} className="connection cbuy">
               <img   src={require("../images/SVG/credit-card.svg")} className="cbuy-icon" alt=""/>
               </div>
-              <Link to={`/Product/${ProductId}`}>
-              <div  className="connection cview">
+        {getARedirect(redirect)}
+              <Link className="connection cview" to={`/Product/${ProductId}`}>
+              {/* <div  className="connection cview"> */}
               <img    src={require("../images/SVG/eye.svg")} className="cview-icon" alt=""/>
-              </div>
+              {/* </div> */}
               </Link>
              
             </div>

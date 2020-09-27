@@ -36,7 +36,6 @@ const Menu = ({ history }) => {
     preload2()
     setWidth(Width)
   }, [])
-console.log(products);
   useEffect(() => {
     if (!loadCart()) {
       return setCart(cart.length = [])
@@ -153,7 +152,6 @@ const setSearchValue = value => {
 setSearch(value)
 setDisplay(false)
 }
-console.log(width);
 
 useEffect(() => {
   document.addEventListener("mousedown" , handleClickOutSite); 

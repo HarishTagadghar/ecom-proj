@@ -204,7 +204,7 @@ const TestUpdate = () => {
                   <td>{i + 1}</td>
                   <td>₹{order.amount}</td>
                   <td>{order.address}</td>
-                  <td>{order.updatedAt}</td>
+                  <td>{order.updatedAt.split('T')[0]}</td>
                   <td className="pr-5">{order.status}<option className="nittu" value={order._id} onClick={track}>Track</option>  </td>
                   <td > {order.products.map((product, i) => {
                     return (
