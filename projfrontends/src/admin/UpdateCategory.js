@@ -9,16 +9,19 @@ const TestUpdate = ({ match }) => {
   const [name, setName] = useState("");
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [loading , setLoading] = useState(false);
 
   const { user, token } = isAutheticated();
 
   const preload = (categoryId) => {
+    setLoading(true)
     getCategory(categoryId).then(data => {
       if (data.error) {
         setError(true)
       }
       else {
         setName(data.name)
+        setLoading(false)
       }
     })
   }
@@ -76,7 +79,15 @@ const TestUpdate = ({ match }) => {
       )
     }
   };
-
+  const loadingMessage = () => {
+    return (
+      loading && (
+        <div className="alert alert-info">
+          <h2>Loading...</h2>
+        </div>
+      )
+    );
+  };
   const warningMessage = () => {
     if (error) {
       return (
@@ -97,6 +108,7 @@ const TestUpdate = ({ match }) => {
       <div className="ccontainer">
 
         <h2 className="ccontainer-hedding">Update Category</h2>
+        {loadingMessage()}
         {successMessage()}
         {warningMessage()}
         <form className="ccontainer-form">

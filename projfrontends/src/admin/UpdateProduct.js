@@ -133,6 +133,15 @@ const UpdateProducts = ({ match }) => {
     </div>
 
   };
+  const loadingMessage = () => {
+    return (
+      loading && (
+        <div className="alert alert-info">
+          <h2>Loading...</h2>
+        </div>
+      )
+    );
+  };
   const warningMessage = () => {
     if (error) {
       return <div className="alert alert-danger mt-3">
@@ -154,6 +163,7 @@ const UpdateProducts = ({ match }) => {
       </div>
       <div className="ccontainer">
         <h2 className="ccontainer-hedding">Update Products</h2>
+        {loadingMessage()}
         {successMessage()}
         {warningMessage()}
         <form>

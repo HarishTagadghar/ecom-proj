@@ -44,7 +44,7 @@ const UpdateBanner = ({ match }) => {
         setValues({
           ...values,
           name: data.name,
-          
+         
           formData: new FormData()
         });
       }
@@ -95,6 +95,15 @@ const UpdateBanner = ({ match }) => {
     </div>
 
   };
+  const loadingMessage = () => {
+    return (
+      loading && (
+        <div className="alert alert-info">
+          <h2>Loading...</h2>
+        </div>
+      )
+    );
+  };
   const warningMessage = () => {
     if (error) {
       return <div className="alert alert-danger mt-3">
@@ -115,6 +124,7 @@ const UpdateBanner = ({ match }) => {
       </div>
       <div className="ccontainer">
         <h2 className="ccontainer-hedding">Update Banne</h2>
+        {loadingMessage()}
         {successMessage()}
         {warningMessage()}
         <form>

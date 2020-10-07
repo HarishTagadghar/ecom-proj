@@ -112,6 +112,17 @@ const TestUpdate = () => {
 
   };
 
+
+
+  const loadingMessage = () => {
+    return (
+      loading && (
+        <div className="alert alert-info">
+          <h2>Loading...</h2>
+        </div>
+      )
+    );
+  };
   const warningMessage = () => {
     if (error) {
       return (
@@ -132,6 +143,7 @@ const TestUpdate = () => {
       <div className="ccontainer ">
 
         <h2 className="ccontainer-hedding">Create Product</h2>
+        {loadingMessage()}
         {successMessage()}
         {warningMessage()}
         <form>

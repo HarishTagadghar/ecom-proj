@@ -107,7 +107,7 @@ const Razorpay = ({ products, setReload = f => f, reload = undefined }) => {
                 currency: "INR",
                 name: products.name,
                 description: products.description,
-                image: `${API}/banner/photo/5f5a6a7f274bd10a880e2b62`,
+                image: require('../images/loader2.png'),
                 order_id: detail.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
                 handler: function (response) {
 
@@ -144,7 +144,7 @@ const Razorpay = ({ products, setReload = f => f, reload = undefined }) => {
                     contact: `+91${phone}`
                 },
                 theme: {
-                    color: "#F37254"
+                    color: "#0187de"
                 }
             };
             var paymentObject = new window.Razorpay(options);

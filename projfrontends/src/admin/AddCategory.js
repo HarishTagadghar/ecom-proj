@@ -9,6 +9,7 @@ const TestUpdate = () => {
   const [name, setName] = useState("");
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [loading , setLoading] = useState(false);
 
   const { user, token } = isAutheticated();
 
@@ -40,7 +41,7 @@ const TestUpdate = () => {
     event.preventDefault();
     setError("");
     setSuccess(false);
-
+setLoading(true)
     //backend request fired
     createCategory(user._id, token, { name }).then(data => {
       if (data.error) {
@@ -49,6 +50,7 @@ const TestUpdate = () => {
         setError("");
         setSuccess(true);
         setName("");
+        setLoading(false)
       }
     });
   };
@@ -62,7 +64,15 @@ const TestUpdate = () => {
       )
     }
   };
-
+  const loadingMessage = () => {
+    return (
+      loading && (
+        <div className="alert alert-info">
+          <h2>Loading...</h2>
+        </div>
+      )
+    );
+  };
   const warningMessage = () => {
     if (error) {
       return (
@@ -83,6 +93,7 @@ const TestUpdate = () => {
       <div className="ccontainer">
 
         <h2 className="ccontainer-hedding">Create Category</h2>
+        {loadingMessage()}
         {successMessage()}
         {warningMessage()}
         <form className="ccontainer-form">

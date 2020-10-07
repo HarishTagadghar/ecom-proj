@@ -10,15 +10,17 @@ const TestUpdate = () => {
         name: "",
         email: "",
         error: "",
-        success: false
+        success: false,
+        loading:false
 
     })
-    const { name, email, encry_password, error, success } = Info
+    const { name, email, encry_password, error, success , loading } = Info
 
 
     const { user, token } = isAutheticated();
 
     const preload = () => {
+        
         isAutheticated() && (
             setInfo({ ...Info, name: isAutheticated().user.name, email: isAutheticated().user.email, success: false })
         )
@@ -38,7 +40,15 @@ const TestUpdate = () => {
         }
 
     };
-
+    const loadingMessage = () => {
+        return (
+          loading && (
+            <div className="alert alert-info">
+              <h2>Loading...</h2>
+            </div>
+          )
+        );
+      };
     const errorMessage = () => {
         if (error) {
             return (
