@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState  , useEffect} from 'react';
 import Footer from '../core/Footer';
 import { Redirect, Link } from "react-router-dom";
-
+import {loadCart} from '../core/helper/cartHelper'
 import { signin, authenticate, isAutheticated } from "../auth/helper";
 
 
@@ -12,7 +12,13 @@ const date = new Date().getFullYear()
 
 
 const TestLogin = () => {
+  const [products, setProducts] = useState([])
 
+
+  useEffect(() => {
+    setProducts(loadCart())
+  } , [])
+  
   const [values, setValues] = useState({
     email: "",
     password: "",
@@ -53,11 +59,11 @@ const TestLogin = () => {
     if (didRedirect) {
       if (user && user.role === 1) {
         return <Redirect to="/admin/dashboard" />;
-      } else {
-        return <Redirect to="/" />;
+      } else if (isAutheticated() && products.length > 0) {
+        return <Redirect to="/cart" />;
       }
     }
-    if (isAutheticated()) {
+    if (isAutheticated()  ) {
       return <Redirect to="/" />;
     }
   };

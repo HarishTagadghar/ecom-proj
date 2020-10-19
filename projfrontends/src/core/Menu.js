@@ -65,7 +65,6 @@ const Menu = ({ history }) => {
 
     })
   }
-
   useEffect(() => {
     if (isAutheticated()) {
       preload(isAutheticated().user._id, isAutheticated().token)
@@ -84,6 +83,7 @@ const Menu = ({ history }) => {
 //   }
   
 // }
+console.log(search);
 const Admin = () => {
   const mql = window.matchMedia('(max-width: 1000px)');
   
@@ -317,17 +317,29 @@ const handleClickOutSite = event => {
   
     {display && (
 <div className="testing2 shadow-lg" >
-  {   products.filter(({name}) => name.indexOf(search) > -1).map((product , i) => {
+  {   products.filter(({name}) => 
+  
+  
+ 
+  
+  name.indexOf(search) > -1).map((product , i) => {
+
      return (
        <Link key={i} className="test-link" to={`/Product/${product._id}`}>
 
        <div  onClick={ () => setSearchValue(product.name)} key={i} className="testing3"  >
 
           <h1 tabIndex="0" className="search-name"  key={i} >{product.name}</h1>
+         
        </div>
        </Link>
      )
-   })}
+
+    
+   
+   })
+   
+   }
 </div>
  )}
  
