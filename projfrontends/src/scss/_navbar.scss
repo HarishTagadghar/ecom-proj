@@ -20,6 +20,8 @@
         [col-start] minmax(min-content, 2rem) [col-end]
       )
       [center-end fr2-start] minmax(2rem, 1fr) [fr2-end];
+
+      position: relative;
   }
   .logo {
     height: 3.5rem;
@@ -106,9 +108,14 @@
     @media (max-width: $bp-small) {
       grid-row: 2;
       grid-column: col-start 5 / fr2-end;
+
+      position: absolute;
+      bottom: 1.5rem;
+      right: 5px;
     }
     @media (max-width: $bp-smallest) {
       grid-column: col-start 2 / fr2-end;
+      bottom: 1rem;
     }
     @media (max-width: $bp-smallest) {
       grid-column: col-start 4 / -1;
@@ -175,9 +182,11 @@
 .authenticate {
   color: white;
   font-size: 1.5rem;
+
   &:hover {
     color: white;
   }
+
 }
 .ndropdown {
   background-color: $gray-dark-color;
@@ -227,34 +236,35 @@
 
 .testing2{
   color: black;
-  width: 39.5vw !important;
+  width:70vw !important;
   background-color: #fbfbfb;
   max-height: 25rem;
   overflow-y:scroll;
   overflow-x:hidden;
-  transform: translateX(-.8rem) translateY(-3rem);
+//  text-align: center;
+  // transform: translateX(-.8rem) translateY(-3rem);
   border-radius: 1rem;
-  @media (max-width: $bp-largest) {
-    transform: translateX(-.3rem) translateY(-3.5rem);
+  // @media (max-width: $bp-largest) {
+  //   transform: translateX(-.3rem) translateY(-3.5rem);
   
-  }
-  @media (max-width: $bp-medium) {
-    transform: translateX(.9rem) translateY(-3.5rem);
+  // }
+  // @media (max-width: $bp-medium) {
+  //   transform: translateX(.9rem) translateY(-3.5rem);
   
-    width: 39.5vw !important;
-  }
-  @media (max-width: $bp-small1) {
-    transform: translateX(1.4rem) translateY(-4rem);
+  //   width: 39.5vw !important;
+  // }
+  // @media (max-width: $bp-small1) {
+  //   transform: translateX(1.4rem) translateY(-4rem);
   
-    width: 39.5vw !important;
-  }
-  @media( max-width: $bp-small){
-    width: 95vw !important;
-    transform: translateX(0rem) translateY(0);
-    margin-bottom: 2rem;
+  //   width: 39.5vw !important;
+  // }
+  // @media( max-width: $bp-small){
+  //   width: 95vw !important;
+  //   transform: translateX(0rem) translateY(0);
+  //   margin-bottom: 2rem;
 
 
-  }
+  // }
 
 }
 .testing3 {
@@ -277,8 +287,10 @@
 // }
 .header-2{
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  margin: 2.5rem 0;
+  // text-align: center;
 }
 .test-link{
   color: black;

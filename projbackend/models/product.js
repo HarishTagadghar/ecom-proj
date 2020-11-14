@@ -35,7 +35,11 @@ const productSchema = new mongoose.Schema(
       data: Buffer,
       contentType: String
     },
-    quantity:Number
+    quantity:Number,
+    youtube:{
+      type:String,
+      trim:true
+    }
 
   },
   { timestamps: true }

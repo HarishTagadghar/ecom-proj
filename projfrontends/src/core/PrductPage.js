@@ -8,11 +8,14 @@ import ReactElasticCarousel from 'react-elastic-carousel';
 import RelatedCard from './RelatedCard';
 import { addItemToCart } from './helper/cartHelper';
 import { Redirect, Link } from 'react-router-dom';
+import ReactPlayer from 'react-player';
 
 const ProductPage = ({match}) => {
   const [products, setProducts] = useState([])
   const [categories, setCategory] = useState("")
   const [redirect , setRedirect ] = useState(false)
+  const [imageone , setImageone] = useState(true)
+  const [imagetwo , setImagetwo] = useState(false)
 
   const [activeItemIndex, setActiveItemIndex] = useState(0);
   const chevronWidth = 100;
@@ -61,6 +64,8 @@ const breakPoints = [
               product:data
             });
             setCategory(data.category._id)
+   
+
           }
         });
       };
@@ -103,8 +108,43 @@ const breakPoints = [
           return <Redirect to="/cart" />
         }
       }
-      // console.log(formateNumber(58354));
-// console.log(product);
+
+
+      const OnClickOne = () => {
+        if(!imageone){
+          
+        setImageone(true)
+        setImagetwo(false)
+ 
+        }
+        
+        }
+        const OnClickTwo = () => {
+          if(!imagetwo){
+            setImagetwo(true)
+            setImageone(false)
+     
+          }
+        }
+   
+useEffect(() => {
+
+
+} , [])
+console.log(imagetwo,imageone);
+
+const imageOneBorder = () => {
+  if(imageone){
+    return (' 1px solid #ff3c20')
+  }
+}
+
+const imageTwoBorder = () => {
+  if(imagetwo){
+    return (' 1px solid #ff3c20')
+  }
+}
+
     return (
       <div className="product-main">
         <div className="product-container-menu">
@@ -114,7 +154,23 @@ const breakPoints = [
         <div className="product-container-left ">
         <div className="vertical-line"> </div>
 
-            <img className="product-container-left-image" src={photo} alt=""/>
+<div className="product-container-left-header">
+  
+<div className="product-container-left-carousel">
+<img onClick={OnClickOne} style={{border: imageOneBorder()}} className="product-container-left-carousel-image-one" src={photo} alt=""/>
+<div onClick={OnClickTwo} style={{border: imageTwoBorder()}} className="product-container-left-carousel-image-two-box">
+
+<img  className="product-container-left-carousel-image-two" src={photo} alt=""/>
+<img  className="product-container-left-carousel-image-two-icon" src={require("../images/SVG/play.svg")} alt=""/>
+</div>
+{/* <ReactPlayer className="product-container-left-carousel-image-two" width={70} height={70} url='https://www.youtube.com/watch?v=zTitoHKsyJg' controls={true} /> */}
+</div>
+
+
+            {imageone ? <img className="product-container-left-image" src={photo} alt=""/> : ''}
+            {imagetwo  ? <ReactPlayer className="product-container-left-image youtube-image" width={450} url='https://www.youtube.com/watch?v=ZwnXW_7fzk0' controls={true} /> : ''}
+            
+</div>
             <div className="product-container-left-button">
             {getARedirect(redirect)}
 

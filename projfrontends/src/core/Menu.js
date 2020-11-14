@@ -83,69 +83,69 @@ const Menu = ({ history }) => {
 //   }
   
 // }
-console.log(search);
-const Admin = () => {
-  const mql = window.matchMedia('(max-width: 1000px)');
+// console.log(search);
+// const Admin = () => {
+//   const mql = window.matchMedia('(max-width: 1000px)');
   
-  let smallview = mql.matches;
-  if(smallview){
-    return (
-      <div style={{width:'235px'}} className="menu-box-3">
+//   let smallview = mql.matches;
+//   if(smallview){
+//     return (
+//       <div style={{width:'235px'}} className="menu-box-3">
     
-      </div>
-    )
-  } else {
-    return (
-      <div style={{width:'304px'}} className="menu-box-3">
+//       </div>
+//     )
+//   } else {
+//     return (
+//       <div style={{width:'304px'}} className="menu-box-3">
     
-      </div>
-    )
-  }
+//       </div>
+//     )
+//   }
 
-}
+// }
 
 
-const UnAuthorised = () => {
-  const mql = window.matchMedia('(max-width: 1000px)');
+// const UnAuthorised = () => {
+//   const mql = window.matchMedia('(max-width: 1000px)');
   
-  let smallview = mql.matches;
-  if(smallview){
-    return (
-      <div style={{width:'190px'}} className="menu-box-3">
+//   let smallview = mql.matches;
+//   if(smallview){
+//     return (
+//       <div style={{width:'190px'}} className="menu-box-3">
     
-      </div>
-    )
-  } else {
-    return (
-      <div style={{width:'190px'}} className="menu-box-3">
+//       </div>
+//     )
+//   } else {
+//     return (
+//       <div style={{width:'190px'}} className="menu-box-3">
     
-      </div>
-    )
-  }
+//       </div>
+//     )
+//   }
 
-}
+// }
 
-const Authorised = () => {
-  const mql = window.matchMedia('(max-width: 1000px)');
+// const Authorised = () => {
+//   const mql = window.matchMedia('(max-width: 1000px)');
   
-  let smallview = mql.matches;
-  if(smallview){
-    return (
-      <div style={{width:'205px'}} className="menu-box-3">
+//   let smallview = mql.matches;
+//   if(smallview){
+//     return (
+//       <div style={{width:'205px'}} className="menu-box-3">
     
-      </div>
-    )
-  } else {
-    return (
-      <div style={{width:'245px'}} className="menu-box-3">
+//       </div>
+//     )
+//   } else {
+//     return (
+//       <div style={{width:'245px'}} className="menu-box-3">
     
-      </div>
-    )
-  }
+//       </div>
+//     )
+//   }
 
 
 
-}
+// }
 
 
 const setSearchValue = value => {
@@ -311,7 +311,7 @@ const handleClickOutSite = event => {
       </header>
 <div  className="header-2">
 
-  <div className="menu-box-1"></div>
+  {/* <div className="menu-box-1"></div> */}
 
   <div ref={wrapper}>      
   
@@ -346,17 +346,8 @@ const handleClickOutSite = event => {
  </div>
 
 
-{!isAutheticated() && (
 
- <UnAuthorised />
 
-)}
-{isAutheticated() && isAutheticated().user.role == 1 && (
-<Admin />
-)}
-{isAutheticated() && isAutheticated().user.role == 0 && (
- <Authorised />
-)}
 </div>
     </div>
   )

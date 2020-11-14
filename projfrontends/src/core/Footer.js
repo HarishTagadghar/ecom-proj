@@ -10,7 +10,7 @@ const Test = () => {
 
 
             <div className="fmenu">
-                <div className="flabel">Follow Me</div>
+                <button className="flabel">Follow Me</button>
                 <div className="fspacer"></div>
 
                 <div className="fitem"><img src={require('../images/SVG/instagram.svg')} alt="" /></div>
