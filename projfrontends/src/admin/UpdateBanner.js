@@ -19,12 +19,12 @@ const UpdateBanner = ({ match }) => {
 
   const [values, setValues] = useState({
     name: "",
-   photo: "",
+   image: [],
   loading: false,
     error: "",
      getaRedirect: false,
      createdBanner:"",
-    formData: ""
+    formData: new FormData()
   });
 
   const {
@@ -33,7 +33,8 @@ const UpdateBanner = ({ match }) => {
     error,
      getaRedirect,
     formData,
-    createdBanner
+    createdBanner,
+    image
   } = values;
 
   const preload = (bannerId) => {
@@ -45,8 +46,13 @@ const UpdateBanner = ({ match }) => {
           ...values,
           name: data.name,
          
-          formData: new FormData()
         });
+        formData.append('name' , name);
+        if (data.image && data.image.length > 0) {
+          data.image.map((file,i) => {
+            formData.append('image',file)
+          })
+        }
       }
     });
   };
@@ -58,6 +64,9 @@ const UpdateBanner = ({ match }) => {
 
   const onSubmit = event => {
     event.preventDefault();
+    if (name) {
+      // formData.append('name' , name)
+    }
     setValues({ ...values, error: "", loading: true });
     updateBanner(match.params.bannerId, user._id, token, formData).then(data => {
       if (data.error) {
@@ -68,7 +77,7 @@ const UpdateBanner = ({ match }) => {
         setValues({
           ...values,
           name: "",
-         photo: "",
+         image: [],
          loading: false,
          createdBanner: data.name,
 
@@ -80,10 +89,59 @@ const UpdateBanner = ({ match }) => {
     });
   };
 
-  const handleChange = name => event => {
-    const value = name === "photo" ? event.target.files[0] : event.target.value;
-    formData.set(name, value);
-    setValues({ ...values, [name]: value });
+  const handleChange = names => event => {
+    // const value = name === "photo" ? event.target.files[0] : event.target.value;
+    // formData.set(name, value);
+    // setValues({ ...values, [name]: value });
+    let value = "";
+    let photo = []
+
+    if(names === 'image'){
+      for (let i = 0; i < event.target.files.length; i++) {
+        console.log('image found');
+        photo.push(event.target.files[i])
+    // formData.append(event.target.files[i].names , event.target.files[i])
+        
+        // console.log(event.target.files[i]);
+      }
+    }else{
+      value = event.target.value
+    }
+    setValues({ ...values, [names]: value , image : photo});
+    // setValues({...values,image:photo})
+  console.log(values);
+  console.log('photos' , photo);
+    // console.log(formData);
+    // if(names == 'name'){
+    //   formData.append('name',name);
+    // }
+    // if (names == 'description') {
+    //   formData.append('description',description);    
+    // }
+    // if (names == 'price') {
+    //   formData.append('price',price);    
+    // }
+    // if (names == 'stock') {
+    //   formData.append('stock',stock);    
+    // }
+    // if (names == 'category') {
+    //   formData.append('category',category);
+      
+    // }
+    console.log(value);
+    if(photo.length > 0){
+      photo.map((file, i ) => {
+        console.log('hey');
+        formData.append('image', file)
+      })
+    }
+  
+    console.log(values);
+    // console.log(value);
+  //   for (var pair of formData.entries()) {
+  //     console.log(pair[0]+ ' - ' + pair[1]); 
+  // }
+  
   };
 
   const successMessage = () => {
@@ -132,11 +190,12 @@ const UpdateBanner = ({ match }) => {
           <div className="form-group">
             <label className="btn btn-block btn-dark">
               <input
-                onChange={handleChange("photo")}
+                onChange={handleChange("image")}
                 type="file"
-                name="photo"
+                name="image"
                 accept="image"
                 placeholder="choose a file"
+                multiple
               />
             </label>
           </div>

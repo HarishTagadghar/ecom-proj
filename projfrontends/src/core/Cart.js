@@ -21,7 +21,7 @@ const TestUpdate = ({ match }) => {
   const CartProduct = ({ product }) => {
    
  
-    const image = `${API}/product/photo/${product._id}`;
+    const image = product.image.slice(0,1).map(photo => photo.url);
     const name = product.name;
     const description = product.description.split('||');
     const price = product.price * product.count;
@@ -38,11 +38,36 @@ const TestUpdate = ({ match }) => {
       return int + '.' + dec
     }
 
+    const Remove = () => {
+      const mql = window.matchMedia('(max-width: 500px)');
+  
+      let mobileView = mql.matches;
+      if (mobileView) {
+          return (
+  
+  
+            <h5 className="cart-items-1-product-right-delete-text">REMOVE </h5>
+          )
+      } else {
+          return (
+            <h5 className="cart-items-1-product-right-delete-text">REMOVE ITEM</h5>
+          )
+      }
+  
+  
+  }
+  
+
+
     return (
       <div className="cart-items-1-product">
         <div className="cart-items-1-product-left">
-          <img className="cart-items-1-product-left-image " src={image} alt="" />
+          {/* <img className="cart-items-1-product-left-image " src={image} alt="" /> */}
+          <div className="cart-items-1-product-left-image-box" >
+            <div style={{backgroundImage:`url(${image})`}}  className="cart-items-1-product-left-image" >
 
+            </div>
+          </div>
         </div>
         <div className="cart-items-1-product-right">
           <div className="cart-items-1-product-right-count">
@@ -71,7 +96,7 @@ const TestUpdate = ({ match }) => {
            setReload(!reload)
           }} className="cart-items-1-product-right-delete">
             <img className="cart-items-1-product-right-delete-icon" src={require("../images/SVG/trash-o.svg")} alt="" />
-            <h5 className="cart-items-1-product-right-delete-text">REMOVE ITEM</h5>
+           <Remove />
 
           </button>
           <h1 className="cart-items-1-product-right-amount">₹{formateNumber(price)}</h1>

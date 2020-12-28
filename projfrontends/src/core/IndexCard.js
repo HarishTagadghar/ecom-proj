@@ -13,10 +13,7 @@ const IndexCard = ({product ,   setReload = f => f /* (f) => return f  */ , relo
     const cartPrice = product ? product.price : "Default Price"
     const ProductId = product._id; 
 
-    const imageUrl = product 
-    ? `${API}/product/photo/${product._id}`
-    : `https://images.pexels.com/photos/3561339/pexels-photo-3561339.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940`
-    ;
+    const imageUrl = product.image.slice(0,1).map(photo => photo.url)
 
 
     const addtocart = () => {
@@ -49,11 +46,13 @@ const IndexCard = ({product ,   setReload = f => f /* (f) => return f  */ , relo
     }
 
 
-
-
     return (
         <div className="test">
-        <div style={{backgroundImage: `url(${imageUrl})`}} id="curve" className="ccard">
+         
+        <div  id="curve" className="ccard">
+        <div style={{backgroundImage: `url(${imageUrl})`}} className="ccard-image">
+
+</div>
        <div className="price-box">
         <h1 className="price">₹{cartPrice}</h1>
         </div>

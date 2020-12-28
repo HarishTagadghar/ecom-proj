@@ -32,7 +32,6 @@ const TestUpdate = () => {
     description: "",
     price: "",
     stock: "",
-    photo: "",
     categories: [],
     category: "",
     loading: false,
@@ -74,9 +73,11 @@ const TestUpdate = () => {
   const onSubmit = event => {
     event.preventDefault();
     setValues({ ...values, error: "", loading: true });
+    console.log(formData);
     createaProduct(user._id, token, formData).then(data => {
       if (data.error) {
         setValues({ ...values, error: data.error });
+        // console.log(data.error);
       } else {
         console.log(formData);
 
@@ -85,7 +86,6 @@ const TestUpdate = () => {
           name: "",
           description: "",
           price: "",
-          photo: "",
           stock: "",
           loading: false,
           createdProduct: data.name,
@@ -95,11 +95,52 @@ const TestUpdate = () => {
     });
   };
 
-  const handleChange = name => event => {
-    const value = name === "photo" ?
-      event.target.files[0] : event.target.value;
-    formData.set(name, value);
-    setValues({ ...values, [name]: value });
+  const handleChange = names => event => {
+
+    // let value ;
+    // const value = names === "image" ?
+    
+    //   event.target.files[0] : event.target.value;
+
+
+     let value =  "";
+
+      let photo = [];
+
+    if(names === 'image'){
+      for (let i = 0; i < event.target.files.length; i++) {
+        photo.push(event.target.files[i])
+    // formData.append(event.target.files[i].names , event.target.files[i])
+        
+        // console.log(event.target.files[i]);
+      }
+    }else{
+      value = event.target.value
+    }
+    setValues({ ...values, [names]: value});
+    // setValues({...values,image:photo})
+
+
+    // console.log(formData);
+    // formData.append([names], value);
+    formData.append('name',name);
+    formData.append('description',description);
+    formData.append('price',price);
+    formData.append('stock',stock);
+    formData.append('category',category);
+    console.log(value);
+    if(photo.length > 0){
+      photo.map((file, i ) => {
+        formData.append('image', file)
+      })
+    }
+
+    console.log(values);
+    // console.log(value);
+  //   for (var pair of formData.entries()) {
+  //     console.log(pair[0]+ ' - ' + pair[1]); 
+  // }
+
   };
 
   const successMessage = () => {
@@ -146,16 +187,17 @@ const TestUpdate = () => {
         {loadingMessage()}
         {successMessage()}
         {warningMessage()}
-        <form>
+        <form enctype="multipart/form-data">
           <span className="text-big">Post photo</span>
           <div className="form-group">
             <label className="btn btn-block btn-dark">
               <input
-                onChange={handleChange("photo")}
+                onChange={handleChange("image")}
                 type="file"
-                name="photo"
+                name="image"
                 accept="image"
                 placeholder="choose a file"
+                multiple='multiple'
               />
             </label>
           </div>

@@ -13,6 +13,9 @@ body,
   justify-content: center;
   align-items: center;
   cursor: default;
+
+  image-rendering: -webkit-optimize-contrast;
+
 }
 .css {
   color: white;
@@ -173,7 +176,6 @@ body,
 }
 
 ///test card
-
 .test {
   height: 25rem;
   width: 20rem;
@@ -218,6 +220,7 @@ body,
   // border-radius: 8px;
   height: 100%;
   width: 100%;
+  background-color: #fff;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -225,6 +228,14 @@ body,
   transition: all 0.2s;
   transform: translateY(0.5rem);
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+  &-image{
+    height: 70%;
+  width: 100%;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  transform: translateY(25px);
+  }
 }
 .ccard:hover {
   box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.4);
@@ -289,6 +300,12 @@ body,
   @media (max-width: $bp-largest1) {
     padding: 13px;
   }
+  @media (max-width:$bp-largest){
+    margin-left: 5px !important;
+  }
+  @media (max-width:$bp-medium){
+    margin-left: 15px !important;
+  }
   @media (max-width: $bp-small2) {
     padding: 0rem;
   }
@@ -340,6 +357,10 @@ body,
     height: 1.7rem;
     top: 5.5px;
     left: 5.5px;
+  }
+  @media (max-width: $bp-small2){
+    top: 5px;
+    left: 5px;
   }
 }
 .ccart:hover {
@@ -433,6 +454,10 @@ body,
     top: 4px;
     left: 4px;
   }
+  @media (max-width:$bp-small2){
+    top: 3.5px;
+    left: 3.5px;
+  }
 }
 .cview:hover {
   width: 9rem;
@@ -440,8 +465,8 @@ body,
   transition: all 0.3s;
   cursor: pointer;
   background-color: $primary-color;
-  @media (max-width: $bp-largest1) {
-    width: 8.5rem;
+  @media (max-width: $bp-largest2) {
+    width: 5.5rem;
   }
 }
 .cview:hover::before {
@@ -451,14 +476,23 @@ body,
   color: white;
   top: 5px;
   left: 3.2rem;
+  @media (max-width:$bp-largest2){
+    content: "View" !important;
+  left: 2.5rem !important;
+
+  }
   @media (max-width: $bp-largest1) {
     font-size: 1rem;
     left: 3rem;
   }
   @media (max-width: $bp-small1) {
-    top: 0px;
+    top: 5px;
     left: 3rem;
   }
+  // @media (max-width: $bp-small) {
+  //   top: 5px !important;
+  //   left: 3rem;
+  // }
 }
 
 .cinfo {
@@ -505,7 +539,6 @@ body,
     display: none;
   }
 }
-
 //sidebar-products
 .sidebar-title {
   background-color: $gray-dark-color;
@@ -566,6 +599,17 @@ body,
     margin-right: 1rem;
     border-right: 1px solid #fff;
     border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &-main{
+      height: 80%;
+      width: 100%;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+
+    }
   }
   &-info {
 
@@ -739,3 +783,42 @@ body,
     transform: translate(-50% , -50%);
   }
 }
+.carousel-imagess {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100%;
+  width: 100% !important;
+}
+
+.loading {
+  &-box{
+// transition: all 2s linear infinite;
+  }
+  &-icon{
+    height: 45rem;
+    -webkit-animation:spin 2s linear infinite;
+    -moz-animation:spin 2s linear infinite;
+    animation:spin 2s linear infinite;
+    position: relative;
+   
+    @media(max-width:$bp-smaller){
+      height: 30rem;
+    }
+    &-2{
+      height: 28rem;
+      position: absolute;
+      top: 55%;
+      left: 50%;
+      transform: translate(-50% , -55%);
+     
+      @media(max-width:$bp-medium){
+        height: 20rem;
+      }
+    }
+  }
+}
+
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }

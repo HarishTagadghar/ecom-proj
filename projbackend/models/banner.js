@@ -8,9 +8,9 @@ const bannerSchema = new mongoose.Schema(
       trim: true,
       required: true
     },
-    photo: {
-      data: Buffer,
-      contentType: String
+    image: {
+      required:true,
+      type:Array
     }
   },
   { timestamps: true }

@@ -1,4 +1,4 @@
-import React, {useState , useEffect} from 'react';
+import React, {useState , useEffect, useCallback} from 'react';
 import { getProduct } from '../admin/helper/adminapicall';
 import { API } from '../backend';
 import Menu from './Menu';
@@ -8,17 +8,15 @@ import ReactElasticCarousel from 'react-elastic-carousel';
 import RelatedCard from './RelatedCard';
 import { addItemToCart } from './helper/cartHelper';
 import { Redirect, Link } from 'react-router-dom';
-import ReactPlayer from 'react-player';
+import { Spinner } from 'react-bootstrap';
 
 const ProductPage = ({match}) => {
   const [products, setProducts] = useState([])
   const [categories, setCategory] = useState("")
   const [redirect , setRedirect ] = useState(false)
-  const [imageone , setImageone] = useState(true)
-  const [imagetwo , setImagetwo] = useState(false)
-
-  const [activeItemIndex, setActiveItemIndex] = useState(0);
-  const chevronWidth = 100;
+  let [firstImage , setFirstimage] = useState("")
+  let [active , setActive] = useState(0)
+  let [loading1 , setLoading1] = useState(false)
 const breakPoints = [
   {width:100 , itemsToShow: 1},
   {width:300 , itemsToShow: 2},
@@ -30,12 +28,11 @@ const breakPoints = [
         name: "",
         description: [],
         price: "",
-        photo: "",
-        loading: false,
+        photo: [],
         error: "",
         megadescription:[],
         categoryId:"",
-        product:{}
+        product:{},
       });
     
       const {
@@ -43,39 +40,49 @@ const breakPoints = [
         description,
         price,
         photo,
-        loading,
         error,
-        product
+        product,
+        category
 
       } = values;
-    const preload = (productId) => {
+    const preload = useCallback((productId) => {
+      setLoading1(true)
         getProduct(productId).then(data => {
           if (data.error) {
             setValues({ ...values, error: data.error });
           } else {
             
-            console.log(data);
             setValues({
               ...values,
               name: data.name,
               description: data.description.split("||"),
               price: data.price,
-              photo: `${API}/product/photo/${data._id}` ,
+              photo: data.image,
               product:data
             });
-            setCategory(data.category._id)
-   
+            // setCategory(data.category);
+            setFirstimage(data.image[0].url);
+            // console.log(data.category._id);
+            setLoading1(false)
 
           }
         });
-      };
-      getCategoryById({ "_id": categories }).then(data => {
-        if (data.error) {
-          setValues({ ...values, error: data.error });
-        } else {
-          setProducts(data)
-        }
-      })
+      },[setValues]);
+     
+        console.log(values , products);
+          
+      useEffect(() => {
+        getCategoryById({ "_id": product.category }).then(data => {
+          if (data.error) {
+            setValues({ ...values, error: data.error });
+          } else {
+            setProducts(data)
+          }
+        })
+      } , [preload ,values])
+  
+  
+         
       useEffect(() => {
         preload(match.params.productId);
       }, []);
@@ -98,7 +105,8 @@ const breakPoints = [
       } 
       const addtocart2 = () => {
         addItemToCart(product , () => {
-          setRedirect(true)
+                    setRedirect(true)
+        
         })
       }
   
@@ -108,68 +116,61 @@ const breakPoints = [
           return <Redirect to="/cart" />
         }
       }
-
-
-      const OnClickOne = () => {
-        if(!imageone){
-          
-        setImageone(true)
-        setImagetwo(false)
- 
-        }
-        
-        }
-        const OnClickTwo = () => {
-          if(!imagetwo){
-            setImagetwo(true)
-            setImageone(false)
-     
-          }
-        }
-   
-useEffect(() => {
-
-
-} , [])
-console.log(imagetwo,imageone);
-
-const imageOneBorder = () => {
-  if(imageone){
-    return (' 1px solid #ff3c20')
+let myRef = React.createRef()
+ let handleclick = (index) => {
+   setActive(100)
+    setFirstimage(photo[index].url)
+    let images = myRef.current.children;
+  for (let i = 0; i < images.length; i++) {
+      images[i].className = images[i].className.replace("active-product" , 'product-container-left-header-images-box')
   }
-}
-
-const imageTwoBorder = () => {
-  if(imagetwo){
-    return (' 1px solid #ff3c20')
+  images[index].className = "active-product"
   }
-}
 
+  let AllContent1 = () => {
+    if (loading1) {
+      return (
+        <div className="spinner-div">
+        <div className="spinner">
+        <Spinner animation="border" className="main-spinner" />
+        <h1>Please Wait...</h1>
+        </div>
+      </div>
+      )
+    }
+    else {
+      return (
+       ""
+      )
+    }
+  }
     return (
       <div className="product-main">
         <div className="product-container-menu">
         <Menu></Menu>
         </div>
-        <div className="product-container ">
+        {/* <AllContent1 /> */}
+    {photo.length > 0 ? (    <div className="product-container ">
         <div className="product-container-left ">
         <div className="vertical-line"> </div>
 
 <div className="product-container-left-header">
+
+ <div className="product-container-left-header-images" ref={myRef} >
+ {photo.map((photo , i) => {
+    return (
+      <div key={i} className={`product-container-left-header-images-box ${active === i ? "active-product" : ""}`}  onClick={() => handleclick(i)}>
+        <div className="product-container-left-header-images-image" style={{backgroundImage:`url(${photo.url})`}}></div>
+      </div>
+    )
+  })}
+
+ </div>
+
+<div className="product-container-left-header-image">
+  <div className="product-container-left-header-image-main" style={{backgroundImage:`url(${firstImage})`}} ></div>
   
-<div className="product-container-left-carousel">
-<img onClick={OnClickOne} style={{border: imageOneBorder()}} className="product-container-left-carousel-image-one" src={photo} alt=""/>
-<div onClick={OnClickTwo} style={{border: imageTwoBorder()}} className="product-container-left-carousel-image-two-box">
-
-<img  className="product-container-left-carousel-image-two" src={photo} alt=""/>
-<img  className="product-container-left-carousel-image-two-icon" src={require("../images/SVG/play.svg")} alt=""/>
-</div>
-{/* <ReactPlayer className="product-container-left-carousel-image-two" width={70} height={70} url='https://www.youtube.com/watch?v=zTitoHKsyJg' controls={true} /> */}
-</div>
-
-
-            {imageone ? <img className="product-container-left-image" src={photo} alt=""/> : ''}
-            {imagetwo  ? <ReactPlayer className="product-container-left-image youtube-image" width={450} url='https://www.youtube.com/watch?v=ZwnXW_7fzk0' controls={true} /> : ''}
-            
+  </div>        
 </div>
             <div className="product-container-left-button">
             {getARedirect(redirect)}
@@ -231,6 +232,7 @@ const imageTwoBorder = () => {
 
         </div>
         <div className="related-products-container">
+      {products.length > 0 ? (<div>
         <h1 className="related-products-hedding">
         {products.length} Related products 
         </h1>
@@ -243,6 +245,8 @@ const imageTwoBorder = () => {
            )
           })}
               </ReactElasticCarousel>
+      
+      </div>) : <div className="noProduct"> <h1>No Related Product Found</h1></div>}
         </div>
         {/* <div className="testing">
           {products.map((product , i) => {
@@ -252,7 +256,12 @@ const imageTwoBorder = () => {
           })}
         </div> */}
         </div>
-        
+    ) :  <div className="spinner-div">
+    <div className="spinner">
+    <Spinner animation="border" className="main-spinner" />
+    <h1>Please Wait...</h1>
+    </div>
+  </div>}  
         <div className="product-main-footer">
             <Footer></Footer>
         </div>

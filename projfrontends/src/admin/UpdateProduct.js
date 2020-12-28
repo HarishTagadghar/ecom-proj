@@ -30,14 +30,14 @@ const UpdateProducts = ({ match }) => {
     description: "",
     price: "",
     stock: "",
-    photo: "",
+    image: [],
     categories: [],
     category: "",
     loading: false,
     error: "",
     createdProduct: "",
     getaRedirect: false,
-    formData: ""
+    formData: new FormData()
   });
 
   const {
@@ -49,6 +49,7 @@ const UpdateProducts = ({ match }) => {
     category,
     loading,
     error,
+    image,
     createdProduct,
     getaRedirect,
     formData
@@ -59,6 +60,7 @@ const UpdateProducts = ({ match }) => {
       //console.log(data);
       if (data.error) {
         setValues({ ...values, error: data.error });
+        console.log(data.error);
       } else {
         preloadCategories()
         setValues({
@@ -68,8 +70,22 @@ const UpdateProducts = ({ match }) => {
           price: data.price,
           category: data.category._id,
           stock: data.stock,
+          // image:data.image,
           formData: new FormData()
         });
+
+        formData.append('name',name);
+        formData.append('description',description);
+        formData.append('price',price);
+        formData.append('stock',stock);
+        formData.append('category',category);
+        // console.log(value);
+        if(data.image.length > 0){
+          data.image.map((file, i ) => {
+            formData.append('image', file)
+          })
+        }
+        
       }
     });
   };
@@ -94,6 +110,23 @@ const UpdateProducts = ({ match }) => {
 
   const onSubmit = event => {
     event.preventDefault();
+    if (name) {
+      formData.append('name' , name)
+    }
+    if (description) {
+      formData.append('description',description)
+    }
+    if(price){
+      formData.append('price',price)
+    }
+    if(stock){
+      formData.append('stock',stock)
+    }
+    if (category) {
+      formData.append('category',category)
+    }
+ 
+    
     setValues({ ...values, error: "", loading: true });
     updateProduct(match.params.productId, user._id, token, formData).then(data => {
       if (data.error) {
@@ -106,7 +139,7 @@ const UpdateProducts = ({ match }) => {
           name: "",
           description: "",
           price: "",
-          photo: "",
+          image: [],
           stock: "",
           loading: false,
           createdProduct: data.name,
@@ -118,12 +151,65 @@ const UpdateProducts = ({ match }) => {
     });
   };
 
-  const handleChange = name => event => {
-    const value = name === "photo" ? event.target.files[0] : event.target.value;
-    formData.set(name, value);
-    setValues({ ...values, [name]: value });
-  };
+  const handleChange = names => event => {
+    // const value = name === "photo" ? event.target.files[0] : event.target.value;
+    // formData.set(name, value);
+    // setValues({ ...values, [name]: value });
 
+    
+
+    let value =  "";
+
+    let photo = []
+
+  if(names === 'image'){
+    for (let i = 0; i < event.target.files.length; i++) {
+      console.log('image found');
+      photo.push(event.target.files[i])
+  // formData.append(event.target.files[i].names , event.target.files[i])
+      
+      // console.log(event.target.files[i]);
+    }
+  }else{
+    value = event.target.value
+  }
+  setValues({ ...values, [names]: value , image : photo});
+  // setValues({...values,image:photo})
+console.log(values);
+console.log('photos' , photo);
+  // console.log(formData);
+  // if(names == 'name'){
+  //   formData.append('name',name);
+  // }
+  // if (names == 'description') {
+  //   formData.append('description',description);    
+  // }
+  // if (names == 'price') {
+  //   formData.append('price',price);    
+  // }
+  // if (names == 'stock') {
+  //   formData.append('stock',stock);    
+  // }
+  // if (names == 'category') {
+  //   formData.append('category',category);
+    
+  // }
+  console.log(value);
+  if(photo.length > 0){
+    photo.map((file, i ) => {
+      console.log('hey');
+      formData.append('image', file)
+    })
+  }
+
+  console.log(values);
+  // console.log(value);
+//   for (var pair of formData.entries()) {
+//     console.log(pair[0]+ ' - ' + pair[1]); 
+// }
+
+  };
+console.log(values);
   const successMessage = () => {
     return <div
       className="alert alert-success mt-3"
@@ -151,7 +237,7 @@ const UpdateProducts = ({ match }) => {
     }
 
   };
-
+console.log(values);
 
 
   return (
@@ -171,18 +257,19 @@ const UpdateProducts = ({ match }) => {
           <div className="form-group">
             <label className="btn btn-block btn-dark">
               <input
-                onChange={handleChange("photo")}
+                onChange={handleChange("image")}
                 type="file"
-                name="photo"
+                name="image"
                 accept="image"
                 placeholder="choose a file"
+                multiple
               />
             </label>
           </div>
           <div className="form-group">
             <input
               onChange={handleChange("name")}
-              name="photo"
+              name="name"
               className="form-control"
               placeholder="Name"
               value={name}
@@ -191,7 +278,7 @@ const UpdateProducts = ({ match }) => {
           <div className="form-group">
             <textarea
               onChange={handleChange("description")}
-              name="photo"
+              name="description"
               className="form-control"
               placeholder="Description"
               value={description}

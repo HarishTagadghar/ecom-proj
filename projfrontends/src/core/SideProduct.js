@@ -1,21 +1,18 @@
 import React , {useState , useEffect} from 'react';
-import { addItemToCart } from './helper/cartHelper';
+import { addItemToCart, loadCart } from './helper/cartHelper';
 import { Link, Redirect } from 'react-router-dom';
 import { API } from '../backend';
 import ImageHelper from './helper/ImageHelper';
 
-const SideProduct = ({product ,  setReload = f => f /* (f) => return f  */ , reload = undefined}) => {
+const SideProduct = ({product , setReload = f => f /* (f) => return f  */ , reload = undefined  }) => {
   
 
     const [redirect , setRedirect ] = useState(false)
-
     const cartTitle = product ? product.name : "Default Title"
     const cartDescription = product ? product.description : "Default Description"
     const cartPrice = product ? product.price : "Default Price"
-    
+    const imageUrl = product.image.slice(0,1).map(photo => photo.url)
   
-
-
 
 
     const addtocart = () => {
@@ -30,12 +27,21 @@ const SideProduct = ({product ,  setReload = f => f /* (f) => return f  */ , rel
       }
   
   
-  
-  
+  let opacitys = () => {
+    if (product) {
+      return ( "0")
+    }
+    else {
+      return( "1")
+    }
+  }
+  console.log(opacitys);
     return (
-      <Link style={{ textDecoration: 'none' }} to={`/product/${product._id}`} >
+      <Link style={{ textDecoration: 'none' }} className="side-productlog"    to={`/product/${product._id}`} >
         <div  className="side-product">
-            <ImageHelper product={product} />
+           <div className="side-product-image">
+             <div className="side-product-image-main" style={{backgroundImage: `url(${imageUrl})`}}></div>
+           </div>
             {getARedirect(redirect)}
             <div className="side-product-info">
                 <h3 className="side-product-info-title" >{cartTitle}</h3>

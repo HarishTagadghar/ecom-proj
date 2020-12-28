@@ -19,7 +19,8 @@ const RazorpayRoutes = require("./routes/razorpay");
 
 //DB Connection
 mongoose
-  .connect("mongodb+srv://Harish-admin:gorahul269@cluster0-qxhqz.mongodb.net/ecom?retryWrites=true&w=majority", {
+//mongodb://localhost:27017/name
+  .connect("mongodb+srv://Harish-admin:gorahul269@cluster0-qxhqz.mongodb.net/ecom?retryWrites=true&w=majority" , {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true

@@ -2,23 +2,23 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { isAutheticated } from "../auth/helper";
 import { getProducts, deleteProduct } from "./helper/adminapicall";
-import { Table } from 'react-bootstrap'
+import { Table ,Spinner } from 'react-bootstrap'
 import Menu from "../core/Menu";
-
 
 const ManageProducts = () => {
   const [products, setProducts] = useState([]);
-
+  const [loading , setLoading] = useState(false)
   const { user, token } = isAutheticated();
 
   const preload = () => {
+    setLoading(true)
     getProducts().then(data => {
       if (!data) {
         console.log("product not found");
       } else {
         setProducts(data);
         console.log(data);
-
+        setLoading(false)
       }
     });
   };
@@ -28,20 +28,38 @@ const ManageProducts = () => {
   }, []);
 
   const deleteThisProduct = productId => {
-    deleteProduct(productId, user._id, token).then(data => {
-      if (data.error) {
-        console.log(data.error);
-      } else {
-        preload();
-      }
-    });
+    if (window.confirm("Are you sure")) {
+    setLoading(true)
+      deleteProduct(productId, user._id, token).then(data => {
+        if (data.error) {
+          console.log(data.error);
+        } else {
+          preload();
+          setLoading(false)
+        }
+      });
+
+    }
+    else{
+      alert("cancled deleting product")
+    }
+    
   };
 
-  return (
-
-    <div>
-      <Menu />
-      <div className="ocontainer padding-bottom">
+  let Allcontent = () => {
+    if (loading) {
+      return (
+        <div className="spinner-div">
+          <div className="spinner">
+          <Spinner animation="border" className="main-spinner" />
+          <h1>Please Wait...</h1>
+          </div>
+        </div>
+      )
+    }
+    else{
+      return(
+        <div className="ocontainer padding-bottom">
         <h1 className="text-center pb-4 pt-4">Total products Are {products.length}</h1>
 
         <Table className="tab text-center " striped responsive bordered hover>
@@ -77,7 +95,17 @@ const ManageProducts = () => {
           </tbody>
         </Table>
       </div>
-    </div>
+     
+      )
+    }
+  }
+
+  return (
+
+    <div>
+      <Menu />
+     <Allcontent/>
+     </div>
   );
 
 };

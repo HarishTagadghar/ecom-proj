@@ -54,6 +54,13 @@
   pointer-events: all;
   transition: all 1s;
   font-size: 1.5rem;
+  background-color: transparent;
+  color: white;
+  border: none;
+  &:focus ,&:hover , &:active , &:visited {
+    border: none;
+    outline: none;
+  }
   @media (max-width: $bp-smallest) {
     font-size: 1.2rem;
   }

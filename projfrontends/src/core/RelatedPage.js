@@ -1,21 +1,22 @@
-import React, {useState , useEffect} from 'react';
+import React, {useState , useEffect, useCallback} from 'react';
 import { getProduct } from '../admin/helper/adminapicall';
 import { API } from '../backend';
 import Menu from './Menu';
 import Footer from './Footer';
 import { getCategoryById } from './helper/categoryHelper';
 import ReactElasticCarousel from 'react-elastic-carousel';
-import IndexCard from './IndexCard';
+import RelatedCard2 from './RelatedCard2';
 import { addItemToCart } from './helper/cartHelper';
 import { Redirect, Link } from 'react-router-dom';
+import { Spinner } from 'react-bootstrap';
 
 const RelatedPage = ({match}) => {
   const [products, setProducts] = useState([])
   const [categories, setCategory] = useState("")
   const [redirect , setRedirect ] = useState(false)
-
-  const [activeItemIndex, setActiveItemIndex] = useState(0);
-  const chevronWidth = 100;
+  let [firstImage , setFirstimage] = useState("")
+  let [active , setActive] = useState(0)
+  let [loading1 , setLoading1] = useState(false)
 const breakPoints = [
   {width:100 , itemsToShow: 1},
   {width:300 , itemsToShow: 2},
@@ -27,12 +28,11 @@ const breakPoints = [
         name: "",
         description: [],
         price: "",
-        photo: "",
-        loading: false,
+        photo: [],
         error: "",
         megadescription:[],
         categoryId:"",
-        product:{}
+        product:{},
       });
     
       const {
@@ -40,37 +40,49 @@ const breakPoints = [
         description,
         price,
         photo,
-        loading,
         error,
-        product
+        product,
+        category
 
       } = values;
-    const preload = (productId) => {
+    const preload = useCallback((productId) => {
+      setLoading1(true)
         getProduct(productId).then(data => {
           if (data.error) {
             setValues({ ...values, error: data.error });
           } else {
             
-            console.log(data);
             setValues({
               ...values,
               name: data.name,
               description: data.description.split("||"),
               price: data.price,
-              photo: `${API}/product/photo/${data._id}` ,
+              photo: data.image,
               product:data
             });
-            setCategory(data.category._id)
+            setCategory(data.category);
+            setFirstimage(data.image[0].url);
+            // console.log(data.category._id);
+            setLoading1(false)
+
           }
         });
-      };
-      getCategoryById({ "_id": categories }).then(data => {
-        if (data.error) {
-          setValues({ ...values, error: data.error });
-        } else {
-          setProducts(data)
-        }
-      })
+      },[setValues]);
+     
+        // console.log(loading);
+          
+        useEffect(()=> {
+          getCategoryById({ "_id": product.category }).then(data => {
+            if (data.error) {
+              setValues({ ...values, error: data.error });
+            } else {
+              setProducts(data)
+            }
+          })
+        },[values , preload])
+  
+  
+         
       useEffect(() => {
         preload(match.params.productId);
       }, []);
@@ -87,31 +99,79 @@ const breakPoints = [
         dec = numSplit[1]
         return int + '.' + dec
       }
+      
       const addtocart = () => {
         addItemToCart(product , () => alert("item added to cart"))
       } 
       const addtocart2 = () => {
         addItemToCart(product , () => {
-          setRedirect(true)
+                    setRedirect(true)
+        
         })
       }
-        
+  
+  
       const getARedirect = (redirect) => {
         if (redirect) {
           return <Redirect to="/cart" />
         }
       }
-// console.log(products);
+let myRef = React.createRef()
+ let handleclick = (index) => {
+   setActive(100)
+    setFirstimage(photo[index].url)
+    let images = myRef.current.children;
+  for (let i = 0; i < images.length; i++) {
+      images[i].className = images[i].className.replace("active-product" , 'product-container-left-header-images-box')
+  }
+  images[index].className = "active-product"
+  }
+
+  let AllContent1 = () => {
+    if (loading1) {
+      return (
+        <div className="spinner-div">
+        <div className="spinner">
+        <Spinner animation="border" className="main-spinner" />
+        <h1>Please Wait...</h1>
+        </div>
+      </div>
+      )
+    }
+    else {
+      return (
+       ""
+      )
+    }
+  }
     return (
       <div className="product-main">
         <div className="product-container-menu">
         <Menu></Menu>
         </div>
-        <div className="product-container ">
+        {/* <AllContent1 /> */}
+    {photo.length > 0 ? (    <div className="product-container ">
         <div className="product-container-left ">
         <div className="vertical-line"> </div>
 
-            <img className="product-container-left-image" src={photo} alt=""/>
+<div className="product-container-left-header">
+
+ <div className="product-container-left-header-images" ref={myRef} >
+ {photo.map((photo , i) => {
+    return (
+      <div key={i} className={`product-container-left-header-images-box ${active === i ? "active-product" : ""}`}  onClick={() => handleclick(i)}>
+        <div className="product-container-left-header-images-image" style={{backgroundImage:`url(${photo.url})`}}></div>
+      </div>
+    )
+  })}
+
+ </div>
+
+<div className="product-container-left-header-image">
+  <div className="product-container-left-header-image-main" style={{backgroundImage:`url(${firstImage})`}} ></div>
+  
+  </div>        
+</div>
             <div className="product-container-left-button">
             {getARedirect(redirect)}
 
@@ -172,6 +232,7 @@ const breakPoints = [
 
         </div>
         <div className="related-products-container">
+      {products.length > 0 ? (<div>
         <h1 className="related-products-hedding">
         {products.length} Related products 
         </h1>
@@ -179,14 +240,28 @@ const breakPoints = [
           {products.map((product,i) => {
            return(
             <div key={i} className="related-products-card">
-                  <IndexCard product={product} />
+                  <RelatedCard2 product={product} />
                 </div>
            )
           })}
               </ReactElasticCarousel>
+      
+      </div>) : <div className="noProduct"> <h1>No Related Product Found</h1></div>}
         </div>
+        {/* <div className="testing">
+          {products.map((product , i) => {
+            return (
+              <h1 key={i}>{product.name}</h1>
+            )
+          })}
+        </div> */}
         </div>
-        
+    ) :  <div className="spinner-div">
+    <div className="spinner">
+    <Spinner animation="border" className="main-spinner" />
+    <h1>Please Wait...</h1>
+    </div>
+  </div>}  
         <div className="product-main-footer">
             <Footer></Footer>
         </div>

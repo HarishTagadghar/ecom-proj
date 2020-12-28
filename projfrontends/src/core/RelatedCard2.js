@@ -3,7 +3,7 @@ import { addItemToCart } from './helper/cartHelper';
 import { Redirect, Link } from 'react-router-dom';
 import { API } from '../backend';
 
-const RelatedCard = ({product ,   setReload = f => f /* (f) => return f  */ , reload = undefined}) => {
+const RelatedCard2 = ({product ,   setReload = f => f /* (f) => return f  */ , reload = undefined}) => {
 
 
   const [redirect , setRedirect ] = useState(false)
@@ -63,7 +63,7 @@ const RelatedCard = ({product ,   setReload = f => f /* (f) => return f  */ , re
               <div  onClick={addtocart2} className="connection cbuy">
               <img   src={require("../images/SVG/credit-card.svg")} className="cbuy-icon" alt=""/>
               </div>
-              <Link  to={`/related/Product/${ProductId}`}>
+              <Link  to={`/Product/${ProductId}`}>
               <div  className="connection cview">
               <img    src={require("../images/SVG/eye.svg")} className="cview-icon" alt=""/>
               </div>
@@ -82,4 +82,4 @@ const RelatedCard = ({product ,   setReload = f => f /* (f) => return f  */ , re
     )
 }
 
-export default RelatedCard
+export default RelatedCard2

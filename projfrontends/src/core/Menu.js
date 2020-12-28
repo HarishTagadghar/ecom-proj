@@ -21,7 +21,6 @@ const Menu = ({ history }) => {
   const [width , setWidth] = useState('')
 
   const wrapper = useRef(null)
-
   const preload2 = () => {
     getProducts().then(data => {
       if (!data) {
@@ -72,6 +71,17 @@ const Menu = ({ history }) => {
 
   }, [])
 
+  // let margin = () => {
+  //   if (display) {
+  //     return(
+  //     )
+  //   }
+  //   else{
+  //     return (
+  //       "margin:0"
+  //     )
+  //   }
+  // }
 // const change = (event) => {
 //   if(event.target.value.length > 0) {
 //     setReload(true)
@@ -173,9 +183,9 @@ const handleClickOutSite = event => {
 
     <div >
       <header className="header">
-      <Link to='/' >
+      <Link to='/' className="logo-box" >
 
-        <img src={`${API}/banner/photo/5f5a6a7f274bd10a880e2b62`} className="logo" alt="" />
+        <img src={require("../images/websitelogo.png")} className="logo" alt="" />
       </Link>
         <form ref={wrapper} action="#" className="search">
           <input onChange={(event) => setSearch(event.target.value) }  onClick={() => setDisplay(!display)} type="text" value={search} placeholder="Search Items" className="search-input" />
@@ -309,7 +319,8 @@ const handleClickOutSite = event => {
 
         </nav>
       </header>
-<div  className="header-2">
+      
+<div  className="header-2" style={{margin: display ? '2.5rem 0' : 0}}>
 
   {/* <div className="menu-box-1"></div> */}
 

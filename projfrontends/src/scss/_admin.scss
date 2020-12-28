@@ -149,3 +149,29 @@
   font-size: 1.5rem;
   font-weight: 600;
 }
+
+.spinner-div{
+  height: calc(100vh - 85px);
+  width: 100%;
+  background-color:#232f3e;
+  position: relative;
+  & > * {
+    height: 5rem;
+    width: 5rem;
+    color: white;
+  }
+}
+.spinner {
+  width: max-content;
+  position: absolute;
+  left: 48%;
+  top: 42%;
+  transform: translate(-50%, -50%);
+text-align: center;
+}
+.main-spinner{
+  height: 7rem;
+  width: 7rem;
+  font-size: 3.5rem;
+  margin-bottom: 2rem;
+}

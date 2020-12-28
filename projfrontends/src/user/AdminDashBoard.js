@@ -12,7 +12,6 @@ const TestUpdate = () => {
   const [errors, setErrors] = useState(false)
   const [user, setUsers] = useState([])
 
-
   const userId = isAutheticated() && isAutheticated().user._id;
   const token = isAutheticated() && isAutheticated().token;
 
@@ -45,7 +44,7 @@ const TestUpdate = () => {
 
   useEffect(() => {
     preload(userId, token)
-  })
+  } , [])
 
 
   const getUsers = (userId, token) => {
@@ -77,7 +76,7 @@ const TestUpdate = () => {
 
   useEffect(() => {
     preload2(userId, token)
-  })
+  } , [])
 
 
   return (
