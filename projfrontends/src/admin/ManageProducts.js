@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { isAutheticated } from "../auth/helper";
-import { getProducts, deleteProduct } from "./helper/adminapicall";
+import {  deleteProduct, getProductname } from "./helper/adminapicall";
 import { Table ,Spinner } from 'react-bootstrap'
 import Menu from "../core/Menu";
 
@@ -12,7 +12,7 @@ const ManageProducts = () => {
 
   const preload = () => {
     setLoading(true)
-    getProducts().then(data => {
+    getProductname().then(data => {
       if (!data) {
         console.log("product not found");
       } else {

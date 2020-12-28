@@ -291,9 +291,15 @@
 }
 .testing3 {
   padding: 1rem;
-&:hover{
+  & >h1 {
+    &:focus {
+      outline: none;
+    }
+  }
+&:hover , &:focus{
   background-color: #cecfd1;
   cursor: pointer;
+  outline: none;
 }
 }
 .search-name{

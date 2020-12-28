@@ -85,7 +85,7 @@
             opacity: .85;
             transition: .5s linear;
             border-radius: 5px;
-            
+            cursor: pointer;
             &:not(:last-child){
                 margin-bottom: 2rem;
             }

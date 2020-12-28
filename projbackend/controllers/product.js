@@ -118,8 +118,8 @@ exports.getAllProducts = (req, res) => {
   let limit = req.query.limit ? parseInt(req.query.limit) : 8;
   let sortBy = req.query.sortBy ? req.query.sortBy : "_id";
 
-  Product.find()
-    // .select("-photo")
+  Product.find({} , {"image": { $slice: 1 } })
+    .select("-photo")
     .populate("category")
     .sort([[sortBy, "asc"]])
 
@@ -133,6 +133,28 @@ exports.getAllProducts = (req, res) => {
     });
 };
 
+exports.getAllProductsName = (req, res) => {
+  let sortBy = req.query.sortBy ? req.query.sortBy : "_id";
+
+  Product.find()
+    .select("-image")
+    .select("-photo")
+    .select("-description")
+    .select("-price")
+    .select("-category")
+    // .select("-stock")
+    // .select("-sold")
+    .sort([[sortBy, "asc"]])
+
+    .exec((err, products) => {
+      if (err) {
+        return res.status(400).json({
+          error: "NO product FOUND"
+        });
+      }
+      res.json(products);
+    });
+};
 exports.getAllProductsByCategory = (req, res) => {
 
   Product.find({ "category": req.body._id })

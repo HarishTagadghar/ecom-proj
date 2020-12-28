@@ -37,12 +37,8 @@ const productSchema = new mongoose.Schema(
       type:Array
 
     },
-    quantity:Number,
-    youtube:{
-      type:String,
-      trim:true
-    }
-
+    quantity:Number
+   
   },
   { timestamps: true }
 );

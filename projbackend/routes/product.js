@@ -14,7 +14,8 @@ const {
   deleteProduct,
   getAllProducts,
   getAllUniqueCategories,
-  getAllProductsByCategory
+  getAllProductsByCategory,
+  getAllProductsName
 } = require("../controllers/product");
 const { isSignedIn, isAuthenticated, isAdmin } = require("../controllers/auth");
 const { getUserById } = require("../controllers/user");
@@ -196,6 +197,8 @@ router.put('/pro/upd' , (req,res) => {
 })
 //listing route
 router.get("/products", getAllProducts);
+router.get("/products/name", getAllProductsName);
+
 // router.get("/product/:ProductId", getProductById);
 // 
 router.post("/products/category", getAllProductsByCategory);

@@ -6,7 +6,7 @@ import { loadCart } from "./helper/cartHelper";
 import { getUserOrders } from "../user/helper/userapicalls";
 import { Dropdown } from 'react-bootstrap'
 import { API } from "../backend";
-import { getProducts  } from '../admin/helper/adminapicall';
+import { getProductname  } from '../admin/helper/adminapicall';
 import Width from "./Width";
 
 
@@ -22,7 +22,7 @@ const Menu = ({ history }) => {
 
   const wrapper = useRef(null)
   const preload2 = () => {
-    getProducts().then(data => {
+    getProductname().then(data => {
       if (!data) {
         setErrors(true)
       } else {

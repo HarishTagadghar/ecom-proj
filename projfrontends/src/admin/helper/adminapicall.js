@@ -137,6 +137,18 @@ export const getProduct = productId => {
     .catch(err => console.log(err));
 };
 
+
+//get a product name
+
+export const getProductname = () => {
+  return fetch(`${API}/products/name`, {
+    method: "GET"
+  })
+    .then(response => {
+      return response.json();
+    })
+    .catch(err => console.log(err));
+};
 //update a product
 
 export const updateProduct = (productId, userId, token, product) => {

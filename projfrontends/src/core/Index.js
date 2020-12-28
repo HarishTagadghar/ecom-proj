@@ -95,11 +95,11 @@ export default function Index() {
 
   useEffect(() => {
     preload()
-    preload2()
+    // preload2()
     // preload3()
 
   }, [])
-
+console.log(products);
   const preloadCategory = () => {
     getCategories().then(data => {
       if (!data) {
