@@ -50,18 +50,18 @@ export default function Index() {
     })
 
   }
-  const preload2 = () => {
-    // setLoading(true)
-    getProducts().then(data => {
-      if (!data) {
-        seterrors(true)
-      } else {
-        // setSideProducts(data)
-      }
-    })
-    // setLoading(false)
+  // const preload2 = () => {
+  //   // setLoading(true)
+  //   getProducts().then(data => {
+  //     if (!data) {
+  //       seterrors(true)
+  //     } else {
+  //       // setSideProducts(data)
+  //     }
+  //   })
+  //   // setLoading(false)
 
-  }
+  // }
   // const preload3 = () => {
   //   getBanners().then(data => {
   //     if (!data) {
@@ -99,7 +99,7 @@ export default function Index() {
     // preload3()
 
   }, [])
-console.log(products);
+// console.log(products);
   const preloadCategory = () => {
     getCategories().then(data => {
       if (!data) {
@@ -283,7 +283,9 @@ return(
             onChange={handleChange}
             placeholder="Category"
           >
-            <Allcategory />
+            {/* <Allcategory /> */}
+          <option className="options" value="all"> All Category ▼ </option>
+
             {categories &&
               categories.map((cate, index) => (
                 <option key={index} value={cate._id}>

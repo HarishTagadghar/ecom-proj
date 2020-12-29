@@ -91,7 +91,7 @@ const TestUpdate = () => {
                       </Link></h3>
 
             <h3 className="acontainer-nav-list-item">
-              <Link className="text-white" to="/admin/create/category"> Creat Category </Link>
+              <Link className="text-white" to="/admin/create/category"> Create Category </Link>
             </h3>
 
 
