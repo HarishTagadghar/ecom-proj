@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { getCategories, updateProduct, getProduct } from "./helper/adminapicall";
 import { isAutheticated } from "../auth/helper/index";
 import Menu from "../core/Menu";
+import Disabled from "./Disabled";
 
 const UpdateProducts = ({ match }) => {
   const HomeAdmin = () => (
@@ -320,7 +321,7 @@ console.log(values);
 
           <button
             type="submit"
-            onClick={onSubmit}
+            onClick={Disabled}
             className="ccontainer-form-button mt-4 center-form-button"
           >
             update Product

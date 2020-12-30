@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import {updateBanner , getBanner} from "./helper/adminapicall";
 import { isAutheticated } from "../auth/helper/index";
 import Menu from "../core/Menu";
+import Disabled from "./Disabled";
 
 const UpdateBanner = ({ match }) => {
   const HomeAdmin = () => (
@@ -212,7 +213,7 @@ const UpdateBanner = ({ match }) => {
     
           <button
             type="submit"
-            onClick={onSubmit}
+            onClick={Disabled}
             className="ccontainer-form-button mt-4 center-form-button"
           >
             update Banner

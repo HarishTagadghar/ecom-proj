@@ -4,6 +4,7 @@ import Menu from '../core/Menu';
 import { isAutheticated } from "../auth/helper";
 import { Link } from 'react-router-dom';
 import { getCategories, createaProduct } from '../admin/helper/adminapicall';
+import Disabled from './Disabled';
 
 
 const TestUpdate = () => {
@@ -255,7 +256,7 @@ const TestUpdate = () => {
 
           <button
             type="submit"
-            onClick={onSubmit}
+            onClick={Disabled}
             className="ccontainer-form-button mt-4 center-form-button"
           >
             Create Product

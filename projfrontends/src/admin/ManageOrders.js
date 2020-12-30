@@ -113,7 +113,7 @@ e.target.value && e.target.value ==='All Orders' ? (
                                 <tr key={i}>
                                     <td>{i + 1}</td>
                                     <td>₹{order.amount}</td>
-                                    <td>{order.address}</td>
+                                    <td>{"xxxxxxxx"}</td>
                                     <td>{order.updatedAt}</td>
                                     <td className="pr-5">{order.status}
                                         <select onClick={handler} className="ml-4">
@@ -134,8 +134,8 @@ e.target.value && e.target.value ==='All Orders' ? (
                                         )
                                     })}</td>
                                     <td>{order.transaction_id}</td>
-                                    <td>{order.phone}</td>
-                                    <td>{order.user.name}</td>
+                                    <td>{"xxx-xxx-xxxx"}</td>
+                                    <td>{"xxxxx"}</td>
                                 </tr>
                             )
                         })}

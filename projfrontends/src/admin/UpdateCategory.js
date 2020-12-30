@@ -4,6 +4,7 @@ import Menu from '../core/Menu';
 import { isAutheticated } from "../auth/helper";
 import { Link } from 'react-router-dom';
 import { updateCategory, getCategory } from '../admin/helper/adminapicall';
+import Disabled from './Disabled';
 
 const TestUpdate = ({ match }) => {
   const [name, setName] = useState("");
@@ -119,7 +120,7 @@ const TestUpdate = ({ match }) => {
             required placeholder="for Ex. summer"
             type="text"
             className="ccontainer-form-input form-control" />
-          <button onClick={onSubmit} className="ccontainer-form-button center-form-button">Update Category</button>
+          <button onClick={Disabled} className="ccontainer-form-button center-form-button">Update Category</button>
         </form>
       </div>
     </div>

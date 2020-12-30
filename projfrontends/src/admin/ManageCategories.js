@@ -4,6 +4,7 @@ import Menu from '../core/Menu';
 import { isAutheticated } from "../auth/helper";
 import { Link } from 'react-router-dom';
 import { Table } from 'react-bootstrap'
+import Disabled from "./Disabled";
 
 import { getCategories, deleteCategory } from '../admin/helper/adminapicall';
 
@@ -61,9 +62,7 @@ const TestUpdate = () => {
                   <td>{category.name}</td>
                   <td><Link className="btn btn-success" to={`/admin/category/update/${category._id}`}>Update</Link></td>
                   <td><button
-                    onClick={() => {
-                      deleteThisCategory(category._id);
-                    }}
+                    onClick={Disabled}
                     className="btn btn-danger"
                   >
                     Delete

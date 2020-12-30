@@ -4,6 +4,7 @@ import Menu from '../core/Menu';
 import { isAutheticated } from "../auth/helper";
 import { Link } from 'react-router-dom';
 import { createCategory } from '../admin/helper/adminapicall';
+import Disabled from './Disabled';
 
 const TestUpdate = () => {
   const [name, setName] = useState("");
@@ -101,8 +102,8 @@ setLoading(true)
           <input onChange={handleChange}
             value={name}
             autoFocus
-            required placeholder="for Ex. summer" type="text" className="ccontainer-form-input form-control" />
-          <button onClick={onSubmit} className="ccontainer-form-button center-form-button">Add Category</button>
+             placeholder="for Ex. summer" type="text" className="ccontainer-form-input form-control" />
+          <button onClick={Disabled}  className="ccontainer-form-button center-form-button">Add Category</button>
         </form>
       </div>
     </div>

@@ -27,15 +27,7 @@ const SideProduct = ({product , setReload = f => f /* (f) => return f  */ , relo
       }
   
   
-  let opacitys = () => {
-    if (product) {
-      return ( "0")
-    }
-    else {
-      return( "1")
-    }
-  }
-  console.log(opacitys);
+
     return (
       <Link style={{ textDecoration: 'none' }} className="side-productlog"    to={`/product/${product._id}`} >
         <div  className="side-product">

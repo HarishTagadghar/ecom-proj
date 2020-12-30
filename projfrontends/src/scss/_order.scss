@@ -2,6 +2,7 @@
   min-height: calc(100vh - 12.5rem);
   background-color: $gray-color;
   position: relative;
+  z-index: 1;
 }
 .tab {
   font-size: 1.5rem;

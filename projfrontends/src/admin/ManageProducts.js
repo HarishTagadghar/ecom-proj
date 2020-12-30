@@ -4,6 +4,7 @@ import { isAutheticated } from "../auth/helper";
 import {  deleteProduct, getProductname } from "./helper/adminapicall";
 import { Table ,Spinner } from 'react-bootstrap'
 import Menu from "../core/Menu";
+import Disabled from "./Disabled";
 
 const ManageProducts = () => {
   const [products, setProducts] = useState([]);
@@ -82,9 +83,7 @@ const ManageProducts = () => {
                   <td><span className="mr-4"> Stock: {product.stock}</span>  <span className="mr-4">,</span>  sold: {product.sold}</td>
                   <td><Link className="btn btn-success" to={`/admin/product/update/${product._id}`}>Update</Link></td>
                   <td><button
-                    onClick={() => {
-                      deleteThisProduct(product._id);
-                    }}
+                    onClick={Disabled}
                     className="btn btn-danger"
                   >
                     Delete
