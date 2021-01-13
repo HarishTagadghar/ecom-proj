@@ -148,8 +148,9 @@ exports.getAllProductsName = (req, res) => {
 
     .exec((err, products) => {
       if (err) {
+        console.log(err);
         return res.status(400).json({
-          error: "NO product FOUND"
+          error: "NO product FOUND",
         });
       }
       res.json(products);
